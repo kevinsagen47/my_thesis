@@ -1,8 +1,7 @@
-# NCTU Thesis Template
+# NYCU Thesis Template
 
-此專案為「國立交通大學」碩博士論文模板。
+此專案為「國立陽明交通大學」碩博士論文模板。
 
----
 ## Installation
 
 > 關於安裝資訊：https://www.latex-project.org/get/#tex-distributions
@@ -16,7 +15,6 @@
 * Online LaTeX Service
     * [Overleaf](https://www.overleaf.com)
 
----
 ## Usage
 
 0. 下載此專案。
@@ -40,10 +38,9 @@
 3. 如何選擇輸出格式？
     * 圖書館上傳格式 (Upload Mode)
         1. 開啟 [`main.tex`](main.tex)。
-        2. 將以下程式碼 (Line 6) 中的 `print` 改為 `upload`。
-            ```latex
-            % Set the class of document by NCTU
-            \documentclass[master, watermark, final, upload]{Class/NCTUtran}
+        2. 將以下程式碼 (Line 11) 中的 `print` 改為 `upload`。
+            ```latex=11
+            \documentclass[master, zh, final, print]{Class/NYCUtran}
             ```
         3. 重新編譯即可。
             ```bash
@@ -51,28 +48,27 @@
             ```
     * 印刷格式 (Print Mode)
         1. 開啟 [`main.tex`](main.tex)。
-        2. 將以下程式碼 (Line 6) 中的 `upload` 改為 `print`。
-            ```latex
-            % Set the class of document by NCTU
-            \documentclass[master, watermark, final, print]{Class/NCTUtran}
+        2. 將以下程式碼 (Line 11) 中的 `upload` 改為 `print`。
+            ```latex=11
+            \documentclass[master, zh, final, print]{Class/NYCUtran}
             ```
         3. 重新編譯即可。
             ```bash
             $ make
             ```
+4. 由於陽明交大尚未決定校徽，故目前繳交之論文仍不需要附上浮水印，然未來仍有加上浮水印之需求，故先將原專案之交大浮水印附上，並設定為不須輸出浮水印，未來只需更改原圖檔為新校徽即可繼續使用。
 
----
-## Description
+## Directory Structure
 
 ```bash
 # In alphabetical order
-nctu-thesis-template
+nycu-thesis-template
 ├── 0-Cover/                        # 0-論文封面文件 (自行編輯)
 │   └── Spine.docx                  #   書背製作檔 (自行編輯)
 ├── 1-Cert/                         # 1-論文口試審定書 (可自行新增)
 │   ├── .gitkeep
-│   ├── 1-Certification-zh.pdf      #   論文口試審定書範本 (網工所)
-│   └── 2-Certification-en.pdf      #   論文口試審定書範本 (資科工所)
+│   ├── 1-Certification-zh.pdf      #   論文口試審定書中文範本 (資科工碩)
+│   └── 2-Certification-en.pdf      #   論文口試審定書英文範本 (資科工碩)
 ├── 2-Auth/                         # 2-論文授權書 (可自行新增)
 │   ├── .gitkeep
 │   └── 1-Authorization.pdf         #   論文授權書範本
@@ -99,7 +95,7 @@ nctu-thesis-template
 ├── Class/                          # * 論文模板 (不需更動)
 │   ├── IEEEtran.bst                #   IEEE 論文參考書目樣式 (不需更動)
 │   ├── IEEEtrantools.sty           #   IEEE 論文模板樣式指令 (不需更動)
-│   ├── NCTUtran.cls                #   國立交通大學碩博論文模板 (不需更動)
+│   ├── NYCUtran.cls                #   國立陽明交通大學碩博論文模板 (不需更動)
 │   └── xCJKnumb.sty                #   中文套件 (不需更動)
 ├── Config/                         # * 相關參數設定
 │   ├── config.tex                  #   設定論文標題、作者資訊等 (自行編輯)
@@ -117,37 +113,22 @@ nctu-thesis-template
 └── README.md                       # 說明文件 (本檔案)
 ```
 
----
 ## Useful Plugins
 
-* **LaTeX Workshop** (on Visual Studio Code)
-    * 備註：LaTeX Workshop 有時會出現無法按下 `Enter` 的錯誤訊息，可以改安裝 `v6.0` 版本就會解決。
+* **[LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)** (on [Visual Studio Code](https://code.visualstudio.com/))
 
----
 ## Reference
 
 * [The LaTex Project](https://www.latex-project.org/)
 * [CTAN](https://www.ctan.org/)
 * [LaTeX Wikibooks](https://en.wikibooks.org/wiki/LaTeX)
 
----
 ## Acknowledgement
 
-在編修此模板時，同時也參考以下的模板，感謝以下前輩之貢獻：
-* 交通大學：[Po-haoHuang/nctu-thesis](https://github.com/Po-haoHuang/nctu-thesis)
-* 臺灣大學：[tzhuan/ntu-thesis](https://github.com/tzhuan/ntu-thesis)
-* 臺灣科技大學：[ntust-thesis](https://code.google.com/archive/p/ntust-thesis/downloads)
+* 此模板修改自原[交大模板](https://github.com/yungshenglu/NCTU-Thesis-Template)
+  * 原作者：[yungshenglu](https://github.com/yungshenglu)
+  * 原模板專案：[yungshenglu/NCTU-Thesis-Template](https://github.com/yungshenglu/NCTU-Thesis-Template)
 
----
-## Contributor
-
-> **NOTICE:** You can follow the contributing process [CONTRIBUTING.md](CONTRIBUTING.md) to join me. I am very welcome any issue!
-
-This repository is dedicatd for all members in Networking and Sensing Systems Laboratory (NSSLAB).
-
-* [David Lu](https://github.com/yungshenglu)
-
----
 ## License
 
 [GNU GENERAL PUBLIC LICENSE Version 3](LICENSE)

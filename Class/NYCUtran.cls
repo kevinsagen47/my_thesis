@@ -1,4 +1,11 @@
 %----------------------------------------------------------------------
+% 本文件修改自
+% https://github.com/yungshenglu/NCTU-Thesis-Template/blob/master/Class/NCTUtran.cls
+%----------------------------------------------------------------------
+% Origin AUTHOR: Yung-Sheng Lu
+% Origin SOURCE: https://github.com/yungshenglu
+%----------------------------------------------------------------------
+%----------------------------------------------------------------------
 % 本文件係採用創用 "CC 姓名標示-非商業性-相同方式分享 3.0 台灣" 授權條款授權
 % (https://creativecommons.org/licenses/by-nc-sa/3.0/tw/legalcode)
 %
@@ -10,7 +17,7 @@
 % SOURCE: https://github.com/yungshenglu
 %----------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{NCTUtran}[2019/07/17 V1.0 by Yung-Sheng Lu]
+\ProvidesClass{Class/NYCUtran}[2020/03/12 V1.1 by Jing Wang]
 
 %----------------------------------------------------------------------
 % DOCUMENT OPTIONS DECLARATION (文件選項定義)
@@ -496,7 +503,7 @@
 	{\chaptertitlename\ \thechapter}
 	{0em}{}
 % The following is the original chapter title format and label numbering style
-% suggested by NCTU Thesis Format. But, such an English chapter title format is
+% suggested by NYCU Thesis Format. But, such an English chapter title format is
 % too ugly. Not mentioning that I need to number chapter label in Roman style,
 % but use arabic style in section label, i.e. doing something like this:
 %		 (chapter) II. Related Work
