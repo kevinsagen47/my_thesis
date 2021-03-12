@@ -36,27 +36,28 @@
     ```
     * 中間檔案為非必要檔案，已經寫入 `.gitignore` 中。
 3. 如何選擇輸出格式？
-    * 圖書館上傳格式 (Upload Mode)
-        1. 開啟 [`main.tex`](main.tex)。
-        2. 將以下程式碼 (Line 11) 中的 `print` 改為 `upload`。
+    * 可選格式
+        * 碩/博士論文 ( **`master`**/`phd`)
+        * 中/英文 (**`en`**/`zh`)
+        * 編輯中/初稿/定稿 (`review`/**`draft`**/`final`)
+        * 印刷/圖書館上傳格式 (**`print`**/`upload`)
+        * 有/無浮水印 (`watermark`)
+        * 是/否引入照片與審定書等文件(`binding`)
+            * 只有`final`才會有binding效果            
+        * 粗體為預設格式
+    * 修改 [`main.tex: 11`](main.tex#L11)
+        * 將欲輸出的格式填入方框中以逗號隔開，如下例為「碩士中文論文印刷定稿」。
             ```latex=11
             \documentclass[master, zh, final, print]{Class/NYCUtran}
-            ```
-        3. 重新編譯即可。
-            ```bash
-            $ make
-            ```
-    * 印刷格式 (Print Mode)
-        1. 開啟 [`main.tex`](main.tex)。
-        2. 將以下程式碼 (Line 11) 中的 `upload` 改為 `print`。
-            ```latex=11
-            \documentclass[master, zh, final, print]{Class/NYCUtran}
-            ```
-        3. 重新編譯即可。
-            ```bash
-            $ make
             ```
 4. 由於陽明交大尚未決定校徽，故目前繳交之論文仍不需要附上浮水印，然未來仍有加上浮水印之需求，故先將原專案之交大浮水印附上，並設定為不須輸出浮水印，未來只需更改原圖檔為新校徽即可繼續使用。
+5. 如有新增檔案，需於`main.tex`中對應的位置新增引入。
+    * 如新增章節`5-Chapters/6-Other.tex`
+        ```latex=77
+        % 於對應位置 (Line 79)新增引入。
+        \input{5-Chapters/5-Conclusion}
+        \input{5-Chapters/6-Other}
+        ```
 
 ## Directory Structure
 
@@ -105,7 +106,6 @@ nycu-thesis-template
 ├── Tools/                          # * 相關小工具 (不需更動)
 │   └── ...
 ├── .gitignore                      # 檔案忽略清單 (不需更動)
-├── CONTRIBUTING.md                 # 說明文件：如何貢獻本專案 (不需更動)
 ├── GNUmakefile                     # 編譯論文檔案所用 (不需更動)
 ├── LICENSE                         # 專案授權 (不需更動)
 ├── main.tex                        # 論文主要檔案 (自行編輯)
