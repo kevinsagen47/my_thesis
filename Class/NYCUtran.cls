@@ -47,7 +47,7 @@
 % 	1. en (English)
 % 	2. zh (Chinese)
 \newif\ifTHESISOPTIONen					\THESISOPTIONentrue
-\newif\ifTHESISOPTIONzh					\THESISOPTIONzhfalse
+\newif\ifTHESISOPTIONzh					\THESISOPTIONzhtrue
 
 \DeclareOption{en}{
 	\THESISOPTIONentrue
@@ -399,12 +399,12 @@
 % Define language-related macros for front pages and back pages
 \ifTHESISOPTIONzh
 	\ackTitle{誌謝}
-	\tocTitle{目\UTF{9304}}
-	\lofTitle{圖目\UTF{9304}}
-	\lotTitle{表目\UTF{9304}}
+	\tocTitle{目錄}
+	\lofTitle{圖目錄}
+	\lotTitle{表目錄}
 	\bibTitle{參考文獻}
 	\cvTitle{自傳}
-	\lopTitle{著作目\UTF{9304}}
+	\lopTitle{著作目錄}
 \else
 	\ackTitle{Acknowledgement}
 	\tocTitle{Table of Contents}
@@ -575,7 +575,7 @@
 
 % Covert 'A' to 1, 'B' to 2, ...
 % TODO:
-% 	This is a workaround to show '附\UTF{9304}一' in the chapter label but 'A.1' in the
+% 	This is a workaround to show '附錄一' in the chapter label but 'A.1' in the
 % section label of an appendix, rather than showing '1.1', which conflicts with
 % the section label of a regular chapter. Hope someone can fix this in a smarter
 % way.
@@ -638,13 +638,13 @@
 	\ifTHESISOPTIONzh
 		% Set appendix numbering to Chiese style in ToC
 		\titlecontents{chapter}[0pt]{}
-		{\bfseries 附\UTF{9304}\xCJKalphatozhnum{\thecontentslabel}\quad}
+		{\bfseries 附錄\xCJKalphatozhnum{\thecontentslabel}\quad}
 		{}{\cftdotfill{\cftdotsep}\contentspage}
 
 		% Set appendix title to Chinese style
 		\titleformat{\chapter}[block]						% (place label and title body at the same line)
 		{\centering\Huge\bfseries}
-		{附\UTF{9304}\xCJKalphatozhnum{\thechapter}\quad}	% (X、 ...)
+		{附錄\xCJKalphatozhnum{\thechapter}\quad}	% (X、 ...)
 		{0em}{}
 	\else
 		% Format appendix title shown in ToC
