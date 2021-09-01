@@ -1,23 +1,20 @@
 %----------------------------------------------------------------------
-% MAIN PROGRAM OF THESIS/DISSERTATION
+% MAIN PROGRAM OF THESIS
 %----------------------------------------------------------------------
 
 % Set the class of document by NYCU
-% Availbale Class;
-% Type: [master] | phd
-% Language: [en] | zh
-% Mode: review | [draft] | final
-% Usage: [print] | upload
-\documentclass[master, zh, final, print]{Class/NYCUtran}
-
+% Availbale Class:
+%   模式：[draft] | final （初稿 | 定稿）
+%   用途：[print] | upload （輸出 | 上傳）
+\documentclass[final, print]{Class/NYCUtran}
 
 %----------------------------------------------------------------------
-% CONFIGURATION
+% 參數設定們
 %----------------------------------------------------------------------
 
-% HINT: Fill in your information of this thesis/dissertation in "Config/config.tex"
+% 請去Config/config.tex填一些關於這本論文的參數
 \input{Config/config}
-% Modify the defualt font in "NYCUtran.cls"
+% 請去Config/fonts.tex填一下要用的字體
 \input{Config/fonts}
 
 %----------------------------------------------------------------------
@@ -25,94 +22,75 @@
 %----------------------------------------------------------------------
 
 \begin{document}
-% Show repeated author names in bibliography when using "IEEEtran.bst"
-% HINT: Comment out this line if you don't set "IEEEtran" in \bibliographystyle{}
-\bstctlcite{IEEEexample:BSTcontrol}
 
-%%% FRONT MATTERS %%%
-% 1. Cover Page (封面頁)
-% 2. Title Page (標題頁)
-% 3. Copyright Page (版權頁)
-\maketitle
-% 4. Certification (論文審訂書)
-% HINT: Put your Chinese and English certification file (PDF) into "1-Cert/"
-\includepdf[pages={1}]{1-Cert/1-Certification-zh.pdf}
-% HINT: The English certification is for Phd only
-%\includepdf[pages={1}]{Cert/2-Certification-en.pdf}
-% 5. Authorization (授權書)
-% HINT: Put your authorization file (PDF) into "2-Auth/"
-\includepdf[pages={1}]{2-Auth/1-Authorization.pdf}
 
-%%% ABSTRACT %%%
-% 1. Chinese Abstract (中文摘要)
-% HINT: Write down your contents in "3-Abs/1-Abstract-zh.tex"
-\input{3-Abs/1-Abstract-zh}
-% 2. English Abstract (英文摘要)
-% HINT: Write down your contents in "3-Abs/2-Abstract-en.tex"
-\input{3-Abs/2-Abstract-en}
+% 以下註解的數字編號是參考自
+% https://aa.nycu.edu.tw/wp-content/uploads/國立陽明交通大學博碩士學位論文格式規範_中英對照.pdf
+% 窩有留一份在Others裡面
 
-%%% ACKNOWLEDGEMENT %%%
-% 1. Acknowledgement (誌謝頁)
-% HINT: Write down your contents in "4-Ack/1-Acknowledgement.tex"
-\input{4-Ack/1-Acknowledgement}
-% 2. Dedication (題獻頁) [PhD only]
-% HINT: 
-% * Only shown in the final mode of a PhD dissertation
-% * Write down your contents in "4-Ack/2-Dedication.tex"
-%\input{4-Ack/2-Dedication}
+% 1. 封面頁
+\coverPage
 
-%%% TOC / LOF %%%
-% Generate Table of Contents (目錄頁) and List of Figures (圖目頁)
+% 2. 書名頁
+\titlePage
+
+% 3. 論文電子檔著作權授權書
+%       口試完將修改完的論文上傳到
+%       https://etd.lib.nctu.edu.tw/cgi-bin/gs32/tugsweb.cgi?o=dwebmge
+%       就會拿到的各種授權書
+%       所以初稿不應該出現這些東西才對
+\includepdf[pages={1}]{1-Authorization/1-Authorization.pdf}
+\includepdf[pages={1}]{1-Authorization/2-PostponePublication.pdf}
+
+% 5. 論文審定同意書
+%       這邊有附一個學校提供的公版
+%       但假如是資訊學院的同學，可以直接在申請口試完後從系統匯出已經填好資料的這張表
+%       這一頁將部會出現在上傳版本中（學校的電子論文不需要這一張），只會出現在列印輸出版中
+%       這個也是口試完才會有完整簽名的東西，所以初稿也不會出現這頁
+\includepdf[pages={1}]{2-Approval/1-Approval.pdf}
+
+% 6. 致謝
+%       依據學校的規定，可依個人意願自行決定是否撰寫，以不超過一頁為原則
+%       如果不想寫，就請將這一行註解
+\input{3-Acknowledgement/1-Ack}
+
+% 請不要動這一行
+% 這一行代表開始編頁碼，從這一行以後開始的頁面會編羅馬數字（i, ii, iii, ...）
+% 依據學校的規定，中文摘要至圖表目錄等，以 i，ii，iii…等小寫羅馬數字連續編頁。
+\frontmatter
+
+% 7. 中文摘要
+\input{4-Abstracts/1-Abs_zh}
+
+% 8. 英文摘要
+\input{4-Abstracts/2-Abs_en}
+
+% 9. 目錄
+% 10. 圖目錄
+% 11. 表目錄
 \maketocs
-% Set page numbering to 'arabic' (1, 2, 3, ...)
+
+% 請不要動這一行
+% 這一行代表開始編頁碼，從這一行以後開始的頁面會編阿拉伯數字（1, 2, 3, ...）
+% 依據學校的規定，論文第一章以至附錄，均以 1，2，3…等阿拉伯數字連續編頁。
 \mainmatter
 
-%%% CHAPTERS %%%
-% HINT:
-% * Arrange the order of all chapters here
-% * Add your chapters as follow
+% 12. 論文正文
+%       各章節內容有附一些常用的Sample，可隨意增減檔案
 \input{5-Chapters/1-Introduction}
-\input{5-Chapters/2-RelatedWork}
+\input{5-Chapters/2-BackgroundKnowldege}
 \input{5-Chapters/3-Design}
 \input{5-Chapters/4-Evaluation}
 \input{5-Chapters/5-Conclusion}
 
-%%% BIBLIOGRAPHY %%%
-% Set the style of bibliography
-\bibliographystyle{IEEEtran}
-% Add the bibliography to "Table of Contents"
-\addBibToContents
-% Include bibliography
-% USAGE:
-% 1. Please put your ".bib" file in the folder "6-Bib/"
-% 2. Modify the command as follow: (Do NOT split with SPACE!)
-%    \bibliography{6-Bib/bib1,6-Bib/bib2,...,6-Bib/bibN}
-% NOTICE:
-% 1. For IEEEtran users:
-%    DO NOT remove "Bib/BSTcontrol.bib" when using "IEEEtran.bst". The reason is 
-%    that when we cite two papers of the same (or similar) authors, "IEEEtran.bst"
-%    would replace the author names with "------". To avoid this, we use "BSTControl.bib"
-%    to set "ctldash_repeated_names" to 'no'.
-% 2. For non IEEEtran users:
-%    Please delete "6-Bib/BSTcontrol" from "\bibliography{}"
-\bibliography{6-Bib/BSTcontrol,6-Bib/thesis}
+% 13. 參考文獻
+\makeBib
 
-%%% APPENDIX %%%
-% Appendix (附錄)
-% HINT: Arrange the order of all appendicies here
-% HINT: Add your appendicies as follow
-%\input{7-Appx/1-Appx}
+% 14. 附錄
+%       ㄅ歉，窩的論文沒有寫到附錄的部分，所以窩不是很確定這邊的格式該怎麼設
+%       但學校的規定又偏鬆散。所以窩就提供了一個窩的設計給各位參考一下
+\input{7-Appendixes/1-Appendix}
 
-%%% AUTHOR [PhD only] %%%
-% 1. Curriculum Vitae (作者簡歷) [PhD only]
-% HINT:
-% * Write down your contents in "8-Author/CV.tex"
-% * Only shown in the final mode of a PhD dissertation
-%\input{8-Author/1-CV}
-% 2. Publications (著作列表) [PhD only]
-% HINT:
-% * Write down your contents in "8-Author/Publications.tex"
-% * Only shown in the final mode of a PhD dissertation
-%\input{8-Author/2-Publications}
-
+% 15. 封底
+%       這一行就是窩寫開心的，Yeah。
 \end{document}

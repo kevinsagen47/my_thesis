@@ -1,41 +1,17 @@
 %-------------------------------------------------------------------------------
-% CHINESE FONT SETTINGS
-%
-%   These macros are used to change the default Chinese fonts (see below) used
-% by thesis.cls. Please leave {} empty if you want to use the default settings
-% and make sure that you have added '-shell-escape' option when using xetex to
-% compile tex files, i.e. xetex compiling commands should run something like:
-%
-%     xelatex -synctex=1 -shell-escape -interaction=nonstopmode %.tex
-%
-% (default Chinese font settings)
-%   Windows              Linux                        Mac OS X
-% * 標楷體 (DFKai-SB)    AR PL 中楷 (AR PL UKai TW)    楷體-繁 (Kaiti TC Regular)
-% @ 新細明體 (PMingLiU)  AR PL 明體 (AR PL UMing TW)   儷宋 Pro (LiSong Pro)
-%
-% * fontname --> 預設中文本文字型 (serif)
-% @ fontname --> 預設中文明體字型 (sans-serif, 使用於封面頁)
+% FONT SETTINGS
+% 拜託填一下要用的中文字型
 %-------------------------------------------------------------------------------
 
-% main (serif) Chinese font, leave {} empty to enable default font setting
-\mainfontzh{}
+% 中文字體
+%       其實學校沒規定，內頁的字型要用啥，但是應該大部分都是用「標楷體」才對。
+%       請填上系統的標楷體的名稱是是啥
+%           Windows：標楷體
+%           Overleaf：cwTeXKai
+%           其他系統：窩不知道
+\zhFont{標楷體}
 
-% sans-serif Chinese font, leave {} empty to enable default font setting
-\sansfontzh{}
-
-%-------------------------------------------------------------------------------
-% ENGLISH FONT SETTINGS
-%
-%   These macros are used to change the default English fonts (see below) used
-% by thesis.cls. Please leave {} empty if you want to use the default settings.
-%
-% (default English font settings)
-% main font       --> Times New Roman (for all platforms)
-% sans-serif font --> Arial           (for all platforms)
-%-------------------------------------------------------------------------------
-
-% Main font for English, leave {} empty if you want to use default font setting
-\mainfont{}
-
-% sans-serif font for English, leave {} empty if you want to use default setting
-\sansfont{}
+% 英文字體
+%       其實學校沒規定，內頁的字型要用啥，但是應該大部分都是用「Times New Roman」才對。
+%       請填上系統的對應的名稱是是啥
+\enFont{Times New Roman}
