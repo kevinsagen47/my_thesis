@@ -25,7 +25,8 @@
 
 
 % 以下註解的數字編號是參考自
-% https://aa.nycu.edu.tw/wp-content/uploads/國立陽明交通大學博碩士學位論文格式規範_中英對照.pdf
+% https://aa.nycu.edu.tw/reg/regulation/ 
+%    底下的 博碩士學位論文格式規範(中、英文說明)
 % 窩有留一份在Others裡面
 
 % 1. 封面頁
@@ -35,21 +36,25 @@
 \titlePage
 
 % 3. 論文電子檔著作權授權書
-%       口試完將修改完的論文上傳到
-%       https://etd.lib.nctu.edu.tw/cgi-bin/gs32/tugsweb.cgi?o=dwebmge
-%       就會拿到的各種授權書
-%       所以初稿不應該出現這些東西才對
+%       - 這邊提供的是學校的公版文件
+%           https://aa.nycu.edu.tw/reg/regulation/
+%       - 口試完將修改完的論文上傳到
+%           https://etd.lib.nctu.edu.tw/cgi-bin/gs32/tugsweb.cgi?o=dwebmge
+%           就會拿到填好的各種授權書
+%           這不是初稿應和上傳版本該出現這些東西才對
 \includepdf[pages={1}]{1-Authorization/1-Authorization.pdf}
 \includepdf[pages={1}]{1-Authorization/2-PostponePublication.pdf}
 
 % 5. 論文審定同意書
-%       這邊有附一個學校提供的公版
-%       但假如是資訊學院的同學，可以直接在申請口試完後從系統匯出已經填好資料的這張表
-%       這一頁將部會出現在上傳版本中（學校的電子論文不需要這一張），只會出現在列印輸出版中
-%       這個也是口試完才會有完整簽名的東西，所以初稿也不會出現這頁
-\includepdf[pages={1}]{2-Approval/1-Approval.pdf}
+%       - 這邊有附一個學校提供的公版
+%           https://aa.nycu.edu.tw/reg/regulation/
+%           但假如是資訊學院的同學，可以直接在申請口試完後從系統匯出已經填好資料的這張表
+%       - 這一頁將不會出現在上傳版本中（學校的電子論文不需要這一張），只會出現在列印輸出版中
+%           這個也是口試完才會有完整簽名的東西，所以初稿也不會出現這頁
+\includepdf[pages={1}]{2-Approval/1-Approval_zh.pdf}
+\includepdf[pages={1}]{2-Approval/1-Approval_en.pdf}
 
-% 6. 致謝
+% 6. 誌謝
 %       依據學校的規定，可依個人意願自行決定是否撰寫，以不超過一頁為原則
 %       如果不想寫，就請將這一行註解
 \input{3-Acknowledgement/1-Ack}
@@ -93,4 +98,6 @@
 
 % 15. 封底
 %       這一行就是窩寫開心的，Yeah。
+
+% 論文結束喇
 \end{document}
