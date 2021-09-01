@@ -1,11 +1,4 @@
 %----------------------------------------------------------------------
-% 本文件修改自
-% https://github.com/yungshenglu/NCTU-Thesis-Template/blob/master/Class/NCTUtran.cls
-%----------------------------------------------------------------------
-% Origin AUTHOR: Yung-Sheng Lu
-% Origin SOURCE: https://github.com/yungshenglu
-%----------------------------------------------------------------------
-%----------------------------------------------------------------------
 % 本文件係採用創用 "CC 姓名標示-非商業性-相同方式分享 3.0 台灣" 授權條款授權
 % (https://creativecommons.org/licenses/by-nc-sa/3.0/tw/legalcode)
 %
@@ -13,14 +6,20 @@
 % 用者修改該著作時，僅得依本授權條款或與本授權條款類似者來散布該衍生作品。使用時
 % 必須按照著作人指定的方式表彰其姓名。
 %----------------------------------------------------------------------
-% AUTHOR: Yung-Sheng Lu
-% SOURCE: https://github.com/yungshenglu
+% AUTHOR: JingWangTW
+% AUTHOR GitHub Page: https://github.com/JingWangTW
+%----------------------------------------------------------------------
+% 本文件修改自
+% https://github.com/yungshenglu/NCTU-Thesis-Template/blob/master/Class/NCTUtran.cls
+%----------------------------------------------------------------------
+% Origin AUTHOR: Yung-Sheng Lu
+% Origin AUTHOR GitHub Page: https://github.com/yungshenglu
 %----------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{Class/NYCUtran}[2020/03/12 V1.1 by Jing Wang]
+\ProvidesClass{Class/NYCUtran}[2021/09/05 V2.0 by JingWangTW]
 
 %----------------------------------------------------------------------
-% DOCUMENT OPTIONS DECLARATION (文件選項定義)
+% DOCUMENT OPTIONS DECLARATION
 %----------------------------------------------------------------------
 
 % Inherent existing options from book document class
@@ -28,191 +27,113 @@
 	\PassOptionsToClass{\CurrentOption}{book}
 }
 
-% Declare options for thesis types: (default: master)
-% 	1. thesis (master)
-% 	2. dissertation (phd)
-\newif\ifTHESISOPTIONmaster				\THESISOPTIONmastertrue
-\newif\ifTHESISOPTIONphd				\THESISOPTIONphdfalse
-
-\DeclareOption{master}{
-	\THESISOPTIONmastertrue
-	\THESISOPTIONphdfalse
-}
-\DeclareOption{phd}{
-	\THESISOPTIONmasterfalse
-	\THESISOPTIONphdtrue
-}
-
-% Declare options for the language used in thesis: (default: english)
-% 	1. en (English)
-% 	2. zh (Chinese)
-\newif\ifTHESISOPTIONen					\THESISOPTIONentrue
-\newif\ifTHESISOPTIONzh					\THESISOPTIONzhtrue
-
-\DeclareOption{en}{
-	\THESISOPTIONentrue
-	\THESISOPTIONzhfalse
-}
-\DeclareOption{zh}{
-	\THESISOPTIONenfalse
-	\THESISOPTIONzhtrue
-}
-
-% Declare binding option: (default: disabled)
-% HINT: Depend on the mode of thesis format
-% 	1. review	: disabled
-%	2. draft 	: disabled
-%	3. final 	: enabled
-\newif\ifTHESISOPTIONbinding			\THESISOPTIONbindingfalse
-
-\DeclareOption{binding}{
-	\THESISOPTIONbindingtrue
-}
-
 % Declare options for print modes: (default: draft)
-% 	1. review	: for thesis writing (hide all front matters)
-%	2. draft 	: draft for defence
-%	3. final 	: print version
-\newif\ifTHESISOPTIONreview				\THESISOPTIONreviewfalse
-\newif\ifTHESISOPTIONdraft				\THESISOPTIONdrafttrue
-\newif\ifTHESISOPTIONfinal				\THESISOPTIONfinalfalse
-
-\DeclareOption{review}{
-	\THESISOPTIONreviewtrue
-	\THESISOPTIONdraftfalse
-	\THESISOPTIONfinalfalse
-	\THESISOPTIONbindingfalse
-}
+%	1. draft 	: draft for defence
+%	2. final 	: print version
+\newif\ifThesisModeDraft        \ThesisModeDrafttrue
+\newif\ifThesisModeFinal        \ThesisModeFinalfalse
 
 \DeclareOption{draft}{
-	\THESISOPTIONreviewfalse
-	\THESISOPTIONdrafttrue
-	\THESISOPTIONfinalfalse
-	\THESISOPTIONbindingfalse
+    \ThesisModeDrafttrue
+    \ThesisModeFinalfalse
 }
 
 \DeclareOption{final}{
-	\THESISOPTIONreviewfalse
-	\THESISOPTIONdraftfalse
-	\THESISOPTIONfinaltrue
-	\THESISOPTIONbindingtrue
-}
-
-% Declare watermark option: (default: disabled)
-% HINT: Depend on the mode of thesis format:
-%	1. review	: never shown
-%	2. draft 	: print "DRAFT" in the background
-%	3. final 	: print the watermark specified by \watermark{}
-\newif\ifTHESISOPTIONwatermark			\THESISOPTIONwatermarkfalse
-\DeclareOption{watermark}{
-	\THESISOPTIONwatermarktrue
+    \ThesisModeDraftfalse
+    \ThesisModeFinaltrue
 }
 
 % Declare options for usage: (default: print)
 %	1. print	: output with cover page
-%	2. upload 	: output without cover page
-\newif\ifTHESISOPTIONprint				\THESISOPTIONprintfalse
-\newif\ifTHESISOPTIONupload				\THESISOPTIONuploadfalse
+%	2. upload 	: output without cover and auth page
+\newif\ifThesisUsagePrint				\ThesisUsagePrinttrue
+\newif\ifThesisUsageUpload				\ThesisUsageUploadfalse
 
 \DeclareOption{print}{
-	\THESISOPTIONprinttrue
-	\THESISOPTIONuploadfalse
+	\ThesisUsagePrinttrue
+	\ThesisUsageUploadfalse
 }
 \DeclareOption{upload}{
-	\THESISOPTIONprintfalse
-	\THESISOPTIONuploadtrue
+	\ThesisUsagePrintfalse
+	\ThesisUsageUploadtrue
 }
 
-% Load basic options
+% Load options passed to document class
 \ProcessOptions
 \LoadClass[a4paper, 12pt, oneside]{book}
 
 %----------------------------------------------------------------------
-% BASIC PACKAGES (引用套件)
+% INCLUDE PACKAGES
 %----------------------------------------------------------------------
-
 % For chinese typing
 \usepackage[BoldFont, SlantFont, CJKchecksingle, CJKmath=true]{xeCJK}
-% For font selection
-\usepackage{fontspec}
-% Determine currently running platform/OS
-\usepackage{ifplatform}
-% For indention (for Windows)
-\usepackage{indentfirst}
-% Double spacing and begin spacing
+% For lines spacing
 \usepackage{setspace}
-% For the position of watermark 
-\usepackage{tikz}
-% For Watermark
-\usepackage{eso-pic}
-% For the index
-\usepackage[xetex, hidelinks]{hyperref}
-% For setting the maring of page
-\usepackage{geometry}		
-% For clearing the page number in empty even pages 
-\usepackage{emptypage}
-% For adding blank page after cover page and title page (two-side)
-\usepackage{afterpage}
-% For generating text for testing
-\usepackage{lipsum}
-% For using "\comment"
-\usepackage{verbatim}
-% For using "\bstctlcite"
-\usepackage[retainorgcmds]{Class/IEEEtrantools}
-% For converting arabic number to chinese number
-\usepackage{Class/xCJKnumb}
-% Formating titles of sectioning
-\usepackage{titlesec}
+% For pdf including
+\usepackage{pdfpages}
+% For phantom section
+\usepackage{hyperref}
+% For header and footer
+\usepackage{fancyhdr}
 % Formatting titles in ToC
 \usepackage{titletoc}
 % For centering ToC, LoF, and LoT
-\usepackage[subfigure]{tocloft}
-% For subfigure
-%\usepackage{caption}
-%\usepackage[labelformat=simple]{subcaption}
-% Formatting the numbering of algorithm label
-\usepackage[ruled, vlined]{algorithm2e}
-% AMS math­e­mat­i­cal fa­cil­i­ties
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\DeclareMathOperator{\dis}{dist}
-% En­hanced sup­port for graph­ics
+\usepackage{tocloft}
+% For page layout
+\usepackage[a4paper]{geometry}
+% For manipulation of length arithmetic
+\usepackage{calc}
+% For custom titile style
+\usepackage{titlesec}
+% For converting arabic number to chinese number
+\usepackage{Class/xCJKnumb}
+% Indent first paragraph
+\usepackage{indentfirst}
+% To config figures
 \usepackage{graphicx}
-% Setting the path of figures
-\graphicspath{{./Figures/}}
-% For in­clude En­cap­su­lated PostScript
-\usepackage{epsfig}
-% For con­vert EPS to PDF us­ing Ghostscript
-\usepackage{epstopdf}
-% Im­proved in­ter­face for float­ing ob­jects
+% For using "\bstctlcite"
+\usepackage[retainorgcmds]{IEEEtrantools}
+% For custom caption
+\usepackage{caption}
+% Using math tools
+\usepackage{amsmath}
+% For special math symbol
+\usepackage{amssymb}
+% For sub fig, sub table
+\usepackage[list=true]{subcaption}
+% Specail Font in math zone
+\usepackage{amsfonts}
+% Algorithm Block
+\usepackage[ruled,vlined,algochapter]{algorithm2e}
+% To float the pic
 \usepackage{float}
-% For multi-row table
+% Set default firgure placement
+\usepackage{graphicx}
+% Rowspan
 \usepackage{multirow}
-% Table style used in books
-\usepackage{booktabs}
-% Import PDF file
-\usepackage{pdfpages}
-% A generic doc­u­ment com­mand parser
-\usepackage{xparse}
-
-%---
-\usepackage{psfrag}
-\usepackage{subfigure}
-\usepackage{type1cm}
-\usepackage{threeparttable}
-\usepackage{listings}
-\usepackage{enumitem}
-\usepackage{textcomp}
-\usepackage{gensymb}
-\usepackage{svg}
-\floatstyle{plaintop}
-\restylefloat{table}
-\usepackage{dblfloatfix}
+% Slash cell in the table
+\usepackage{diagbox}
+% Evenly distributing column widths
+\usepackage{tabularx,booktabs}
+% To over the border 
+\usepackage{adjustbox}
+% Double cline
 \usepackage{hhline}
-\usepackage{wallpaper}
-\usepackage{graphics}
-\renewcommand{\baselinestretch}{1.5}
+% multiple foot notes in table
+\usepackage{tablefootnote}
+% For "TM" trademark
+\usepackage{textcomp}
+% For better bib (show visited on text after an url)
+\usepackage[
+    backend=biber,
+    style=ieee,
+    sorting=none,
+    dashed=false
+]{biblatex}
+% Break url in bib
+\usepackage{xurl}
+% For unit transform
+\usepackage{siunitx}
 
 %----------------------------------------------------------------------
 % PAGE FORMAT (頁面格式)
