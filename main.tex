@@ -6,7 +6,7 @@
 % Availbale Class:
 %   模式：[draft] | final （初稿 | 定稿）
 %   用途：[print] | upload （輸出 | 上傳）
-\documentclass[final, print]{Class/NYCU}
+\documentclass[draft, print]{Class/NYCU}
 
 %-----------------------------------------------------------------------------------------------------
 % 參數設定們
@@ -20,6 +20,10 @@
 %-----------------------------------------------------------------------------------------------------
 % MAIN CONTENT
 %-----------------------------------------------------------------------------------------------------
+
+% 這個模板用的Bibliography管理器是biblatex
+% biblatex規定要在\begin{document}前加入bib資料
+\addbibresource{6-Reference/thesis.bib}
 
 \begin{document}
 
@@ -40,7 +44,7 @@
 %       - 口試完將修改完的論文上傳到
 %           https://etd.lib.nctu.edu.tw/cgi-bin/gs32/tugsweb.cgi?o=dwebmge
 %           就會拿到填好的各種授權書
-%           這不是初稿應和上傳版本該出現這些東西才對
+%           所以這是輸出且為定稿才會出現的東西
 %       - 如果有多份授權書需加入，如授權書與延後公開申請書
 %           請先合併成一個PDF然後在這邊指定路徑
 \makeAuthPage{1-Authorization/1-Authorization.pdf}
@@ -62,7 +66,7 @@
 % 6. 誌謝
 %       依據學校的規定，可依個人意願自行決定是否撰寫，以不超過一頁為原則
 %       如果不想寫，就請將這一行註解
-\input{3-Acknowledgement/1-Ack}
+\input{3-Acknowledgement/1-Acknowledgement}
 
 % 請不要動這一行
 % 這一行代表開始編頁碼，從這一行以後開始的頁面會編羅馬數字（i, ii, iii, ...）
@@ -70,15 +74,21 @@
 \frontmatter
 
 % 7. 中文摘要
-\input{4-Abstracts/1-Abs_zh}
+\input{4-Abstracts/1-Abstract_zh}
 
 % 8. 英文摘要
-\input{4-Abstracts/2-Abs_en}
+\input{4-Abstracts/2-Abstract_en}
 
 % 9. 目錄
+\maketoc
+
 % 10. 圖目錄
+%       如果沒有可以註解掉
+\makelof
+
 % 11. 表目錄
-\maketocs
+%       如果沒有可以註解掉
+\makelot
 
 % 請不要動這一行
 % 這一行代表開始編頁碼，從這一行以後開始的頁面會編阿拉伯數字（1, 2, 3, ...）
@@ -99,7 +109,7 @@
 % 14. 附錄
 %       ㄅ歉，窩的論文沒有寫到附錄的部分，所以窩不是很確定這邊的格式該怎麼設
 %       但學校的規定又偏鬆散。所以窩就提供了一個窩的設計給各位參考一下
-\input{7-Appendixes/1-Appendix}
+% \input{7-Appendixes/1-Appendix}
 
 % 15. 封底
 %       這一行就是窩寫開心的，Yeah。

@@ -6,21 +6,43 @@
 % 用者修改該著作時，僅得依本授權條款或與本授權條款類似者來散布該衍生作品。使用時
 % 必須按照著作人指定的方式表彰其姓名。
 %----------------------------------------------------------------------
-% AUTHOR: JingWangTW
-% AUTHOR GitHub Page: https://github.com/JingWangTW
+% Template Name: NYCU-Thesis
+% Version: 2.0
+% Version: Update: Sep. 05, 2021
+% Author: JingWangTW
+% Author GitHub Page: https://github.com/JingWangTW
 %----------------------------------------------------------------------
-% 本文件修改自
-% https://github.com/yungshenglu/NCTU-Thesis-Template/blob/master/Class/NCTUtran.cls
-%----------------------------------------------------------------------
-% Origin AUTHOR: Yung-Sheng Lu
-% Origin AUTHOR GitHub Page: https://github.com/yungshenglu
+% Origin File: https://github.com/yungshenglu/NCTU-Thesis-Template/blob/master/Class/NCTUtran.cls
+% Origin Author: Yung-Sheng Lu
+% Origin Author GitHub Page: https://github.com/yungshenglu
 %----------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{Class/NYCUtran}[2021/09/05 V2.0 by JingWangTW]
+\ProvidesClass{Class/NYCU-Thesis}[2021/09/05 V2.0 by JingWangTW]
 
 %----------------------------------------------------------------------
-% DOCUMENT OPTIONS DECLARATION
+% Table of Contents
+%   1.0 - Document Options Declaration
+%   2.0 - Include Required Package
+%   3.0 - Macro Definition
+%   4.0 - Font Configuration
+%   5.0 - Page Layout
+%       5.1 - Cover Page Layout
+%       5.2 - Title Page Layout
+%       5.3 - Authorization Page Layout
+%       5.4 - Approval Page Layout
+%       5.5 - Chinese Abstract Layout
+%       5.6 - English Abstract Layout
+%       5.7 - ToC, LoF, LoT Layout
+%       5.8 - Chapter Contents Layout
+%       5.9 - Reference Layout
+%       5.10 - Appendices Layout
+%   6.0 - Utility Command / Tools
 %----------------------------------------------------------------------
+
+
+%======================================================================
+% 1.0 Document Options Declaration
+%======================================================================
 
 % Inherent existing options from book document class
 \DeclareOption*{
@@ -62,15 +84,17 @@
 \ProcessOptions
 \LoadClass[a4paper, 12pt, oneside]{book}
 
-%----------------------------------------------------------------------
-% INCLUDE PACKAGES
-%----------------------------------------------------------------------
+%======================================================================
+% 2.0 Include Required Package
+%======================================================================
 % For chinese typing
 \usepackage[BoldFont, SlantFont, CJKchecksingle, CJKmath=true]{xeCJK}
 % For lines spacing
 \usepackage{setspace}
 % For pdf including
 \usepackage{pdfpages}
+% For condition if
+\usepackage{ifthen}
 % For phantom section
 \usepackage{hyperref}
 % For header and footer
@@ -135,351 +159,422 @@
 % For unit transform
 \usepackage{siunitx}
 
-%----------------------------------------------------------------------
-% PAGE FORMAT (頁面格式)
-%----------------------------------------------------------------------
+%======================================================================
+% 3.0 Macro Definition
+%======================================================================
 
-% Page margin
-% HINT: Only valid in final mode
-\ifTHESISOPTIONbinding	
-	\geometry{left=3 cm, right=2 cm, top=2.5 cm, bottom=2.5 cm}
-\else
-	\geometry{left=2.5 cm, right=2.5 cm, top=2.5 cm, bottom=2.5 cm}
-\fi
+% 中英文論文題目
+\def\zhTitle#1{\gdef\@zhTitle{#1}}
+\def\enTitle#1{\gdef\@enTitle{#1}}
 
-% Position of page number
-\pagestyle{plain}
-\setlength{\footskip}{1.5cm}
+% 中英文關鍵字
+\def\zhKeywords#1{\gdef\@zhKeywords{#1}}
+\def\enKeywords#1{\gdef\@enKeywords{#1}}
 
-% Double spacing
-\doublespacing
+% 研究生中英文姓名
+\def\zhStudentName#1{\gdef\@zhStudentName{#1}}
+\def\enStudentName#1{\gdef\@enStudentName{#1}}
 
-%----------------------------------------------------------------------
-% FONT SETTING (字型設定)
-%----------------------------------------------------------------------
+% 指導教授中英文姓名
+\def\zhAdvisorName#1{\gdef\@zhAdvisorName{#1}}
+\def\enAdvisorName#1{\gdef\@enAdvisorName{#1}}
 
-%%% ENGLISH %%%
-% Main font for English
-\newcommand{\mainfont}[1]{
+% 中英文大學名稱
+\def\zhUnivName#1{\gdef\@zhUnivName{#1}}
+\def\enUnivName#1{\gdef\@enUnivName{#1}}
+
+% 中英文學院名稱
+\def\zhCollegeName#1{\gdef\@zhCollegeName{#1}}
+\def\enCollegeName#1{\gdef\@enCollegeName{#1}}
+
+% 中英文研究所名稱
+\def\zhInstName#1{\gdef\@zhInstName{#1}}
+\def\enInstName#1{\gdef\@enInstName{#1}}
+
+% 英文學位名稱
+\def\enDegree#1{\gdef\@enDegree{#1}}
+
+% 英文領域名稱
+\def\enField#1{\gdef\@enField{#1}}
+
+% 英文地點名稱
+\def\enLocation#1{\gdef\@enLocation{#1}}
+
+% 中英文論文日期
+\def\zhDegreeYear#1{\gdef\@zhDegreeYear{#1}}
+\def\zhDegreeMonth#1{\gdef\@zhDegreeMonth{#1}}
+\def\enDegreeYear#1{\gdef\@enDegreeYear{#1}}
+\def\enDegreeMonth#1{\gdef\@enDegreeMonth{#1}}
+
+%======================================================================
+% 4.0 Font Configuration
+%======================================================================
+
+%%% CHINESE Font %%%
+\newcommand{\zhFont}[1]{
 	\ifx &#1&
-		\setmainfont[Ligatures=TeX]{Times New Roman}
-	\else
-		\setmainfont[Ligatures=TeX]{#1}
-	\fi
-}
-
-% "Sans-serif" font for English
-\newcommand{\sansfont}[1]{
-	\ifx &#1&
-		\setsansfont[Ligatures=TeX]{Arial}
-	\else
-		\setsansfont[Ligatures=TeX]{#1}
-	\fi
-}
-
-%%% CHINESE %%%
-% Main (serif) font for Chinese
-\newcommand{\mainfontzh}[1]{
-	\ifx &#1&
-		\ifwindows		% Windows
-			\setCJKmainfont{DFKai-SB}			% 標楷體
-		\else\iflinux	% Linux
-			\setCJKmainfont{AR PL UKai TW}		% AR PL 中楷
-		\else\ifmacosx	% MacOS X
-			\setCJKmainfont{Kaiti TC Regular}	% 楷體-繁
-		\else			% '-shell-escape' is not set, using Windows fonts as default
-			\setCJKmainfont{DFKai-SB}
-		\fi \fi \fi
+        \PackageError{NYCU}{請透過\\zhFont設定中文字型}{請提供中文字型的名稱}
 	\else
 		\setCJKmainfont{#1}
 	\fi
 }
 
-% Sans-serif font for Chinese
-\newcommand{\sansfontzh}[1]{
+%%% English Font %%%
+\newcommand{\enFont}[1]{
 	\ifx &#1&
-		\ifwindows		% Windows
-			\setCJKsansfont{PMingLiU}			% 新細明體
-		\else\iflinux	% Linux
-			\setCJKsansfont{AR PL UMing TW}		% AR PL 明體
-		\else\ifmacosx	% MacOS X
-			\setCJKsansfont{LiSong Pro}			% 儷宋 Pro (明體)
-		\else			% '-shell-escape' is not set, using Windows fonts as default
-			\setCJKsansfont{PMingLiU}
-		\fi \fi \fi
+        \PackageError{NYCU}{請透過\\enFont設定英文字型}{請提供英文字型的名稱}
 	\else
-		\setCJKsansfont{#1}
+		\setmainfont{#1}
 	\fi
 }
 
-% Enable line break for chinese
-\XeTeXlinebreaklocale "zh"
-\XeTeXlinebreakskip = 0pt plus 1pt
-
-%----------------------------------------------------------------------
-% MACROS (巨集)
-%----------------------------------------------------------------------
-
-% English title of thesis/dissertation
-\def\enTitle#1{\gdef\@enTitle{#1}}
-% Chinese title of thesis/dissertation
-\def\zhTitle#1{\gdef\@zhTitle{#1}}
-% English keywords of thesis/dissertation
-\def\enKeywords#1{\gdef\@enKeywords{#1}}
-% Chinese keywords of thesis/dissertation
-\def\zhKeywords#1{\gdef\@zhKeywords{#1}}
-% The year and month the completed thesis is submitted in English
-\def\enDegreeYear#1{\gdef\@enDegreeYear{#1}}
-\def\enDegreeMonth#1{\gdef\@enDegreeMonth{#1}}
-% The year and month the completed thesis is submitted in Chinese
-\def\zhDegreeYear#1{\gdef\@zhDegreeYear{#1}}
-% The full (unabbreviated) name of the degree
-\def\enDegree#1{\gdef\@enDegree{#1}}
-% The name of your degree's field (e.g. Psychology, Computer Science)
-\def\enField#1{\gdef\@enField{#1}}
-% The type of thesis in English
-\def\enThesisType#1{\gdef\@enThesisType{#1}}
-% The type of thesis in Chinese
-\def\zhThesisType#1{\gdef\@zhThesisType{#1}}
-% The name of the institute in English
-\def\enInstName#1{\gdef\@enInstName{#1}}
-% The name of the institute in Chinese
-\def\zhInstName#1{\gdef\@zhInstName{#1}}
-% The name of college in English
-\def\enCollegeName#1{\gdef\@enCollegeName{#1}}
-% The name of college in Chinese
-\def\zhCollegeName#1{\gdef\@zhCollegeName{#1}}
-% The name of university in English
-\def\enUnivName#1{\gdef\@enUnivName{#1}}
-% The name of university in Chinese
-\def\zhUnivName#1{\gdef\@zhUnivName{#1}}
-% The location of university
-\def\enLocation#1{\gdef\@enLocation{#1}}
-% The name of student in English
-\def\enStudentName#1{\gdef\@enStudentName{#1}}
-% The name of student in Chinese
-\def\zhStudentName#1{\gdef\@zhStudentName{#1}}
-% The email of student
-\def\studentEmail#1{\gdef\@studentEmail{#1}}
-% The name of advisor in English
-\def\enAdvisorName#1{\gdef\@enAdvisorName{#1}}
-% The name of advisor in Chinese
-\def\zhAdvisorName#1{\gdef\@zhAdvisorName{#1}}
-% The email of advisor
-\def\advisorEmail#1{\gdef\@advisorEmail{#1}}
-% The name of co-advisor A in English
-\def\enCoadvisorNameA#1{\gdef\@enCoadvisorNameA{#1}}
-% The name of co-advisor A in Chinese
-\def\zhCoadvisorNameA#1{\gdef\@zhCoadvisorNameA{#1}}
-% The email of co-advisor A the advisor
-\def\coadvisorEmailA#1{\gdef\@coadvisorEmailA{#1}}
-% The name of co-advisor B in English
-\def\enCoadvisorNameB#1{\gdef\@enCoadvisorNameB{#1}}
-% The name of co-advisor B in Chinese
-\def\zhCoadvisorNameB#1{\gdef\@zhCoadvisorNameB{#1}}
-% The email of co-advisor B
-\def\coadvisorEmailB#1{\gdef\@coadvisorEmailB{#1}}
-% The path to watermark
-\def\watermark#1{\gdef\@watermark{#1}}
-% Title of Acknowledgement
-\def\ackTitle#1{\gdef\@ackTitle{#1}}
-% Title of Table of Contents
-\def\tocTitle#1{\gdef\@tocTitle{#1}}
-% Title of List of Figures
-\def\lofTitle#1{\gdef\@lofTitle{#1}}
-% Title of List of Tables (Comment out if unnecessary)
-\def\lotTitle#1{\gdef\@lotTitle{#1}}
-% Title of List of Bibliography
-\def\bibTitle#1{\gdef\@bibTitle{#1}}
-% Title of Curriculum Vitae
-\def\cvTitle#1{\gdef\@cvTitle{#1}}
-% Title of List of Publications
-\def\lopTitle#1{\gdef\@lopTitle{#1}}
-% Number of frontpages reserved for authorization and certification
-\def\reservedFrontPages#1{\gdef\@reservedFrontPages{#1}}
-
-%----------------------------------------------------------------------
-% DEFAULT VALUES FOR MACROS (預設巨集參數值)
-%----------------------------------------------------------------------
-
-% Define macros related to degree
-\ifTHESISOPTIONmaster
-	\enThesisType{Thesis}
-	\zhThesisType{碩士論文}
-	\enDegree{Master}
-	% HINT: Authorization + Chinese Certification
-	\reservedFrontPages{2}
-\else
-	\enThesisType{Dissertation}
-	\zhThesisType{博士論文}
-	\enDegree{Doctor of Philosophy}
-	% HINT: Authorization + Chinese Certification + Englush Certification
-	\reservedFrontPages{3}
-\fi
-
-% Define language-related macros for front pages and back pages
-\ifTHESISOPTIONzh
-	\ackTitle{誌謝}
-	\tocTitle{目錄}
-	\lofTitle{圖目錄}
-	\lotTitle{表目錄}
-	\bibTitle{參考文獻}
-	\cvTitle{自傳}
-	\lopTitle{著作目錄}
-\else
-	\ackTitle{Acknowledgement}
-	\tocTitle{Table of Contents}
-	\lofTitle{List of Figures}
-	% List of Tables (Comment out if unnecessary)
-	\lotTitle{List of Tables}
-	\ifTHESISOPTIONmaster
-		\bibTitle{References}
-	\else
-		\bibTitle{Bibliography}
+%%% TypeWriter Font %%%
+\newcommand{\ttFont}[1]{
+	\ifx \NOT &#1&
+		\CJKttdefault{#1}
 	\fi
-	% HINT: PhD only
-	\ifTHESISOPTIONphd				
-		\cvTitle{Curriculum Vitae}
-		\lopTitle{List of Publications}
-	\fi
-\fi
+}
 
-%----------------------------------------------------------------------
-% TABLE OF CONTENTS / LIST OF FIGURES / LIST OF TABLES (目錄頁)
-%----------------------------------------------------------------------
+%%% URL Font %%%
+\urlstyle{same}
 
-% Place the titles of ToC, LoF, and LoT to center and set the font of the titles
+%======================================================================
+% 5.0 Page Layout
+%======================================================================
+
+% Page Border
+\geometry{
+    a4paper,
+    left=3cm,
+    right=2cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    footskip=1cm,
+}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{} % Clear origin header and footer configuration
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage}
+
+%=================================  5.1 Cover Page Layout  =================================
+
+%%% Cover Page Generator %%%
+\def\makeCoverPage{
+
+    % Cover Page Layout rule provided by NYCU
+    \newgeometry{
+        left=2cm,
+        right=2cm,
+        top=3cm,
+        bottom=3cm,
+        footskip=0cm,
+    }
+
+    %  Produces empty heads and feet - no page numbers.
+    \thispagestyle{empty}
+
+    \begin{center}
+        \begin{doublespacing}
+
+            \fontsize{18}{27}{\selectfont \@zhUnivName} \\
+            \fontsize{18}{27}{\selectfont \@zhInstName} \\
+            \fontsize{18}{27}{\selectfont 碩士論文}      \\
+
+            \vfill
+
+            \fontsize{14}{14}{\selectfont \@enInstName} \\
+            \fontsize{16}{16}{\selectfont \@enUnivName} \\
+            \fontsize{16}{16}{\selectfont Master Thesis} \\
+
+            \vfill
+
+            \fontsize{18}{18}{\selectfont \@zhTitle} \\
+            \fontsize{18}{18}{\selectfont \@enTitle} \\
+
+            \vfill
+
+            \ifThesisModeDraft
+                \fontsize{18}{18}{\selectfont 初稿} \\
+                \vfill
+            \fi
+
+            \fontsize{18}{18}{\selectfont 研究生：\@zhStudentName（\@enStudentName）} \\
+            \vspace{1\baselineskip}
+            \fontsize{18}{18}{\selectfont 指導教授：\@zhAdvisorName（\@enAdvisorName）} \\
+
+            \vfill
+
+            \fontsize{18}{18}{\selectfont 中華民國 \@zhDegreeYear 年 \@zhDegreeMonth 月} \\
+            \vspace{1.5\baselineskip}
+            \fontsize{18}{18}{\selectfont \@enDegreeMonth\ \@enDegreeYear} \\
+        \end{doublespacing}
+    \end{center}
+
+    % Restore Normal Page Layout
+    \restoregeometry
+}
+
+%=================================  5.2 Title Page Layout  =================================
+
+%%% Title Page Generator %%%
+\def\makeTitlePage{
+
+    \thispagestyle{empty}
+
+    \begin{center}
+        \begin{doublespacing}
+
+            \fontsize{18}{18}{\selectfont \@zhTitle} \\
+            \fontsize{18}{18}{\selectfont \@enTitle} \\
+
+        \end{doublespacing}
+
+        \vfill
+        
+        \renewcommand{\arraystretch}{1.5}
+        \fontsize{14}{14}{\selectfont
+            \begin{tabularx}{\textwidth}{@{}p{2.5cm}@{}Xl@{}}
+                \makebox[2.5cm][s]{研究生：}   & \@zhStudentName \hfill Student：       & \@enStudentName      \\
+                \makebox[2.5cm][s]{指導教授：} & \@zhAdvisorName\ 博士 \hfill Advisor： & Dr.\ \@enAdvisorName \\
+            \end{tabularx}
+        }
+        \renewcommand{\arraystretch}{1}
+
+        \vfill
+
+        \begin{doublespacing}
+            \fontsize{14}{14}{\selectfont \@zhUnivName} \\
+            \fontsize{14}{14}{\selectfont \@zhInstName} \\
+            \fontsize{14}{14}{\selectfont 碩士論文} \\
+        \end{doublespacing}
+
+        \vfill
+
+        \ifThesisModeDraft
+            \fontsize{18}{18}{\selectfont 初稿} \\
+            \vfill
+        \fi
+
+        \fontsize{14}{14}{\selectfont
+            A Thesis \\
+            Submitted to \@enInstName \\
+            \@enCollegeName \\
+            \@enUnivName \\
+            in partial Fulfillment of the Requirements \\
+            for the Degree of \\
+            % \@enDegree
+            % \ifthenelse{\equal{\@enField}{}}{}{\\ in \\ \@enField}
+        }
+
+        \vfill
+
+        \fontsize{14}{14}{\selectfont \@enDegreeMonth\ \@enDegreeYear} \\
+        \fontsize{14}{14}{\selectfont \@enLocation} \\
+        \vspace{1.5\baselineskip}
+        \fontsize{14}{14}{\selectfont 中華民國\ \@zhDegreeYear\ 年\ \@zhDegreeMonth\ 月} \\
+
+    \end{center}
+}
+
+%=================================  5.3 Authorization Page Layout  =========================
+
+%%% Authorization Page %%%
+\newcommand{\makeAuthPage}[1]{
+    % include the authorization page only when it's a final edtion and is used to print out
+    \ifThesisModeFinal
+        \ifThesisUsagePrint
+            \includepdf{#1}
+        \fi
+    \fi
+}
+
+%=================================  5.4 Approval Page Layout  ==============================
+
+%%% Approval Page %%%
+\newcommand{\makeApprovalPage}[1]{
+    % include the approval page only when it's a final edtion and is used to print out
+    \ifThesisModeFinal
+        \ifThesisUsagePrint
+            \includepdf{#1}
+        \fi
+    \fi
+}
+
+%=================================  5.5 Acknowledgement Page Layout  =======================
+
+%%% Acknowledgement Page %%%
+\newenvironment{acknowledgement}{
+
+    \cleardoublepage
+    \thispagestyle{empty}
+
+    \begin{center}
+        \LARGE \bf \makebox[3em][s]{誌謝}
+    \end{center}\
+    \par
+} {
+
+}
+
+%=================================  5.5 Chinese Abstract Layout  ===========================
+
+%%% Environment %%%
+\newenvironment{zhAbstract}{
+
+    \cleardoublepage
+
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\textbf{摘要}}
+
+    \begin{center}
+        \LARGE \bf \makebox[3em][s]{摘要}
+    \end{center}\
+    \par
+
+} {
+}
+
+%%% Chinese Keyword %%%
+\def\zhAbsKeywords{
+    \begin{flushleft}
+        {關鍵字：\textbf{\@zhKeywords}}
+    \end{flushleft}
+}
+
+%=================================  5.6 English Abstract Layout  ===========================
+
+%%% Environment %%%
+\newenvironment{enAbstract}{
+
+    \cleardoublepage
+
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\textbf{Abstract}}
+
+    \begin{center}
+        \LARGE \bf {Abstract}
+    \end{center}\
+    \par
+
+} {
+}
+
+%%% English Keyword %%%
+\def\enAbsKeywords{
+    \begin{flushleft}
+        {Keywords: \textbf{\@enKeywords}}
+    \end{flushleft}
+}
+
+%=================================  5.7 ToC, LoF, LoT Layout  ==============================
+
+% Add dots between title and page number
+\renewcommand{\cftchapdotsep}{\cftdotsep}
+
+%%% Font setting for title of these tables %%%
 \renewcommand{\cfttoctitlefont}{\hspace*{\fill}\Huge\bfseries}
 \renewcommand{\cftaftertoctitle}{\hspace*{\fill}}
+\renewcommand{\cftbeforetoctitleskip}{0in}
 \renewcommand{\cftlottitlefont}{\hspace*{\fill}\Huge\bfseries}
 \renewcommand{\cftafterlottitle}{\hspace*{\fill}}
+\renewcommand{\cftbeforelottitleskip}{0in}
 \renewcommand{\cftloftitlefont}{\hspace*{\fill}\Huge\bfseries}
 \renewcommand{\cftafterloftitle}{\hspace*{\fill}}
+\renewcommand{\cftbeforeloftitleskip}{0in}
 
-% Set the language used in ToC, LoF, and LoT
-\ifTHESISOPTIONzh
-	\renewcommand{\contentsname}{\makebox[3em][s]{\@tocTitle}}
-	\renewcommand{\listfigurename}{\makebox[4em][s]{\@lofTitle}}
-	\renewcommand{\listtablename}{\makebox[4em][s]{\@lotTitle}}
-	\renewcommand{\tablename}{表}
-	\renewcommand{\figurename}{圖}
-\else
-	\renewcommand{\contentsname}{\@tocTitle}
-	\renewcommand{\listfigurename}{\@lofTitle}
-	\renewcommand{\listtablename}{\@lotTitle}
-\fi
+%%% Title for these tables %%%
+\renewcommand{\contentsname}{\makebox[3em][s]{目錄}}
+\renewcommand{\listfigurename}{\makebox[4em][s]{圖目錄}}
+\renewcommand{\listtablename}{\makebox[4em][s]{表目錄}}
 
-% Set the chapter numbering to Chinese number in ToC
-\ifTHESISOPTIONzh
-	\titlecontents{chapter}[0pt]{}
-	{\bfseries\xCJKnumber{\thecontentslabel}、\hspace{0.5em}}{}
-	{\cftdotfill{\cftdotsep}\contentspage}
-\else
-	% Format the chapter numbering in ToC when using English
-	\titlecontents{chapter}[0pt]{}
-	% Fix the chapter number within a box no matter it has 1 or 2 digits
-	{\bfseries\makebox[1em][l]{\thecontentslabel}\hspace{0.25em}}{}
-	{\cftdotfill{\cftdotsep}\contentspage}
-\fi
+%%% Numbering label %%%
+\renewcommand{\tablename}{表}
+\renewcommand{\figurename}{圖}
+\DeclareCaptionLabelSeparator{colon}{：}    % Re-defined colon in caption to fullwidth form
 
-% Adjust the position of the title of ToC, LoF, and LoT
-\renewcommand\cftbeforetoctitleskip{-0.5cm}
-\renewcommand\cftbeforeloftitleskip{-0.5cm}
-\renewcommand\cftbeforelottitleskip{-0.5cm}
-
-% A wraper to generate toc, lof, and lot
-\def\maketocs{
-	\ifTHESISOPTIONreview \else
-		% Table of Contents
-		\cleardoublepage
-		\phantomsection
-		\addcontentsline{toc}{chapter}{\textbf{\@tocTitle}}
-		\tableofcontents
-		% List of Figures
-		\cleardoublepage
-		\phantomsection
-		\addcontentsline{toc}{chapter}{\textbf{\@lofTitle}}
-		\listoffigures
-		% List of Tables (Comment out if unnecessary)
-		\cleardoublepage
-		\phantomsection
-		\addcontentsline{toc}{chapter}{\textbf{\@lotTitle}}
-		\listoftables
-	\fi
+%%% ToC Generator %%%
+\def\maketoc{
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\textbf{目錄}}
+    \tableofcontents
 }
 
-%----------------------------------------------------------------------
-% CHAPTERS (章節內容)
-%----------------------------------------------------------------------
-
-% Set the position of chapter label and title
-\ifTHESISOPTIONzh
-	\titleformat{\chapter}[block]				% (place label and title body at the same line)
-	{\centering\Huge\bfseries}
-	{\xCJKnumber{\thechapter}、\hspace{0.5em}}	% (X、 ...)
-	{0em}{}
-\else
-	\titleformat{\chapter}[display]				% (title body is placed at second line)
-	{\centering\Huge\bfseries}
-	{\chaptertitlename\ \thechapter}
-	{0em}{}
-% The following is the original chapter title format and label numbering style
-% suggested by NYCU Thesis Format. But, such an English chapter title format is
-% too ugly. Not mentioning that I need to number chapter label in Roman style,
-% but use arabic style in section label, i.e. doing something like this:
-%		 (chapter) II. Related Work
-%		 (section)		 2.1 brabra
-% Besides, generally, Roman style numbering is reserved for 'parts' in a book.
-% Therefore, I made my own way. :)
-%
-%	\titleformat{\chapter}[block]% (place label and title body at the same line)
-%	{\centering\Huge\bfseries}
-%	{\Roman{chapter}.\hspace{0.5em}}
-%	{0em}{}
-\fi
-
-% Set the spacing before and after chapter label/title
-%	{type}{left}{before seperation}{after seperation}
-\titlespacing*{\chapter}{0em}{-40pt}{*6}
-
-%----------------------------------------------------------------------
-% WATERMARK (浮水印)
-%----------------------------------------------------------------------
-
-% Set the source of watermark
-\newcommand\BackgroundPicture{
-	\ifTHESISOPTIONwatermark
-		% For draft mode, print "DRAFT"
-		\ifTHESISOPTIONdraft
-			\setlength{\@tempdimb}{.5\paperwidth}
-			\setlength{\@tempdimc}{.5\paperheight}
-			\setlength{\unitlength}{1pt}
-			\put(\strip@pt\@tempdimb,\strip@pt\@tempdimc){
-			\makebox(0,0){\rotatebox{45}{\textcolor[gray]{0.75}
-				{\fontsize{6cm}{6cm}\selectfont{DRAFT}}}}
-			}
-		\fi
-		% HINT: For final mode, print the watermark specified by \watermark{}
-		\ifTHESISOPTIONfinal
-			\begin{tikzpicture}
-				\node[minimum width=\paperwidth, minimum height=\paperheight, opacity=0.75]
-					{\includegraphics[width=0.75\textwidth]{\@watermark}};
-			\end{tikzpicture}
-		\fi
-	\fi
+%%% LoF Generator %%%
+\def\makelof{
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\textbf{圖目錄}}
+    \listoffigures
 }
 
-% Update \cleardoublepage to handle watermark
-% 	\chapter{} implicity calls \cleardoublepage first, then starts to print chapter title and contents
-\let\oldcleardoublepage\cleardoublepage
-\renewcommand{\cleardoublepage}{
-	% Remove watermark if previous page is a blank even page in twoside mode.
-	\newpage
-	\ClearShipoutPicture
-	\oldcleardoublepage
-	% Add watermark
-	\AddToShipoutPicture{\BackgroundPicture}
+%%% LoT Generator %%%
+\def\makelot{    
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\textbf{表目錄}}
+    \listoftables
 }
+
+%=================================  5.8 Chapter Contents Layout  ===========================
+
+%%% Chapter Title Content %%%
+\titleformat{\chapter}[block]
+{\centering\Huge\bfseries}
+{第\xCJKnumber{\thechapter}章}
+{1em}
+{}
+
+%%% Chapter Title Format %%%
+\titlespacing{\chapter}{0em}{0pt}{*6}
+
+%%% Algorithm Content %%%
+\SetKwInOut{Input}{\textbf{輸入}~}
+\SetKwInOut{Output}{\textbf{輸出}~}
+\DontPrintSemicolon
+
+%%% Algorithm Title Format %%%
+\renewcommand{\algorithmcfname}{演算法}
+
+%%% Layout Setting %%%
+
+% Set indent width for first line in a paragraph to two space(Fullwidth forms)
+\setlength{\parindent}{(\widthof{　} * 2)}
+
+% Set space between paragraphs
+\setlength{\parskip}{(.5\baselineskip)}%
+
+% Re-set line height
+\renewcommand{\baselinestretch}{1.1}
+
+% Custom Equation Label
+\numberwithin{equation}{chapter} % This line resets equation numbering when starting a new chapter.
+\renewcommand{\theequation}{式 \thechapter.\arabic{equation}} % This line add "式" in front of equation numbering.
+
+% Set default figures placement
+\graphicspath{{Figures/}}
+
+%=================================  5.9 Reference Layout  ==================================
+
+%%% Bibliography Generator %%%
+\newcommand{\makeBib}{
+    
+    % Add Bibliography to ToC
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\textbf{參考文獻}}
+
+    % Print bib and set its title
+    \printbibliography[title={\makebox[5.5em][s]{參考文獻}}]
+}
+
+%=================================  5.10 Appendices Layout  ================================
+
+
+
+
 
 %----------------------------------------------------------------------
 % COMMANDS
@@ -574,590 +669,3 @@
 		{}{\cftdotfill{\cftdotsep}\contentspage}
 	\fi
 }
-
-%----------------------------------------------------------------------
-% FIGURES (圖)
-%----------------------------------------------------------------------
-
-% Changing the format of subcaption for reference
-\renewcommand\thesubfigure{ (\alph{subfigure})}
-
-%----------------------------------------------------------------------
-% CHINESE ACKNOWLEDGEMENT SIGNATURE (中文誌謝署名)
-%----------------------------------------------------------------------
-
-\def\zhAckSignature{
-	\begin{flushright}
-		\@zhStudentName \ 誌於 \\
-		{{\@zhUnivName}{\@zhInstName}} \\
-		\@zhDegreeYear
-	\end{flushright}
-}
-
-%----------------------------------------------------------------------
-% ENGLISH ACKNOWLEDGEMENT SIGNATURE (英文誌謝署名)
-%----------------------------------------------------------------------
-
-\def\enAckSignature{
-	\begin{flushleft}
-		\textbf{\@enStudentName} \\
-		{{\@enInstName}, {\@enUnivName}} \\
-		{{\@enDegreeMonth} {\@enDegreeYear}}
-	\end{flushleft}
-}
-
-%----------------------------------------------------------------------
-% CHINESE ABSTRACT KEYWORDS (中文摘要關鍵字)
-%----------------------------------------------------------------------
-
-\def\zhAbsKeywords{
-	\begin{flushleft}
-		{關鍵字：\textbf{\@zhKeywords}}
-	\end{flushleft}
-}
-
-%----------------------------------------------------------------------
-% ENGLISH ABSTRACT KEYWORDS (英文摘要關鍵字)
-%----------------------------------------------------------------------
-
-\def\enAbsKeywords{
-	\begin{flushleft}
-		{Keywords: \textbf{\@enKeywords}}
-	\end{flushleft}
-}
-
-%----------------------------------------------------------------------
-% COVER PAGE (封面頁)
-%----------------------------------------------------------------------
-
-\def\coverPage{
-	\thispagestyle{empty}
-	% University, institute, and title
-	\begin{center}
-		% University
-		\fontsize{40}{40}{\makebox[10cm][s]{\@zhUnivName}} \\
-		\vspace{1.5\baselineskip}
-		% Institute
-		\fontsize{28}{28}{\makebox[1.333\width][s]{\textbf{\@zhInstName}}} \\
-		\vspace{1.5\baselineskip}
-		% Thesis type
-		\fontsize{24}{24}{\makebox[4.5cm][s]{\textbf{\@zhThesisType}}} \\
-		\ifTHESISOPTIONdraft
-			\vspace{1.5\baselineskip}
-			\makebox[2cm][s]{\textbf{初稿}} \\
-		\fi
-		\vfill
-		\singlespacing
-		% Chinese title
-		\LARGE{\@zhTitle} \\
-		\vspace{0.75\baselineskip}
-		% English title
-		\LARGE{\@enTitle} \\
-		\vfill
-	\end{center}
-	% Author & advisors
-	\begin{flushleft}
-		\singlespacing
-		\LARGE
-		\begin{tabular}{crll}
-			% Author
-			&\LARGE{\makebox[4em][s]{研究生}：}&{\@zhStudentName}&\vspace{1em} \\
-			% Advisor
-			&{指導教授：}&{\@zhAdvisorName}&{博士} \\
-			% Co-advisor A
-			\ifx \@zhCoadvisorNameA \@empty \else
-				&&{\@zhCoadvisorNameA}&{博士} \\
-			\fi
-			% Co-advisor B
-			\ifx \@zhCoadvisorNameB \@empty \else
-				&&{\@zhCoadvisorNameB}&{博士} \\
-			\fi
-		\end{tabular}
-	\end{flushleft}
-	\vspace{1in}
-	\vfill
-	% Submission date in Chinese
-	\begin{center}
-		\makebox[2.5\width][s]{\large\@zhDegreeYear} \\
-	\end{center}
-}
-
-%----------------------------------------------------------------------
-% START PAGE (起始頁)
-%----------------------------------------------------------------------
-
-\def\startPage{
-	\cleardoublepage
-	\thispagestyle{empty}
-	% University, institute, and title
-	\begin{center}
-		% University
-		\fontsize{40}{40}{\makebox[10cm][s]{\@zhUnivName}} \\
-		\vspace{1.5\baselineskip}
-		% Institute
-		\fontsize{28}{28}{\makebox[1.333\width][s]{\textbf{\@zhInstName}}} \\
-		\vspace{1.5\baselineskip}
-		% Thesis/Dissertation type
-		\fontsize{24}{24}{\makebox[4.5cm][s]{\textbf{\@zhThesisType}}} \\
-		\ifTHESISOPTIONdraft
-			\vspace{1.5\baselineskip}
-			\makebox[2cm][s]{\textbf{初稿}} \\
-		\fi
-		\vfill
-		\singlespacing
-		% Chinese title
-		\LARGE{\@zhTitle} \\
-		\vspace{0.75\baselineskip}
-		% English title
-		\LARGE{\@enTitle} \\
-		\vfill
-	\end{center}
-	% Author & advisors
-	\begin{flushleft}
-		\singlespacing
-		\LARGE
-		\begin{tabular}{crll}
-			% Author
-			&\LARGE{\makebox[4em][s]{研究生}：}&{\@zhStudentName}&\vspace{1em} \\
-			% Advisor
-			&{指導教授：}&{\@zhAdvisorName}&{博士} \\
-			% Co-advisor A
-			\ifx \@zhCoadvisorNameA \@empty \else
-				&&{\@zhCoadvisorNameA}&{博士} \\
-			\fi
-			% Co-advisor B
-			\ifx \@zhCoadvisorNameB \@empty \else
-				&&{\@zhCoadvisorNameB}&{博士} \\
-			\fi
-		\end{tabular}
-	\end{flushleft}
-	\vspace{1in}
-	\vfill
-	% Submission date in Chinese
-	\begin{center}
-		\makebox[2.5\width][s]{\large\@zhDegreeYear} \\
-	\end{center}
-}
-
-%----------------------------------------------------------------------
-% TITLE PAGE (標題頁)
-%----------------------------------------------------------------------
-
-\def\titlePage{
-	\cleardoublepage
-	\thispagestyle{empty}
-	% Chinese and English titles
-	\begin{center}
-		\singlespacing\Large
-		\@zhTitle \\
-		\vspace{0.25\baselineskip}
-		\@enTitle \\
-		\vspace{0.25\baselineskip}
-	\end{center}
-	% Student name and advisor name in Chinese and English
-	\begin{flushleft}
-		\singlespacing
-		\setlength{\tabcolsep}{0.25em}
-		% Chinese name
-		\begin{tabular}{rl}
-			\large{\makebox[4em][s]{研究生}：}&\large{\@zhStudentName}\vspace{0.5em} \\
-			\large{指導教授：}&{\large{\@zhAdvisorName}} \\
-			\ifx \@zhCoadvisorNameA \@empty \else
-				&{\large{\@zhCoadvisorNameA}} \\
-			\fi
-			\ifx \@zhCoadvisorNameB \@empty \else
-				&{\large{\@zhCoadvisorNameB}} \\
-			\fi
-		\end{tabular}
-		\hfill
-		% English name
-		\begin{tabular}{rl}
-			\large{Student:}&{\large{\@enStudentName}}\vspace{0.5em} \\
-			\large{Advisor:}&{\large{\@enAdvisorName}} \\
-			\ifx \@enCoadvisorNameA \@empty \else
-				&{\large{\@enCoadvisorNameA}} \\
-			\fi
-			\ifx \@enCoadvisorNameB \@empty \else
-				&{\large{\@enCoadvisorNameB}} \\
-			\fi
-		\end{tabular}
-	\end{flushleft}
-	\vfill
-	% University & institute & thesis type in Chinese
-	\begin{center}
-		\makebox[2\width][s]{\large\@zhUnivName} \\
-		\makebox[1.33\width][s]{\large\@zhInstName} \\
-		\ifTHESISOPTIONdraft
-			\makebox[1.33\width][s]{\large\@zhThesisType 初稿} \\
-		\else
-			\makebox[1.33\width][s]{\large\@zhThesisType} \\
-		\fi
-		\vfill
-		% Submission description in English
-		\ifTHESISOPTIONdraft
-			\centerline{{A \@enThesisType\ Draft}}
-		\else
-			\centerline{{A \@enThesisType}}
-		\fi
-		Submitted to {\@enInstName} \\
-		\@enCollegeName \\
-		\@enUnivName \\
-		in partial fulfilment of the requirements \\
-		for the Degree of \\
-		\@enDegree \\
-		in \\
-		\vspace{0.5\baselineskip}
-		\@enField \\
-		\vspace{\baselineskip}
-		\vfill
-		% Submission date and location
-		{{\@enDegreeMonth} {\@enDegreeYear}} \\
-		\vspace{0.25\baselineskip}
-		\@enLocation \\
-		\vfill
-		\makebox[1.75\width][s]{\normalsize\@zhDegreeYear}
-	\end{center}
-}
-
-%----------------------------------------------------------------------
-% COPYRIGHT PAGE (版權頁)
-%----------------------------------------------------------------------
-
-\def\copyrightPage{
-	\cleardoublepage
-	\thispagestyle{empty}
-	\rule[0pt]{0pt}{0pt} \\
-	\vspace{2.5in}
-	\rule[0pt]{0pt}{0pt} \\
-	\begin{center}
-		\copyright {\@enDegreeYear} - {\@enStudentName} \\
-		\vspace{0.5\baselineskip}
-		All rights reserved. \\
-	\end{center}
-}
-
-%----------------------------------------------------------------------
-% CHINESE CERTIFICATION (中文論文審定書)
-%----------------------------------------------------------------------
-
-\def\zhCertPage{
-	\cleardoublepage
-	\ClearShipoutPicture		% HINT: Remove watermark in this page
-	\thispagestyle{empty}
-	\phantomsection
-}
-
-%----------------------------------------------------------------------
-% ENGLISH CERTIFICATION PAGE (英文論文審定書)
-%----------------------------------------------------------------------
-
-\def\enCertPage{
-	\cleardoublepage
-	\ClearShipoutPicture		% HINT: Remove watermark in this page
-	\thispagestyle{empty}
-	\phantomsection
-}
-
-%----------------------------------------------------------------------
-% AUTHORIZATION PAGE (授權書)
-%----------------------------------------------------------------------
-
-\def\zhAuthPage{
-	\cleardoublepage
-	\ClearShipoutPicture		% HINT: Remove watermark in this page
-	\thispagestyle{empty}
-	\phantomsection
-}
-
-%----------------------------------------------------------------------
-% \maketitle REDEFINITION (重訂標題格式)
-%----------------------------------------------------------------------
-
-\def\maketitle{{
-	\ifTHESISOPTIONreview \else
-		% Cover page (封面頁)
-		% HINT: Only for final mode
-		\ifTHESISOPTIONprint
-			\coverPage
-		\fi
-
-		% Start page (起始頁)
-		\startPage
-
-		% Title page (標題頁)
-		\titlePage
-
-		% Copyright page (版權頁)
-		% HINT: Only for final mode
-		\ifTHESISOPTIONfinal
-			\copyrightPage
-		\fi
-
-		% Chinese certification page (中文論文審定書)
-		\zhCertPage
-
-		% English certification page (英文論文審定書) [PhD only]
-		%\enCertPage
-
-		% Authorization page (授權書)
-		\zhAuthPage
-	\fi
-}}
-
-%----------------------------------------------------------------------
-% CHINESE ABSTRACT (中文摘要)
-%----------------------------------------------------------------------
-
-% Page layout of Chinese abstract
-\def\zhAbsPage{
-	\cleardoublepage
-	% HINT: Reserve front pages for authentication page and certification page in final mode
-	\ifTHESISOPTIONfinal
-		\setcounter{page}{\the\numexpr\@reservedFrontPages+\arabic{page}\relax}
-	\fi
-	% Set page numbering to 'roman' (i, ii, iii, ...)
-	\frontmatter
-	\phantomsection
-	\addcontentsline{toc}{chapter}{\textbf{摘要}}
-	\begin{center}
-		\singlespacing
-		% Thesis title
-		{\Large \bf \@zhTitle} \\
-		\vspace{\baselineskip}
-		% Author and advisors
-		\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lr}
-			\setlength{\tabcolsep}{0.25em}
-			% Author
-			\begin{tabular}{rl}
-				\large{學生：}&{\large{\@zhStudentName}} \\
-			\end{tabular}&
-			\setlength{\tabcolsep}{0.25em}
-			\begin{tabular}{rlc}
-				% Advisor
-				\large{指導教授：}&{\large{\@zhAdvisorName}}&{\large{博士}} \\
-				% Co-advisor A
-				\ifx \@zhCoadvisorNameA \@empty \else
-					&{\large{\@zhCoadvisorNameA}}&{\large{博士}} \\
-				\fi
-				% Co-advisor B
-				\ifx \@zhCoadvisorNameB \@empty \else
-					&{\large{\@zhCoadvisorNameB}}&{\large{博士}} \\
-				\fi
-			\end{tabular} \\
-		\end{tabular*} \\
-		% Institute and university name
-		\vspace{0.5\baselineskip}
-		\large{\@zhUnivName\hspace{1ex}\@zhInstName} \\
-		\vspace{\baselineskip}
-		% Abstract title
-		\Large{\textbf{摘\qquad 要}} \\
-	\end{center}
-}
-
-% New environment for Chinese Abstract
-\newenvironment{zhAbstract}{
-	\ifTHESISOPTIONreview \else
-		\zhAbsPage
-		% Start a new paragraph and force the first line being indented
-		\par
-	\fi
-	% Ignore input tex in review mode
-	\ifTHESISOPTIONreview
-		\comment
-	\fi	
-} {
-	\ifTHESISOPTIONreview
-		\endcomment
-	\fi
-}
-
-%----------------------------------------------------------------------
-% ENGLISH ABSTRACT (英文摘要)
-%----------------------------------------------------------------------
-
-% Page layout of English abstract
-\def\enAbsPage{
-	\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{\textbf{Abstract}}
-	\begin{center}
-		\singlespacing
-		% Thesis title
-		{\Large \bf \@enTitle} \\
-		\vspace{\baselineskip}
-		% Author and advisors
-		\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lr}
-			\setlength{\tabcolsep}{0.25em}
-			% Author
-			\begin{tabular}{rl}
-				\large{Student:}&{\large{\@enStudentName}} \\
-			\end{tabular}&
-			\setlength{\tabcolsep}{0.25em}
-			\begin{tabular}{rl}
-				% Advisor
-				\large{Advisor:}&{\large{Dr. \@enAdvisorName}} \\
-				% Co-advisor A
-				\ifx \@enCoadvisorNameA \@empty \else
-					&{\large{Dr. \@enCoadvisorNameA}} \\
-				\fi
-				% Co-advisor B
-				\ifx \@enCoadvisorNameB \@empty \else
-					&{\large{Dr. \@enCoadvisorNameB}} \\
-				\fi
-			\end{tabular} \\
-		\end{tabular*} \\
-		% Institue and university name
-		\vspace{0.5\baselineskip}
-		\large{\@enInstName} \\
-		\large{\@enUnivName} \\
-		\vspace{\baselineskip}
-		% Abstract title
-		\Large{\textbf{Abstract}} \\
-	\end{center}
-}
-
-% New environment for English abstract
-\newenvironment{enAbstract}{
-	\ifTHESISOPTIONreview \else
-		\enAbsPage
-		% Start a new paragraph and force the first line being indented
-		\par
-	\fi
-	% Ignore input tex in review mode
-	\ifTHESISOPTIONreview
-		\comment
-	\fi	
-} {
-	\ifTHESISOPTIONreview
-		\endcomment
-	\fi
-}
-
-%----------------------------------------------------------------------
-% ACKNOWLEDGEMENT (誌謝)
-%----------------------------------------------------------------------
-
-\def\ackPage{
-	\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{\textbf{\@ackTitle}}
-	\begin{center}
-		\ifTHESISOPTIONzh
-			{\LARGE \bf \makebox[3em][s]{\@ackTitle}} \\
-		\else
-			{\LARGE \bf \@ackTitle} \\
-		\fi
-	\end{center}
-}
-
-\newenvironment{acknowledgement}{
-	\ifTHESISOPTIONfinal
-		\ackPage
-		% Start a new paragraph and force the first line being indented
-		\par
-	\fi
-	% Ignore input tex if not in final mode
-	\ifTHESISOPTIONfinal \else \comment \fi
-} {
-	\ifTHESISOPTIONfinal \else \endcomment \fi
-}
-
-%----------------------------------------------------------------------
-% DEDICATION (題獻頁) [PhD only]
-%----------------------------------------------------------------------
-
-\newenvironment{dedication}{
-	\ifTHESISOPTIONfinal
-		\ifTHESISOPTIONphd
-			\cleardoublepage
-			\thispagestyle{empty}
-			\vspace*{6.6cm}
-			\begin{center}
-		\fi 
-	\fi
-	% Ignore input tex if not in the final mode of a PhD dissertation
-	\ifTHESISOPTIONfinal
-		\ifTHESISOPTIONphd \else
-			\comment
-		\fi
-	\else
-		\comment
-	\fi
-} {
-	\ifTHESISOPTIONfinal
-		\ifTHESISOPTIONphd \else
-			\endcomment
-		\fi
-	\else
-		\endcomment
-	\fi
-	\ifTHESISOPTIONfinal
-		\ifTHESISOPTIONphd
-			\end{center}
-		\fi
-	\fi
-}
-
-%----------------------------------------------------------------------
-% CURRICULUM VITAE (作者簡歷) [PhD only]
-%----------------------------------------------------------------------
-	
-\newenvironment{vita}{
-	% HINT: Only be compiled in the draft or final mode of a PhD dissertation
-	\ifTHESISOPTIONreview
-		\comment
-	\else
-		\ifTHESISOPTIONphd \else
-			\comment
-		\fi
-	\fi
-	\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{\textbf{\@cvTitle}}
-	\ifTHESISOPTIONzh
-		\chapter*{\makebox[3em][s]{\@cvTitle}}
-	\else
-		\chapter*{\@cvTitle}
-	\fi
-} {
-	\ifTHESISOPTIONreview
-		\endcomment
-	\else
-		\ifTHESISOPTIONphd \else
-			\endcomment
-		\fi
-	\fi
-}
-
-%----------------------------------------------------------------------
-% PUBLICATIONS (著作列表) [PhD only]
-%----------------------------------------------------------------------
-
-\newenvironment{publications}{
-	% HINT: Only be compiled in the draft or final mode of a PhD dissertation
-	\ifTHESISOPTIONreview
-		\comment
-	\else
-		\ifTHESISOPTIONphd \else
-			\comment
-		\fi
-	\fi
-	\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{\textbf{\@lopTitle}}
-	\ifTHESISOPTIONzh
-		\chapter*{\makebox[5.5em][s]{\@lopTitle}}
-	\else
-		\chapter*{\@lopTitle}
-	\fi
-} {
-	\ifTHESISOPTIONreview
-		\endcomment
-	\else
-		\ifTHESISOPTIONphd \else
-			\endcomment
-		\fi
-	\fi
-}
-
-\endinput
