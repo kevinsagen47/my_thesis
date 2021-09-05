@@ -367,8 +367,8 @@
             \@enUnivName \\
             in partial Fulfillment of the Requirements \\
             for the Degree of \\
-            % \@enDegree
-            % \ifthenelse{\equal{\@enField}{}}{}{\\ in \\ \@enField}
+            \@enDegree
+            \ifthenelse{\equal{\@enField}{}}{}{\\ in \\ \@enField}
         }
 
         \vfill
