@@ -158,6 +158,8 @@
 \usepackage{xurl}
 % For unit transform
 \usepackage{siunitx}
+% For custom appendix
+\usepackage{appendix}
 
 %======================================================================
 % 3.0 Macro Definition
@@ -572,7 +574,58 @@
 
 %=================================  5.10 Appendices Layout  ================================
 
+% % Set appendix numbering to Chiese style in ToC
+% \titlecontents{chapter}[0pt]{}
+% {\bfseries 附錄\xCJKalphatozhnum{\thecontentslabel}\quad}
+% {}{\cftdotfill{\cftdotsep}\contentspage}
 
+% % Set appendix title to Chinese style
+% \titleformat{\chapter}[block]						% (place label and title body at the same line)
+% {\centering\Huge\bfseries}
+% {附錄\xCJKalphatozhnum{\thechapter}\quad}	% (X、 ...)
+% {0em}{}
+
+\newcounter{appendix}
+\setcounter{appendix}{0}
+
+% new title show in toc
+\renewcommand{\addappheadtotoc}[1]{
+    \phantomsection
+	\addcontentsline{toc}{chapter}{附錄\xCJKnumber{\theappendix}、#1}    
+}
+
+% new title for appendix
+\renewcommand{\appendixname}[1]{
+    \begin{flushleft}
+        \LARGE\bfseries{附錄\xCJKnumber{\theappendix}、#1}
+    \end{flushleft}
+}
+
+%%% Appendix Page %%%
+\newenvironment{Appx}[1]{
+    
+    % Increase appendix counter by one
+    \stepcounter{appendix}
+
+    % Start a new appendix
+    \appendix
+
+    % Add appendix to toc
+    \addappheadtotoc{#1}
+
+    % Clear a new page
+    \cleardoublepage
+
+    % Show appendix title
+    \appendixname{#1}
+
+    % New label counter for seciotn under appendix
+    \renewcommand\thesection{\arabic{section}}
+} {
+
+    % Restore section label
+    \renewcommand\thesection{\thechapter.\arabic{section}}
+}
 
 
 
@@ -649,19 +702,7 @@
 
 % A wraper to reset the style of appendicies when 'zh' option is set
 \newcommand{\addAppxToContents}{
-	% Hide section, subsection from ToC
-	\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-	\ifTHESISOPTIONzh
-		% Set appendix numbering to Chiese style in ToC
-		\titlecontents{chapter}[0pt]{}
-		{\bfseries 附錄\xCJKalphatozhnum{\thecontentslabel}\quad}
-		{}{\cftdotfill{\cftdotsep}\contentspage}
-
-		% Set appendix title to Chinese style
-		\titleformat{\chapter}[block]						% (place label and title body at the same line)
-		{\centering\Huge\bfseries}
-		{附錄\xCJKalphatozhnum{\thechapter}\quad}	% (X、 ...)
-		{0em}{}
+	
 	\else
 		% Format appendix title shown in ToC
 		\titlecontents{chapter}[0pt]{}
