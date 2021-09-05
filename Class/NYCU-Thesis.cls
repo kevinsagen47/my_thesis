@@ -18,7 +18,7 @@
 %----------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{Class/NYCU-Thesis}[2021/09/05 V2.0 by JingWangTW]
-
+\gdef\@ClassName{NYCU-Thesis}
 %----------------------------------------------------------------------
 % Table of Contents
 %   1.0 - Document Options Declaration
@@ -58,6 +58,9 @@
 \DeclareOption{draft}{
     \ThesisModeDrafttrue
     \ThesisModeFinalfalse
+    
+    \PackageWarningNoLine{\@ClassName}{Set \hbadness to 10000 in draft mode}
+    \hbadness 10000
 }
 
 \DeclareOption{final}{
@@ -131,8 +134,6 @@
 \usepackage[ruled,vlined,algochapter]{algorithm2e}
 % To float the pic
 \usepackage{float}
-% Set default firgure placement
-\usepackage{graphicx}
 % Rowspan
 \usepackage{multirow}
 % Slash cell in the table
@@ -215,7 +216,7 @@
 %%% CHINESE Font %%%
 \newcommand{\zhFont}[1]{
 	\ifx &#1&
-        \PackageError{NYCU}{請透過\\zhFont設定中文字型}{請提供中文字型的名稱}
+        \PackageError{\@ClassName}{請透過\zhFont設定中文字型}{請提供中文字型的名稱}
 	\else
 		\setCJKmainfont{#1}
 	\fi
@@ -224,7 +225,7 @@
 %%% English Font %%%
 \newcommand{\enFont}[1]{
 	\ifx &#1&
-        \PackageError{NYCU}{請透過\\enFont設定英文字型}{請提供英文字型的名稱}
+        \PackageError{\@ClassName}{請透過\enFont設定英文字型}{請提供英文字型的名稱}
 	\else
 		\setmainfont{#1}
 	\fi
@@ -520,6 +521,9 @@
     \listoftables
 }
 
+% Show link in draft mode either
+\hypersetup{final}
+
 %=================================  5.8 Chapter Contents Layout  ===========================
 
 %%% Chapter Title Content %%%
@@ -591,7 +595,7 @@
 % new title show in toc
 \renewcommand{\addappheadtotoc}[1]{
     \phantomsection
-	\addcontentsline{toc}{chapter}{附錄\xCJKnumber{\theappendix}、#1}    
+	\addcontentsline{toc}{chapter}{\texorpdfstring{附錄\xCJKnumber{\theappendix}、#1}{#1}}
 }
 
 % new title for appendix
