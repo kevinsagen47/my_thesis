@@ -537,7 +537,9 @@
 \titlespacing{\chapter}{0em}{0pt}{*6}
 
 %%% Algorithm Content %%%
+\ResetInOut{Input}
 \SetKwInOut{Input}{\textbf{輸入}~}
+\ResetInOut{Output}
 \SetKwInOut{Output}{\textbf{輸出}~}
 \DontPrintSemicolon
 
@@ -577,17 +579,6 @@
 }
 
 %=================================  5.10 Appendices Layout  ================================
-
-% % Set appendix numbering to Chiese style in ToC
-% \titlecontents{chapter}[0pt]{}
-% {\bfseries 附錄\xCJKalphatozhnum{\thecontentslabel}\quad}
-% {}{\cftdotfill{\cftdotsep}\contentspage}
-
-% % Set appendix title to Chinese style
-% \titleformat{\chapter}[block]						% (place label and title body at the same line)
-% {\centering\Huge\bfseries}
-% {附錄\xCJKalphatozhnum{\thechapter}\quad}	% (X、 ...)
-% {0em}{}
 
 \newcounter{appendix}
 \setcounter{appendix}{0}
@@ -631,86 +622,15 @@
     \renewcommand\thesection{\thechapter.\arabic{section}}
 }
 
+%======================================================================
+% 6.0 Utility Command / Tools
+%======================================================================
 
+% Horizon Line in Algorithm Block
+\newcommand{\AlgoHRule}[0]{\vspace{1mm} \hrule \vspace{1mm}}
 
-%----------------------------------------------------------------------
-% COMMANDS
-%----------------------------------------------------------------------
+% Evenly distributing column widths
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
 
-% Change to uppercase of roman number
-\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
-
-% Change margin of a period
-%% \changemargin
-\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
-%% \endchangemargin
-\let\endchangemargin=\endlist 
-
-% Covert 'A' to 1, 'B' to 2, ...
-% TODO:
-% 	This is a workaround to show '附錄一' in the chapter label but 'A.1' in the
-% section label of an appendix, rather than showing '1.1', which conflicts with
-% the section label of a regular chapter. Hope someone can fix this in a smarter
-% way.
-\DeclareRobustCommand{\xCJKalphatozhnum}[1]{
-	\ifnum \strcmp{#1}{A} = 0 一 \else
-	\ifnum \strcmp{#1}{B} = 0 二 \else
-	\ifnum \strcmp{#1}{C} = 0 三 \else
-	\ifnum \strcmp{#1}{D} = 0 四 \else
-	\ifnum \strcmp{#1}{E} = 0 五 \else
-	\ifnum \strcmp{#1}{F} = 0 六 \else
-	\ifnum \strcmp{#1}{G} = 0 七 \else
-	\ifnum \strcmp{#1}{H} = 0 八 \else
-	\ifnum \strcmp{#1}{I} = 0 九 \else
-	\ifnum \strcmp{#1}{J} = 0 十 \else
-	\ifnum \strcmp{#1}{K} = 0 十一 \else
-	\ifnum \strcmp{#1}{L} = 0 十二 \else
-	\ifnum \strcmp{#1}{M} = 0 十三 \else
-	\ifnum \strcmp{#1}{N} = 0 十四 \else
-	\ifnum \strcmp{#1}{O} = 0 十五 \else
-	\ifnum \strcmp{#1}{P} = 0 十六 \else
-	\ifnum \strcmp{#1}{Q} = 0 十七 \else
-	\ifnum \strcmp{#1}{R} = 0 十八 \else
-	\ifnum \strcmp{#1}{S} = 0 十九 \else
-	\ifnum \strcmp{#1}{T} = 0 二十 \else 零
-	\fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi \fi
-}
-
-%----------------------------------------------------------------------
-% BIBLIPGRAPHY (參考書目)
-%----------------------------------------------------------------------
-
-% A wraper to add Bibliography to "Table of Contents"
-\newcommand{\addBibToContents}{
-	\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{\textbf{\@bibTitle}}
-}
-
-% Configure the name of References/Bibliography
-\renewcommand{\bibname}{
-	\makebox[5.5em][s]{\@bibTitle}
-}
-
-%----------------------------------------------------------------------
-% ALGORITHMS (演算法)
-%----------------------------------------------------------------------
-
-% Change the numbering style of algorithms to [chapter].[algorithm]
-% HINT: You need to use "\caption" before "\label"
-%		\renewcommand{\thealgorithm}{\arabic{chapter}.\arabic{algorithm}}
-
-%----------------------------------------------------------------------
-% APPENDICIES (附錄)
-%----------------------------------------------------------------------
-
-% A wraper to reset the style of appendicies when 'zh' option is set
-\newcommand{\addAppxToContents}{
-	
-	\else
-		% Format appendix title shown in ToC
-		\titlecontents{chapter}[0pt]{}
-		{\bfseries \appendixname\hspace{0.5em}\thecontentslabel\hspace{0.5em}}
-		{}{\cftdotfill{\cftdotsep}\contentspage}
-	\fi
-}
+% Centralized the wrapped table 
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}

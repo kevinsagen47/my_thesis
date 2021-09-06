@@ -1,7 +1,49 @@
 %----------------------------------------------------------------------
-% CONCLUSION
+% 結論與未來展望
 %----------------------------------------------------------------------
 
-\chapter{Conclusion}\label{sec:conclusion}
-% Write down your content here
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+\chapter{結論與未來展望\small{（如何使用footnote）}}\label{chap:conclusion}
+
+\section{研究成果}
+
+表\ref{tab:tabexample6}。表\ref{tab:tabexample7}。一個註腳\footnote{這是一個正常文字中的footnote}。在人生的歷程中，研究成果的出現是必然的。做好研究成果這件事，可以說已經成為了全民運動。領悟其中的道理也不是那麼的困難。對於一般人來說，研究成果究竟象徵著什麼呢？總而言之，我們普遍認為，若能理解透徹核心原理，對其就有了一定的了解程度。想必大家都能了解研究成果的重要性。我們不得不面對一個非常尷尬的事實，那就是，若沒有研究成果的存在，那麼後果可想而知。不難發現，問題在於該用什麼標準來做決定呢？當你搞懂後就會明白了。研究成果，到底應該如何實現。世界上若沒有研究成果，對於人類的改變可想而知。如果別人做得到，那我也可以做到。
+
+\section{未來展望}
+
+\begin{table}[ht]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+
+    \begin{tabular}{ c | c | c | c | C{10em}}
+        $\alpha$                               & \multicolumn{2}{c|}{$\gamma $} & \multicolumn{2}{c}{$\delta $}                                   \\\hline
+        $\beta$                                & $\epsilon $                    & $\varepsilon $                & $\zeta $     & $\grave{\zeta} $ \\ \hline\hline
+        這邊有第一個表格footnote \footnotemark & $\eta $                        & $\theta $                     & $\vartheta $ & $\iota $         \\\hline
+    \end{tabular}
+
+    \renewcommand{\arraystretch}{1}
+
+    \caption{第一種表格footnote}
+    \label{tab:tabexample6}
+\end{table}
+\footnotetext{第一種表個footnote，這種方法一個table只能有一個footnote，而且要寫在2個地方。}
+
+\begin{table}[ht]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+
+    \begin{tabular}{ c | c | c | c | c}
+        \multirow{2}{*}{$\alpha$}                                                                                  & \multicolumn{2}{c|}{$\gamma $} & \multicolumn{2}{c}{$\delta $}                                   \\\cline{2-5}
+                                                                                                                   & $\epsilon $                    & $\varepsilon $                & $\zeta $     & 這是一個內容有點 \\ \hline\hline
+        這邊有第二個表格footnote \tablefootnote{這邊有另外一種table footnote，}                                    & $\eta $                        & $\theta $                     & $\vartheta $ & $\iota $         \\\hline
+        這邊有第三個表格footnote \tablefootnote{使用\textbackslash tablefootnote就可以在table內產生多組footnote，} & $\kappa  $                     & $\lambda  $                   & $\mu  $      & $\nu  $          \\\hline
+        這邊有第四個表格footnote \tablefootnote{但是也會讓你的table部分的code變得有點亂。}                         & $\xi  $                        & $o  $                         & $\pi  $      & $\varpi  $       \\\hline
+    \end{tabular}
+
+    \renewcommand{\arraystretch}{1}
+
+    \caption{第二種表格footnote}
+    \label{tab:tabexample7}
+\end{table}
+
+
+% \footnotetext{使用\textbackslash footnotemark和\textbackslash footnotetext對表格文字做footnote}

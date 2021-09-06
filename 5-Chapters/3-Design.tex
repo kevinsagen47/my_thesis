@@ -1,36 +1,44 @@
 %----------------------------------------------------------------------
-% DESIGN
+% 設計方法
 %----------------------------------------------------------------------
 
-\chapter{Design}\label{sec:design}
+\chapter{設計方法\small{（如何使用equation和algorithm）}}\label{chap:design}
 % Write down your content here
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+第\ref{chap:intro}章。儘管設計方法看似不顯眼，卻佔據了我的腦海。如果別人做得到，那我也可以做到。我們不得不相信，若無法徹底理解設計方法，恐怕會是人類的一大遺憾。我們都很清楚，這是個嚴謹的議題。
 
-% % Example of inserting figure
-% \begin{figure}[ht!]
-% 	\centering
-% 	\epsfig{
-% 		width=2.5in,
-% 		file=nsslab.eps
-% 	}
-% 	\caption{Figure Caption}
-% 	\label{fig:fig4}
-% \end{figure}
+章節\ref{sec:2-spec}。\ref{equ:equlabel}。我們不得不面對一個非常尷尬的事實，那就是問題的關鍵看似不明確，但想必在諸位心中已有了明確的答案。對於設計方法，我們不能不去想，卻也不能走火入魔。裡根曾講過，每一個人都應該為自己的失敗負責。我國社會的結構，是由家庭、教會、學校、左鄰右舍、政府，以及娛樂場所等交織而成的。在所有與孩子發展有關的因素中，都包含著一種角色的模仿，而影響角色模仿最大的，便是為人父母者。這不禁令我重新仔細的思考。設計方法究竟是怎麼樣的存在，始終是個謎題。由於，培根在不經意間這樣說過，無論你怎樣地表示憤怒，都不要做出任何無法挽回的事來。
 
-% % Example of adding section
-% \section{Section Title}
+\begin{equation}\label{equ:equlabel}
+    \max \sum_{p, i, s}{V_{p, i} \cdot X_{p, i, s}} \ni \sum_{p, i}{W_{p, i} \cdot X_{p, i, s}} \le C_s
+\end{equation}
 
-% Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
-% Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+\begin{algorithm}[htbp]
+    \SetAlgoNoLine
 
-% % Example of inserting equation
-% \begin{equation}\label{equ:equlabel}
-% 	\max \sum_{p, i, s}{V_{p, i} \cdot X_{p, i, s}} \ni \sum_{p, i}{W_{p, i} \cdot X_{p, i, s}} \le C_s
-% \end{equation}
+    \caption{演算法A}
+    \label{algo:algoexample}
 
-% % Example of adding subsection
-% \subsection{Subsection Title}
+    \Input{
+        長度為$n$的序列$S$
+    }
 
-% Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
-% Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+    \Output{
+        序列$S$的總和
+    }
+
+    % 這是在Algorithm加一條線R
+    \AlgoHRule
+
+    $i \gets 0$\;
+    $x \gets 0$\;
+    \;
+    \While{$i < n$}
+    {
+        $x \gets x + S[i]$\;
+        $i  \gets i + 1$\;
+    }
+    \BlankLine
+    \Return $x$\;
+\end{algorithm}
+
+章節\ref{sec:1-motivation}。演算法\ref{algo:algoexample}。希望大家能從這段話中有所收穫。對設計方法進行深入研究，在現今時代已經無法避免了。當前最急迫的事，想必就是釐清疑惑了。帶著這些問題，我們一起來審視設計方法。在人生的歷程中，設計方法的出現是必然的。本人也是經過了深思熟慮，在每個日日夜夜思考這個問題。設計方法絕對是史無前例的。回過神才發現，思考設計方法的存在意義，已讓我廢寢忘食。
