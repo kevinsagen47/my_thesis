@@ -10,11 +10,11 @@
 % Version: 2.0
 % Version: Update: Sep. 05, 2021
 % Author: JingWangTW
-% Author GitHub Page: https://github.com/JingWangTW
+% Author's GitHub Page: https://github.com/JingWangTW
 %----------------------------------------------------------------------
 % Origin File: https://github.com/yungshenglu/NCTU-Thesis-Template/blob/master/Class/NCTUtran.cls
 % Origin Author: Yung-Sheng Lu
-% Origin Author GitHub Page: https://github.com/yungshenglu
+% Origin Author's GitHub Page: https://github.com/yungshenglu
 %----------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{Class/NYCU-Thesis}[2021/09/05 V2.0 by JingWangTW]
@@ -90,6 +90,10 @@
 %======================================================================
 % 2.0 Include Required Package
 %======================================================================
+% Pass "final" option to package graphics at the very fist time
+% Since package "graphicx" may be used by other packages
+% We need to pass the option at the very first time
+\PassOptionsToPackage{final}{graphicx}
 % For chinese typing
 \usepackage[BoldFont, SlantFont, CJKchecksingle, CJKmath=true]{xeCJK}
 % For lines spacing
