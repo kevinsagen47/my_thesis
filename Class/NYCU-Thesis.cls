@@ -44,7 +44,7 @@
 % 1.0 Document Options Declaration
 %======================================================================
 
-% Inherent existing options from book document class
+% Inherent existing options from document class "book"
 \DeclareOption*{
 	\PassOptionsToClass{\CurrentOption}{book}
 }
@@ -52,8 +52,12 @@
 % Declare options for print modes: (default: draft)
 %	1. draft 	: draft for defence
 %	2. final 	: print version
-\newif\ifThesisModeDraft        \ThesisModeDrafttrue
-\newif\ifThesisModeFinal        \ThesisModeFinalfalse
+\newif\ifThesisModeDraft        
+\newif\ifThesisModeFinal        
+
+% Default mode for print mode
+\ThesisModeDrafttrue
+\ThesisModeFinalfalse
 
 \DeclareOption{draft}{
     \ThesisModeDrafttrue
@@ -71,13 +75,18 @@
 % Declare options for usage: (default: print)
 %	1. print	: output with cover page
 %	2. upload 	: output without cover and auth page
-\newif\ifThesisUsagePrint				\ThesisUsagePrinttrue
-\newif\ifThesisUsageUpload				\ThesisUsageUploadfalse
+\newif\ifThesisUsagePrint				
+\newif\ifThesisUsageUpload				
+
+% Default mode for usage
+\ThesisUsagePrinttrue
+\ThesisUsageUploadfalse
 
 \DeclareOption{print}{
 	\ThesisUsagePrinttrue
 	\ThesisUsageUploadfalse
 }
+
 \DeclareOption{upload}{
 	\ThesisUsagePrintfalse
 	\ThesisUsageUploadtrue
@@ -96,28 +105,26 @@
 \PassOptionsToPackage{final}{graphicx}
 % For chinese typing
 \usepackage[BoldFont, SlantFont, CJKchecksingle, CJKmath=true]{xeCJK}
-% For lines spacing
+% To set space between lines
 \usepackage{setspace}
-% For pdf including
+% To include pdf file
 \usepackage{pdfpages}
-% For condition if
+% For condition if (e.g., \ifthenelse)
 \usepackage{ifthen}
-% For phantom section
+% For exntend used of hypertext in the document(include  \phantomsection)
 \usepackage{hyperref}
-% For header and footer
+% For custom header and footer of
 \usepackage{fancyhdr}
-% Formatting titles in ToC
+% Alternative headings for Toc, LoF, LoT
 \usepackage{titletoc}
-% For centering ToC, LoF, and LoT
+% For custom content in ToC, LoF, and LoT (add dots between title and page numbers)
 \usepackage{tocloft}
 % For page layout
 \usepackage[a4paper]{geometry}
 % For manipulation of length arithmetic
 \usepackage{calc}
-% For custom titile style
+% For alternative section titles
 \usepackage{titlesec}
-% For converting arabic number to chinese number
-\usepackage{Class/xCJKnumb}
 % Indent first paragraph
 \usepackage{indentfirst}
 % To config figures
@@ -126,45 +133,47 @@
 \usepackage[retainorgcmds]{IEEEtrantools}
 % For custom caption
 \usepackage{caption}
-% Using math tools
+% Using math tools, e.g. "equation" environment
 \usepackage{amsmath}
 % For special math symbol
 \usepackage{amssymb}
-% For sub fig, sub table
-\usepackage[list=true]{subcaption}
 % Specail Font in math zone
 \usepackage{amsfonts}
-% Algorithm Block
+% For caption in subfigure
+\usepackage[list=true]{subcaption}
+% For "algorithm" environment
 \usepackage[ruled,vlined,algochapter]{algorithm2e}
-% To float the pic
+% For floating object
 \usepackage{float}
-% Rowspan
+% For tabular spanning multiple rows
 \usepackage{multirow}
-% Slash cell in the table
+% For diagnoal cell in the table
 \usepackage{diagbox}
-% Evenly distributing column widths
-\usepackage{tabularx,booktabs}
-% To over the border 
+% For "tabularx" environment
+\usepackage{tabularx}
+% To create box that can over the page border
 \usepackage{adjustbox}
-% Double cline
+% For double cline in table environment
 \usepackage{hhline}
-% multiple foot notes in table
+% For multiple footnotes in table
 \usepackage{tablefootnote}
 % For "TM" trademark
 \usepackage{textcomp}
-% For better bib (show visited on text after an url)
+% For better bib (show "visited on" text after an url)
 \usepackage[
     backend=biber,
     style=ieee,
     sorting=none,
     dashed=false
 ]{biblatex}
-% Break url in bib
+% For breaking url in bib
 \usepackage{xurl}
 % For unit transform
 \usepackage{siunitx}
 % For custom appendix
 \usepackage{appendix}
+% For converting arabic number to chinese number
+\usepackage{Class/xCJKnumb}
 
 %======================================================================
 % 3.0 Macro Definition
@@ -249,7 +258,7 @@
 % 5.0 Page Layout
 %======================================================================
 
-% Page Border
+%%% Page Layout %%%
 \geometry{
     a4paper,
     left=3cm,
@@ -259,11 +268,14 @@
     footskip=1cm,
 }
 
-% Header and Footer
+%%% Header and Footer %%%
 \pagestyle{fancy}
 \fancyhf{} % Clear origin header and footer configuration
 \renewcommand{\headrulewidth}{0pt}
 \cfoot{\thepage}
+
+%%% Show link in draft mode either %%%
+\hypersetup{final}
 
 %=================================  5.1 Cover Page Layout  =================================
 
@@ -524,9 +536,6 @@
     \addcontentsline{toc}{chapter}{\textbf{表目錄}}
     \listoftables
 }
-
-% Show link in draft mode either
-\hypersetup{final}
 
 %=================================  5.8 Chapter Contents Layout  ===========================
 
