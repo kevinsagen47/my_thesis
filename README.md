@@ -64,11 +64,11 @@
 * 本Template有提供許多LaTex使用範例。
     * 各範例說明：
         * [`5-Chpaters/1-Introduction.tex`](5-Chapters/1-Introduction.tex)：提供切分段落的範例。
-        * [`5-Chpaters/2-RelatedWorks.tex`](5-Chapters/2-RelatedWorks.tex)：提供如何\cite別人的文獻的範例。
+        * [`5-Chpaters/2-RelatedWorks.tex`](5-Chapters/2-RelatedWorks.tex)：提供如何`\cite`別人的文獻的範例。
         * [`5-Chpaters/3-Design.tex`](5-Chapters/3-Design.tex)：提供如何在論文中插入公式和pseudo code段落的範例。
         * [`5-Chpaters/4-Evaluation.tex`](5-Chapters/4-Evaluation.tex)：提供如何插入表格和圖片的範例。
         * [`5-Chpaters/5-Conclusion.tex`](5-Chapters/5-Conclusion.tex)：提供如何寫註腳的範例。
-        * [`6-Reference/thesis.bib`](6-Reference/thesis.bib)：提供多種bib文獻的引入範例。
+        * [`6-Reference/thesis.bib`](6-Reference/thesis.bib)：提供多種文獻的引入範例。
     * 範例文章來源：
         * [亂數假文產生器 Chinese Lorem Ipsum](http://www.richyli.com/tool/loremipsum/)
         * [唬爛產生器](https://howtobullshit.me/)
@@ -84,14 +84,14 @@
     \hbadness 10000
     ```
 * 由於陽明交大至今（Sep. 8, 2021）尚未決定校徽，故目前繳交之論文仍不需要附上浮水印，所以本模板沒有浮水印的功能。
-* 學校僅針對封面與書名頁等非內文之內容有相關論文格式規範，有關內文之規範則交由各研究系所訂定細則。由於本人為資科工碩畢業，所以基本上此Template應該是可以無痛通過資科工碩的系所審查，但是其餘科系真的不好說，QQ。
+* 學校僅針對封面與書名頁等非內文之內容有相關論文格式規範，有關內文之規範則由各研究系所訂定細則。由於本人為資科工碩畢業，所以基本上此Template應該是可以無痛通過資科工碩的系所審查，但是其餘科系真的不好說，QQ。
 ## 資料夾結構
 
 ```bash
 NYCU-Thesis-Template
 ├── 0-Spine/                                # 0-書脊（書背）（就是論文印出來後面的那一條啦）
-│   ├── 書背範本_學校提供.pdf                  #   學校提供的範本
-│   ├── 資科工碩書脊範本.pdf                   #   資科工碩提供的範本
+│   ├── 書背範本_學校提供.pdf               #   學校提供的範本
+│   ├── 資科工碩書脊範本.pdf                #   資科工碩提供的範本
 ├── 1-Authorization/                        # 1-授權書們 (將論文上傳至圖書館通過審核後，可以拿到的文件們)
 │   ├── 1-Authorization.pdf                 #   將底下兩份文件合併後的檔案（可以在main.tex中提供給模板使用）
 │   ├── Authorization.pdf                   #   電子檔著作權授權書（範本）
@@ -100,8 +100,8 @@ NYCU-Thesis-Template
 │   ├── 1-Approvale.pdf                     #   最後需要放進論文印出來的合併檔
 │   ├── Approval_en.pdf                     #   論文審定書（英文範本）
 │   ├── Approval_zh.pdf                     #   論文審定書（中文範本）
-│   ├── 國立陽明交通大學論文審定同意書.docx      #   論文審定書（中文範本）
-│   ├── 國立陽明交通大學論文審定同意書.odt       #   論文審定書（中文範本）
+│   ├── 國立陽明交通大學論文審定同意書.docx       #   論文審定書（中文範本）
+│   ├── 國立陽明交通大學論文審定同意書.odt        #   論文審定書（中文範本）
 │   ├── 國立陽明交通大學論文審定同意書英文版.docx #   論文審定書（英文範本）
 │   └── 國立陽明交通大學論文審定同意書英文版.odt  #   論文審定書（英文範本）
 ├── 3-Acknowledgement/                      # 3-誌謝
