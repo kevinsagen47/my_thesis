@@ -17,7 +17,7 @@
 % Origin Author's GitHub Page: https://github.com/yungshenglu
 %----------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{Class/NYCU-Thesis}[2021/09/05 V2.0 by JingWangTW]
+\ProvidesClass{Class/NYCU-Thesis}[2021/09/08 V2.0 by JingWangTW]
 \gdef\@ClassName{NYCU-Thesis}
 %----------------------------------------------------------------------
 % Table of Contents
