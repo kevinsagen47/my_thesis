@@ -8,7 +8,7 @@
 ### 編譯方法與順序
 1.  總結：TeX檔案需使用`xelatex`編譯，Bib的部分則需使用`biber`編譯。
     > * 那個比較潮用`pdflatex`搭配對utf-8支援的使用方法，我怎麼用就是不成功啦，QQ。所以中文是使用`xeCJK`套件完成的，所以需要使用`xelatex`才可以編。
-    > * 阿那個Bib好像大部分的人都是用`bibtex`編的，但是他不會自動對URL出現`visited on`字樣，所以窩就改用`biblatex`搭配`biber`編譯了，我覺得很棒。
+    > * 阿那個Bib好像大部分的人都是用`bibtex`編的，但是他不會自動對URL出現`visited on`字樣，我不是很開心，所以我就改用`biblatex`搭配`biber`編譯了，然後我覺得很棒。
 2.  編譯順序：`xelatex` -> `biber` -> `xelatex` -> `xelatex`
     ```bash
     xelatex main.tex
@@ -32,7 +32,7 @@
         # 清掉編譯過程產生的垃圾們
         make -f WinMakefile clean
     ```
-4. 阿如果只是想要看一下剛剛打的一行字會有甚麼效果的話，就只要使用`xelatex`編一次就可以看到了（所有的link和編號都有可能會壞掉，但是東西出現的位置和順序基本上不會有差）。
+4. 阿如果只是想要看一下剛剛打的一行字會有甚麼效果的話，就只要使用`xelatex`編一次就可以看到了（link、目錄和編號都有可能會壞掉，但是東西出現的位置和順序基本上不會有差），這樣比較快。
 ### 輸出格式選項
 1.  可選格式
     * 論文階段：
@@ -57,7 +57,7 @@
     * Table Column Type `C`
         * 在`tabular`環境中可以指定格子寬度然後自動換行並且置中。
         * 使用情境請參考：[`5-Chapters/4-Evaluation.tex: 55`](5-Chapters/4-Evaluation.tex#L55)。
-    * Table Column Type `C`
+    * Table Column Type `Y`
         * 在`tabularx`環境中平均分配格子寬度。
         * 使用情境請參考：[`5-Chapters/4-Evaluation.tex: 79`](5-Chapters/4-Evaluation.tex#L79)。
 * 本Template有提供許多LaTex使用範例。
@@ -88,7 +88,7 @@
 
 ```bash
 NYCU-Thesis-Template
-├── 1-Authorization/                        # 1-授權書們 (將論文上傳至圖書館通過審核後，可以拿到的文件)
+├── 1-Authorization/                        # 1-授權書們 (將論文上傳至圖書館通過審核後，可以拿到的文件們)
 │   ├── 1-Authorization.pdf                 #   將底下兩份文件合併後的檔案（可以在main.tex中提供給模板使用）
 │   ├── Authorization.pdf                   #   電子檔著作權授權書（範本）
 │   └── PostponePublicationApplication.pdf  #   延後公開申請書（範本）
@@ -101,7 +101,7 @@ NYCU-Thesis-Template
 │   ├── 國立陽明交通大學論文審定同意書英文版.docx #   論文審定書（英文範本）
 │   └── 國立陽明交通大學論文審定同意書英文版.odt  #   論文審定書（英文範本）
 ├── 3-Acknowledgement/                      # 3-誌謝
-│   ├── 1-Acknowledgement.tex               #   誌謝本文內容，模板有提供`acknowledgement` enviroment可以使用。
+│   ├── 1-Acknowledgement.tex               #   誌謝，模板有提供`acknowledgement` enviroment可以使用。
 ├── 4-Abstracts/                            # 4-摘要們
 │   ├── 1-Abstract_zh.tex                   #   中文摘要，模板有提供`zhAbstract` enviroment可以使用。
 │   └── 2-Abstract_en.tex                   #   英文摘要，模板有提供`enAbstract` enviroment可以使用。
@@ -112,16 +112,16 @@ NYCU-Thesis-Template
 │   ├── 4-Evaluation.tex                    #   這一份文件有提供如何插入表格和圖片的方法
 │   └── 5-Conclusion.tex                    #   這一份文件有提供如何寫註腳的方法
 ├── 6-Reference/                            # 6-參考文獻
-│   └── thesis.bib                          #   參考文獻檔，有提供一些範例就對惹喇
+│   └── thesis.bib                          #   參考文獻檔，有提供一些常見的文獻引入範例
 ├── 7-Appx/                                 # 7-附錄 (可自行新增)
-│   ├── 1-Data.tex                          #   就是一個附錄，模板有提供`Appx`，environment可以使用。
+│   ├── 1-Data.tex                          #   就是一個附錄，模板有提供`Appx` environment可以使用。
 │   └── 1-Spec.tex                                     
 ├── Class/                                  # * 論文模板 (如果沒事不要亂動)
-│   ├── NYCU-Thesis.cls                     #   國立陽明交通大學碩博論文模板
+│   ├── NYCU-Thesis.cls                     #   國立陽明交通大學碩士中文論文模板
 │   └── xCJKnumb.sty                        #   中文套件
 ├── Config/                                 # * 相關參數設定
 │   ├── config.tex                          #   設定論文標題、作者資訊等
-│   └── fonts.tex                           #   字型設定 (請拜託前一下你的系統字體名稱)
+│   └── fonts.tex                           #   字型設定 (請拜託填一下你的系統字體名稱)
 ├── Figures/                                # * 論文圖片 (可自行新增)
 │   └── ...
 ├── Otherss/                                # * 貼心的提供一些文件
