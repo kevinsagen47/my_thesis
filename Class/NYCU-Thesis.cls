@@ -46,12 +46,12 @@
 
 % Inherent existing options from document class "book"
 \DeclareOption*{
-	\PassOptionsToClass{\CurrentOption}{book}
+    \PassOptionsToClass{\CurrentOption}{book}
 }
 
 % Declare options for print modes: (default: draft)
-%	1. draft 	: draft for defence
-%	2. final 	: print version
+%   1. draft    : draft for defence
+%   2. final    : print version
 \newif\ifThesisModeDraft        
 \newif\ifThesisModeFinal        
 
@@ -73,23 +73,23 @@
 }
 
 % Declare options for usage: (default: print)
-%	1. print	: output with cover page
-%	2. upload 	: output without cover and auth page
-\newif\ifThesisUsagePrint				
-\newif\ifThesisUsageUpload				
+%   1. print    : output with cover page
+%   2. upload   : output without cover and auth page
+\newif\ifThesisUsagePrint               
+\newif\ifThesisUsageUpload              
 
 % Default mode for usage
 \ThesisUsagePrinttrue
 \ThesisUsageUploadfalse
 
 \DeclareOption{print}{
-	\ThesisUsagePrinttrue
-	\ThesisUsageUploadfalse
+    \ThesisUsagePrinttrue
+    \ThesisUsageUploadfalse
 }
 
 \DeclareOption{upload}{
-	\ThesisUsagePrintfalse
-	\ThesisUsageUploadtrue
+    \ThesisUsagePrintfalse
+    \ThesisUsageUploadtrue
 }
 
 % Load options passed to document class
@@ -228,27 +228,27 @@
 
 %%% CHINESE Font %%%
 \newcommand{\zhFont}[1]{
-	\ifx &#1&
+    \ifx &#1&
         \PackageError{\@ClassName}{請透過\zhFont設定中文字型}{請提供中文字型的名稱}
-	\else
-		\setCJKmainfont{#1}
-	\fi
+    \else
+        \setCJKmainfont{#1}
+    \fi
 }
 
 %%% English Font %%%
 \newcommand{\enFont}[1]{
-	\ifx &#1&
+    \ifx &#1&
         \PackageError{\@ClassName}{請透過\enFont設定英文字型}{請提供英文字型的名稱}
-	\else
-		\setmainfont{#1}
-	\fi
+    \else
+        \setmainfont{#1}
+    \fi
 }
 
 %%% TypeWriter Font %%%
 \newcommand{\ttFont}[1]{
-	\ifx \NOT &#1&
-		\CJKttdefault{#1}
-	\fi
+    \ifx \NOT &#1&
+        \CJKttdefault{#1}
+    \fi
 }
 
 %%% URL Font %%%
@@ -599,7 +599,7 @@
 % new title show in toc
 \renewcommand{\addappheadtotoc}[1]{
     \phantomsection
-	\addcontentsline{toc}{chapter}{\texorpdfstring{附錄\xCJKnumber{\theappendix}、#1}{#1}}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{附錄\xCJKnumber{\theappendix}、#1}{#1}}
 }
 
 % new title for appendix
