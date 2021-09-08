@@ -1,58 +1,155 @@
 %----------------------------------------------------------------------
-% EVALUATION
+% 實驗設計分析
 %----------------------------------------------------------------------
 
-\chapter{Evaluation}\label{sec:result}
-% Write down your content here
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+\chapter{實驗設計分析\small{（如何插入表格和圖片）}}\label{sec:evalutaion}
 
-% Example of inserting figure
-\begin{figure}[ht!]
-	\centering
-	\epsfig{
-		width=2.5in,
-		file=nsslab.eps
-	}
-	\caption{Figure Caption}
-	\label{fig:fig5}
+\section{實驗設計}
+
+圖\ref{fig:figexample}。圖\ref{fig:figexample2}。圖\ref{fig:figexample3}。表\ref{tab:tabexample}。表\ref{tab:tabexample2}。表\ref{tab:tabexample3}。表\ref{tab:tabexample4}。表\ref{tab:tabexample5}。話雖如此，需要考慮周詳實驗設計的影響及因應對策。鄒韜奮曾講過，友誼是天地間最可寶貴的東西，深摯的友誼是人生最大的一種安慰。這啟發了我。我們一般認為，抓住了問題的關鍵，其他一切則會迎刃而解。對於一般人來說，實驗設計究竟象徵著什麼呢？儘管實驗設計看似不顯眼，卻佔據了我的腦海。茅盾講過一段深奧的話，過去的，讓它過去，永遠不要回顧; 未來的，等來了時再說，不要空想; 我們只抓住了現在，用我們現在的理想，做我們所應該做的。這段話讓我所有的疑惑頓時豁然開朗。一般來講，我們都必須務必慎重的考慮考慮。
+
+\begin{table}[ht]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+
+    \begin{tabular}{ c | l l }
+
+        \diagbox[innerwidth=6em,trim=l]{$\alpha$}{$\beta$} & \multicolumn{2}{c}{這一格透過\textbackslash multicolumn可以跨2欄並且置中}                          \\
+        \hline\hline
+        \multirow{2}{*}{跨列A}                             & 這邊2欄的內容會靠左對齊                                                   & 而且不會平均分配       \\\cline{2-3}
+                                                           & 要平均分配的話                                                            & 請看下面的另外一個範例 \\\hline
+        \multirow{5}{*}{跨列B}                             & $\alpha  $                                                                & $\beta  $              \\\cline{2-3}
+                                                           & $\gamma  $                                                                & $\delta  $             \\\cline{2-3}
+                                                           & $\epsilon  $                                                              & $\varepsilon  $        \\\cline{2-3}
+                                                           & $\zeta  $                                                                 & $\eta  $               \\\cline{2-3}
+                                                           & $\theta  $                                                                & $\vartheta $           \\\hline
+    \end{tabular}
+
+    \renewcommand{\arraystretch}{1}
+
+    \caption{範例表格A}
+    \label{tab:tabexample}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+
+    \begin{tabularx}{\textwidth}{l|l|X}
+        \hline
+        $\iota $   & $\kappa $ & 這一個欄位會自動被撐開到滿足表格總寬度 \\
+        \hline\hline
+        $\lambda $ & $\mu $    & $\nu $                                 \\
+        $\xi $     & $o $      & $\pi $                                 \\
+        \hline
+    \end{tabularx}
+
+    \caption{使用tabularx可以指定表格總寬度，搭配它內建的Column Type "X"，可以撐開格子。}
+    \label{tab:tabexample2}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+
+    \begin{tabular}{ c | c | C{10em}}
+        $\varpi $   & $\rho  $      & 這是一個內容有點多的格子，它會自動換行而且置中 \\ \hline\hline
+        $\varrho  $ & $\sigma  $    & $\varsigma  $                                  \\\hline
+        $\tau  $    & $\upsilon   $ & $\phi   $                                      \\\hline
+        $\varphi $  & $\chi   $     & $\psi   $                                      \\\hline
+    \end{tabular}
+
+    \renewcommand{\arraystretch}{1}
+
+    \caption{使用tabular，然後使用模板提供的New Column Type "C"，可以指定格子寬度然後自動換行並且置中}
+    \label{tab:tabexample3}
+\end{table}
+
+\begin{figure}[hpbt]
+    \centering
+    \includegraphics[width=\textwidth]{Figures/computer_science.jpg}
+    \caption{範例圖片A}
+    \label{fig:figexample}
 \end{figure}
 
-% Example of adding table
-\afterpage{
-    \vspace*{\fill}{
-		\begin{table}[ht!]
-			\begin{center}
-				\begin{tabular}{ c|c|c } 
-					\hline
-					\hline
-					Table (unit) & Header1 & Header2 \\
-					\hline
-					\hline
-					Row1 & 0.00 & 0.00 \\
-					\hline 
-					Row2 & 0.00 & 0.00 \\
-					\hline
-					Row3 & 0.00 & 0.00 \\
-					\hline
-				\end{tabular}
-			\end{center}
-			\caption{Table Caption}
-			\label{tb:tb1}
-		\end{table}
-	}
-	\vspace*{\fill}
-	\clearpage
-}
+\begin{table}[ht]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
 
-% Example of adding section
-\section{Section Title}
+    \begin{tabularx}{\textwidth}{ c *{6}{|Y} }
+        \multirow{3}{*}{$\omega  $} & \multicolumn{6}{c}{這邊底下的六個欄位會好好的平均分好}                                                                                                           \\\cline{2-7}
+                                    & \multicolumn{3}{c|}{$A  $}                             & \multicolumn{3}{c}{$B  $}                                                                               \\\cline{2-7}
+                                    & $\Gamma $                                              & $\varGamma $                       & $\Delta  $ & $\varDelta $              & $E $       & $Z $         \\
+        \hline\hline
+        $H  $                       & $\Theta  $                                             & \multicolumn{2}{c|}{$\varTheta  $} & $I  $      & \multicolumn{2}{c}{$K  $}                             \\\hline
+        $\Lambda  $                 & $\varLambda  $                                         & $M  $                              & $N  $      & $\Xi  $                   & $\varXi  $ & $O  $        \\
+        \hline\hline
+        $\Pi  $                     & $\varPi $                                              & $P  $                              & $\Sigma  $ & $\varSigma  $             & $T  $      & $\Upsilon  $ \\\hline
+    \end{tabularx}
+    \renewcommand{\arraystretch}{1}
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+    \caption{使用tabularx搭配模板提供的New Column Type "Y"可以平均分配格子寬度。}
+    \label{tab:tabexample4}
+\end{table}
 
-% Example of adding subsection
-\subsection{Subsection Title}
+\begin{table}[ht]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+    \begin{adjustbox}{center}
+        \begin{tabular*}{1.1\textwidth}{  *6{ c |} @{\extracolsep{\fill}} cccc }
+            \multirow{2}{*}{$\varUpsilon  $}     & \multicolumn{9}{c}{這個表格超級超級寬} \\\cline{2-10}
+            & $\Phi  $       & $\varPhi  $        & $X  $      & $\Psi  $       & $\varPsi  $        & $\Omega  $ & $\varOmega  $       & $\aleph  $        & $\beth  $ \\
+            \hline\hline
+            $\daleth  $                                       &        $\gimel  $      & $\vert  $                    & $\Vert $                &      $\langle  $               & $\rangle  $            & $\lfloor  $            & $\rfloor  $                    & $\lceil  $             & $\rceil  $              \\\hline
+            $\Uparrow  $                                   &      $\uparrow  $          & $\Downarrow  $                 & $\downarrow  $                   &    $\llcorner $                 & $\lrcorner  $              & $\ulcorner  $              &  $\urcorner  $                   & $\ast  $              & $\star  $              \\\hline
+            $\cdot  $                                  &   $\bullet  $             & $\circ  $                     &$\bigcirc  $                   &    $\diamond  $                & $\times  $              & $\div  $              &   $\centerdot  $                & $\circledast  $              & $\circledcirc  $              \\\hline
+            $\circledcirc  $                                         &    $\circleddash  $           & $\dotplus  $                    & $\divideontimes  $                  &   $\pm  $                 & $\mp  $              & $\amalg  $              &    $\odot  $                & $\ominus  $              & $\oplus  $              \\\hline
+            $\oslash  $                                 &     $\otimes  $                & $\wr  $                     & $\Box  $                   &        $\boxplus  $           &$\boxminus  $             & $\boxtimes  $              &            $\boxdot  $      & $\square  $            & $\cap  $              \\
+            \hline\hline
+            $\cup  $                                   &        $\uplus  $                  & $\sqcap  $                    & $\sqcup  $                   &       $\wedge  $                & $\vee  $            & $\dagger  $              &      $\ddagger  $               & $\barwedge  $             & $\veebar  $             \\\hline
+        \end{tabular*}
+    \end{adjustbox}
+
+    \renewcommand{\arraystretch}{1}
+
+    \caption{這是一個會炸出邊界的超寬表格，使用adjustbox讓表格還是維持置中。}
+    \label{tab:tabexample5}
+\end{table}
+
+\begin{figure}[hbpt]
+    \centering
+    \begin{subfigure}{0.45\linewidth}
+        \includegraphics[width=\textwidth]{Figures/computer_science.jpg}
+        \caption{左邊放個圖片}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\linewidth}
+        \includegraphics[width=\textwidth]{Figures/computer_science.jpg}
+        \caption{右邊放個圖片}
+    \end{subfigure}
+    \caption{2張圖擺在一起}
+    \label{fig:figexample2}
+\end{figure}
+
+\begin{figure}[hbpt]
+    \centering
+    \begin{subfigure}{0.4\linewidth}
+        \includegraphics[width=\textwidth]{Figures/computer_science.jpg}
+        \caption{左邊放個圖片}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \begin{tabular}{c | c }
+            $\mathcal{A} \mathcal{B}  $                   & $\mathbb{A} \mathbb{B}  $                                               \\
+            \hline \hline
+            $\mathfrak{A} \mathfrak{B}  $                 & $\mathsf{A} \mathsf{B}  $                                               \\
+            $\mathbf{A} \mathbf{B}  $                     & $\clubsuit \diamondsuit \heartsuit \spadesuit  $                        \\
+            $ \looparrowleft \looparrowright \Lsh \Rsh  $ & $\curvearrowleft \curvearrowright \circlearrowleft \circlearrowright  $ \\
+        \end{tabular}
+        \caption{右邊放個表格}
+    \end{subfigure}
+    \caption{圖表擺在一起}
+    \label{fig:figexample3}
+\end{figure}

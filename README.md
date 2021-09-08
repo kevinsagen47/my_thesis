@@ -1,123 +1,149 @@
-# NYCU Thesis Template
+# NYCU Chinese Master Thesis Template
 
-此專案為「國立陽明交通大學」碩博士論文模板。
+* 此專案為「國立陽明交通大學」「中文碩士」論文模板。
+* 本人論文已上傳圖書館通過審核，請放心服用。
+    > 除了「附錄」以外。請查閱[「免責聲明」](#一些免責聲明)段落。
+* 為了方便閱讀和改寫，大部分的註解和說明都已經是寫中文了，麻煩可以看一下再動筆。
+## Template編譯與輸出方法
 
-## Installation
-
-> 關於安裝資訊：https://www.latex-project.org/get/#tex-distributions
-
-* Windows
-    * 安裝 [MiKTeX](https://miktex.org/)
-* MacOS
-    * 安裝 [MacTeX](http://www.tug.org/mactex/)
-* Linux
-    * 安裝 [TeXLive](https://www.tug.org/texlive/)
-* Online LaTeX Service
-    * [Overleaf](https://www.overleaf.com)
-
-## Usage
-
-0. 下載此專案。
-1. 執行以下指令進行編譯。
+### 編譯方法與順序
+1.  總結：TeX檔案需使用`xelatex`編譯，Bib的部分則需使用`biber`編譯。
+    > * 那個比較潮用`pdflatex`搭配對utf-8支援的使用方法，我怎麼用就是不成功啦，QQ。所以中文是使用`xeCJK`套件完成的，所以需要使用`xelatex`才可以編。
+    > * 阿那個Bib好像大部分的人都是用`bibtex`編的，但是他不會自動對URL出現`visited on`字樣，我不是很開心，所以我就改用`biblatex`搭配`biber`編譯了，然後我覺得很棒。
+2.  編譯順序：`xelatex` -> `biber` -> `xelatex` -> `xelatex`
     ```bash
-    # Make sure your current directory is correct
-    $ make
+    xelatex main.tex
+    biber main
+    xelatex main.tex
+    xelatex main.tex
     ```
-    * 需等待 2-3 秒，若編譯成功，會在最後一行出現以下範例訊息，而不會有任何錯誤訊息。
-        ```bash
-        ...
-        Output written on main.pdf (23 pages).
-        ```
-    * 編譯成功後會自動生成 PDF 檔案 `main.pdf`。
-2. 如何移除編譯過程所產生的中間檔案 (e.g., `main.aux`, `main.bbl`, `main.blg`, etc.)？
+3.  我有準備makefile，所以
     ```bash
-    # Make sure your current directory is correct
-    $ make clean
+    ## 一般Linux的同學：
+        #  編譯
+        make            
+
+        # 清掉編譯過程產生的垃圾們
+        make clean
+    
+    ## Windows的同學：
+        #  編譯
+        make -f WinMakefile
+
+        # 清掉編譯過程產生的垃圾們
+        make -f WinMakefile clean
     ```
-    * 中間檔案為非必要檔案，已經寫入 `.gitignore` 中。
-3. 如何選擇輸出格式？
-    * 可選格式
-        * 碩/博士論文 ( **`master`**/`phd`)
-        * 中/英文 (**`en`**/`zh`)
-        * 編輯中/初稿/定稿 (`review`/**`draft`**/`final`)
+4. 阿如果只是想要看一下剛剛打的一行字會有甚麼效果的話，就只要使用`xelatex`編一次就可以看到了（link、目錄和編號都有可能會壞掉，但是東西出現的位置和順序基本上不會有差），這樣比較快。
+### 輸出格式選項
+1.  可選格式
+    * 論文階段：
+        * 初稿/定稿 (**`draft`**/`final`)
+    * 論文使用模式：
         * 印刷/圖書館上傳格式 (**`print`**/`upload`)
-        * 有/無浮水印 (`watermark`)
-        * 是/否引入照片與審定書等文件(`binding`)
-            * 只有`final`才會有binding效果            
-        * 粗體為預設格式
-    * 修改 [`main.tex: 11`](main.tex#L11)
-        * 將欲輸出的格式填入方框中以逗號隔開，如下例為「碩士中文論文印刷定稿」。
-            ```latex=11
-            \documentclass[master, zh, final, print]{Class/NYCUtran}
-            ```
-4. 由於陽明交大尚未決定校徽，故目前繳交之論文仍不需要附上浮水印，然未來仍有加上浮水印之需求，故先將原專案之交大浮水印附上，並設定為不須輸出浮水印，未來只需更改原圖檔為新校徽即可繼續使用。
-5. 如有新增檔案，需於`main.tex`中對應的位置新增引入。
-    * 如新增章節`5-Chapters/6-Other.tex`
-        ```latex=77
-        % 於對應位置 (Line 79)新增引入。
-        \input{5-Chapters/5-Conclusion}
-        \input{5-Chapters/6-Other}
+2.  修改方式
+    * 修改 [`main.tex: 9`](main.tex#L9)
+    * 將欲輸出的格式填入方框中以逗號隔開，如下例為「論文印刷定稿」。
+        ```latex=9
+        \documentclass[final, print]{Class/NYCU-Thesis}
         ```
+## 關於這份Template
 
-## Directory Structure
+### 一些說明和注意事項
+* 請於[`Config/config.tex`](Config/config.tex)設定論文各項參數，各參數皆附有註解說明用途。
+* **請一定要去[`Config/fonts.tex`](Config/fonts.tex)設定中文字體**，要不然很有可能無法編譯。
+* Template有提供以下幾個額外的Command
+    * `\AlgoHRule`
+        * 在Pseudo Code環境中，製造一條水平線。
+        * 使用情境請參考：[`5-Chapters/3-Design.tex: 30`](5-Chapters/3-Design.tex#L30)。
+    * Table Column Type `C`
+        * 在`tabular`環境中可以指定格子寬度然後自動換行並且置中。
+        * 使用情境請參考：[`5-Chapters/4-Evaluation.tex: 55`](5-Chapters/4-Evaluation.tex#L55)。
+    * Table Column Type `Y`
+        * 在`tabularx`環境中平均分配格子寬度。
+        * 使用情境請參考：[`5-Chapters/4-Evaluation.tex: 79`](5-Chapters/4-Evaluation.tex#L79)。
+* 本Template有提供許多LaTex使用範例。
+    * 各範例說明：
+        * [`5-Chpaters/1-Introduction.tex`](5-Chapters/1-Introduction.tex)：提供切分段落的範例。
+        * [`5-Chpaters/2-RelatedWorks.tex`](5-Chapters/2-RelatedWorks.tex)：提供如何\cite別人的文獻的範例。
+        * [`5-Chpaters/3-Design.tex`](5-Chapters/3-Design.tex)：提供如何在論文中插入公式和pseudo code段落的範例。
+        * [`5-Chpaters/4-Evaluation.tex`](5-Chapters/4-Evaluation.tex)：提供如何插入表格和圖片的範例。
+        * [`5-Chpaters/5-Conclusion.tex`](5-Chapters/5-Conclusion.tex)：提供如何寫註腳的範例。
+        * [`6-Reference/thesis.bib`](6-Reference/thesis.bib)：提供多種bib文獻的引入範例。
+    * 範例文章來源：
+        * [亂數假文產生器 Chinese Lorem Ipsum](http://www.richyli.com/tool/loremipsum/)
+        * [唬爛產生器](https://howtobullshit.me/)
+        * [Drpapaer 期末報告產生器](https://drpaper.neocities.org/)
+        * [Lorem Ipsum](https://www.lipsum.com/)
+### 一些免責聲明
+* 由於本人只有碩班畢業，而且寫中文論文，所以這份Template就是只能產出**中文碩士**論文。
+* 由於本人論文沒有附錄，所以**這份Template的「附錄」排版是沒有經過審查**的喔。
+* 由於本人十分討厭在draft模式下無法看到圖片的狀況，所以本模板即使是在draft模式下也會將圖片載入（編譯時間較久）。
+    > 如果圖片使用Microsoft Visio繪製，強烈建議在輸出時調整版面大小並選擇pdf檔案，且一樣用`\includegraphics`載入圖片，這樣可以大幅減少論文檔案大小，並加速編譯時間。
+* 由於本人十分討厭看到在編譯時有waring這件事，所以本模板在**draft模式**有設置以下參數，這樣才不會一直出現`underfull hbox (badness 10000)`的warning。
+    ```latex
+    \hbadness 10000
+    ```
+* 由於陽明交大至今（Sep. 8, 2021）尚未決定校徽，故目前繳交之論文仍不需要附上浮水印，所以本模板沒有浮水印的功能。
+* 學校僅針對封面與書名頁等非內文之內容有相關論文格式規範，有關內文之規範則交由各研究系所訂定細則。由於本人為資科工碩畢業，所以基本上此Template應該是可以無痛通過資科工碩的系所審查，但是其餘科系真的不好說，QQ。
+## 資料夾結構
 
 ```bash
-# In alphabetical order
-nycu-thesis-template
-├── 0-Cover/                        # 0-論文封面文件 (自行編輯)
-│   └── Spine.docx                  #   書背製作檔 (自行編輯)
-├── 1-Cert/                         # 1-論文口試審定書 (可自行新增)
-│   ├── .gitkeep
-│   ├── 1-Certification-zh.pdf      #   論文口試審定書中文範本 (資科工碩)
-│   └── 2-Certification-en.pdf      #   論文口試審定書英文範本 (資科工碩)
-├── 2-Auth/                         # 2-論文授權書 (可自行新增)
-│   ├── .gitkeep
-│   └── 1-Authorization.pdf         #   論文授權書範本
-├── 3-Abs/                          # 3-摘要 (自行編輯)
-│   ├── 1-Abstract-zh.tex           #   中文摘要 (自行編輯)
-│   └── 2-Abstract-en.tex           #   英文摘要 (自行編輯)
-├── 4-Ack/                          # 4-誌謝與題獻 (自行編輯)
-│   ├── 1-Acknowledgement.tex       #   誌謝頁 (自行編輯)
-│   └── 2-Dedication.tex            #   題獻頁 (自行編輯) [博士論文使用]
-├── 5-Chapters/                     # 5-論文各節內容 (可自行新增)
-│   ├── 1-Introduction.tex
-│   ├── 2-RelatedWork.tex
-│   ├── 3-Design.tex
-│   ├── 4-Evaluation.tex
-│   └── 5-Conclusion.tex
-├── 6-Bib/                          # 6-參考文獻
-│   ├── BSTcontrol.bib              #   IEEE 論文參考書目設定 (不需更動)
-│   └── thesis.bib                  #   參考文獻檔 (自行編輯)
-├── 7-Appx/                         # 7-附錄 (可自行新增)
-│   └── 1-Appx.tex           
-├── 8-Author/                       # 8-作者簡歷與著作列表 (自行編輯) [博士論文使用]
-│   ├── 1-CV.tex                    #   作者簡歷 (自行編輯) [博士論文使用]
-│   └── 2-Publications.tex          #   著作列表 (自行編輯) [博士論文使用]                               
-├── Class/                          # * 論文模板 (不需更動)
-│   ├── IEEEtran.bst                #   IEEE 論文參考書目樣式 (不需更動)
-│   ├── IEEEtrantools.sty           #   IEEE 論文模板樣式指令 (不需更動)
-│   ├── NYCUtran.cls                #   國立陽明交通大學碩博論文模板 (不需更動)
-│   └── xCJKnumb.sty                #   中文套件 (不需更動)
-├── Config/                         # * 相關參數設定
-│   ├── config.tex                  #   設定論文標題、作者資訊等 (自行編輯)
-│   └── fonts.tex                   #   字型設定 (不需更動)
-├── Figurs/                         # * 論文圖片 (可自行新增)
+NYCU-Thesis-Template
+├── 0-Spine/                                # 0-書脊（書背）（就是論文印出來後面的那一條啦）
+│   ├── 書背範本_學校提供.pdf                  #   學校提供的範本
+│   ├── 資科工碩書脊範本.pdf                   #   資科工碩提供的範本
+├── 1-Authorization/                        # 1-授權書們 (將論文上傳至圖書館通過審核後，可以拿到的文件們)
+│   ├── 1-Authorization.pdf                 #   將底下兩份文件合併後的檔案（可以在main.tex中提供給模板使用）
+│   ├── Authorization.pdf                   #   電子檔著作權授權書（範本）
+│   └── PostponePublicationApplication.pdf  #   延後公開申請書（範本）
+├── 2-Approval/                             # 2-論文審定同意書書 (在口試當天要給口委簽名的一份文件)
+│   ├── 1-Approvale.pdf                     #   最後需要放進論文印出來的合併檔
+│   ├── Approval_en.pdf                     #   論文審定書（英文範本）
+│   ├── Approval_zh.pdf                     #   論文審定書（中文範本）
+│   ├── 國立陽明交通大學論文審定同意書.docx      #   論文審定書（中文範本）
+│   ├── 國立陽明交通大學論文審定同意書.odt       #   論文審定書（中文範本）
+│   ├── 國立陽明交通大學論文審定同意書英文版.docx #   論文審定書（英文範本）
+│   └── 國立陽明交通大學論文審定同意書英文版.odt  #   論文審定書（英文範本）
+├── 3-Acknowledgement/                      # 3-誌謝
+│   ├── 1-Acknowledgement.tex               #   誌謝，模板有提供`acknowledgement` enviroment可以使用。
+├── 4-Abstracts/                            # 4-摘要們
+│   ├── 1-Abstract_zh.tex                   #   中文摘要，模板有提供`zhAbstract` enviroment可以使用。
+│   └── 2-Abstract_en.tex                   #   英文摘要，模板有提供`enAbstract` enviroment可以使用。
+├── 5-Chapters/                             # 5-論文各節內容 (可自行新增)
+│   ├── 1-Introduction.tex                  #   這一份文件有提供切分段落的方法
+│   ├── 2-RelatedWorks.tex                  #   這一份文件有提供如何\cite別人的文獻的方法
+│   ├── 3-Design.tex                        #   這一份文件有提供如何在論文中插入公式和pseudo code段落的方法
+│   ├── 4-Evaluation.tex                    #   這一份文件有提供如何插入表格和圖片的方法
+│   └── 5-Conclusion.tex                    #   這一份文件有提供如何寫註腳的方法
+├── 6-Reference/                            # 6-參考文獻
+│   └── thesis.bib                          #   參考文獻檔，有提供一些常見的文獻引入範例
+├── 7-Appx/                                 # 7-附錄 (可自行新增)
+│   ├── 1-Data.tex                          #   就是一個附錄，模板有提供`Appx` environment可以使用。
+│   └── 1-Spec.tex                                     
+├── Class/                                  # * 論文模板 (如果沒事不要亂動)
+│   ├── NYCU-Thesis.cls                     #   國立陽明交通大學碩士中文論文模板
+│   └── xCJKnumb.sty                        #   中文套件
+├── Config/                                 # * 相關參數設定
+│   ├── config.tex                          #   設定論文標題、作者資訊等
+│   └── fonts.tex                           #   字型設定 (請拜託填一下你的系統字體名稱)
+├── Figures/                                # * 論文圖片 (可自行新增)
 │   └── ...
-├── Tools/                          # * 相關小工具 (不需更動)
-│   └── ...
-├── .gitignore                      # 檔案忽略清單 (不需更動)
-├── GNUmakefile                     # 編譯論文檔案所用 (不需更動)
-├── LICENSE                         # 專案授權 (不需更動)
-├── main.tex                        # 論文主要檔案 (自行編輯)
-├── main.pdf                        # 論文輸出檔案
-└── README.md                       # 說明文件 (本檔案)
+├── Otherss/                                # * 貼心的提供一些文件
+│   └── 國立陽明交通大學博碩士學位論文格式規範_中英對照.pdf
+├── .gitignore                              # git檔案忽略清單
+├── Makefile                                # Linux makefile
+├── WinMakefile                             # Winodws makefile
+├── LICENSE                                 # 本專案授權
+├── main.tex                                # 論文主要檔案
+└── README.md                               # 說明文件 (本檔案)
 ```
 
-## Useful Plugins
+## 工商服務時間
 
-* **[LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)** (on [Visual Studio Code](https://code.visualstudio.com/))
+* [Overleaf](https://www.overleaf.com/) (The easy to use, online, collaborative LaTeX editor)
+* [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) (on [Visual Studio Code](https://code.visualstudio.com/))
 
-## Reference
+## LaTex Reference
 
 * [The LaTex Project](https://www.latex-project.org/)
 * [CTAN](https://www.ctan.org/)
@@ -126,8 +152,8 @@ nycu-thesis-template
 ## Acknowledgement
 
 * 此模板修改自原[交大模板](https://github.com/yungshenglu/NCTU-Thesis-Template)
-  * 原作者：[yungshenglu](https://github.com/yungshenglu)
-  * 原模板專案：[yungshenglu/NCTU-Thesis-Template](https://github.com/yungshenglu/NCTU-Thesis-Template)
+    * 原作者：[yungshenglu](https://github.com/yungshenglu)
+    * 原模板專案：[yungshenglu/NCTU-Thesis-Template](https://github.com/yungshenglu/NCTU-Thesis-Template)
 
 ## License
 
