@@ -37,7 +37,7 @@ jobs:
       #   3. Modify the font name declared in the config.
       - name: Modify English Font
         run: |
-          sed -i 's/Times New Roman/LiberationSerif/1' Config/fonts.tex && cat Config/fonts.tex
+          sed -i 's/Times New Roman/Liberation Serif/1' Config/fonts.tex && cat Config/fonts.tex
 
       #  This action is to compile LaTeX documents
       - name: Compile LaTeX Documents
