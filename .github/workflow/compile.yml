@@ -1,0 +1,36 @@
+# The name of this action
+name: Compiler project to pdf
+
+# Controls when the workflow will be run
+on: 
+  # Triggers the workflow on push
+  [push]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  
+  compile:
+    
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # This action checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+    
+      # Compile the document with this action
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: main.tex
+          # compile with xelatex
+          latexmk_use_xelatex: true
+      
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            main.pdf
