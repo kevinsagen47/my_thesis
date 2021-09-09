@@ -2,9 +2,11 @@
 name: Compile Project to PDF
 
 # Controls when the workflow will run
-on: 
-  # Triggers the workflow on push to any branch
-  [push]
+on:
+  # Triggers the workflow on push to any tags
+  push:
+    tags:
+      - "v*.*.*"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
