@@ -10,13 +10,18 @@
 1.  總結：TeX檔案需使用`xelatex`編譯，Bib的部分則需使用`biber`編譯。
     > * 那個比較潮用`pdflatex`搭配對utf-8支援的使用方法，我怎麼用就是不成功啦，QQ。所以中文是使用`xeCJK`套件完成的，所以需要使用`xelatex`才可以編。
     > * 阿那個Bib好像大部分的人都是用`bibtex`編的，但是他不會自動對URL出現`visited on`字樣，我不是很開心，所以我就改用`biblatex`搭配`biber`編譯了，然後我覺得很棒。
-2.  編譯順序：`xelatex` -> `biber` -> `xelatex` -> `xelatex`
-    ```bash
-    xelatex main.tex
-    biber main
-    xelatex main.tex
-    xelatex main.tex
-    ```
+2.  編譯順序：
+    1.  方法一：`xelatex` -> `biber` -> `xelatex` -> `xelatex`（我自己的編法）
+        ```bash
+        xelatex main.tex
+        biber main
+        xelatex main.tex
+        xelatex main.tex
+        ```
+    2. 方法二：用很潮的`latexmk`就好了（我試過可以用的編法）
+        ```bash
+        latexmk -xelatex main.tex
+        ```
 3.  我有準備makefile，所以
     ```bash
     ## 一般Linux的同學：
@@ -85,6 +90,9 @@
     ```
 * 由於陽明交大至今（Sep. 8, 2021）尚未決定校徽，故目前繳交之論文仍不需要附上浮水印，所以本模板沒有浮水印的功能。
 * 學校僅針對封面與書名頁等非內文之內容有相關論文格式規範，有關內文之規範則由各研究系所訂定細則。由於本人為資科工碩畢業，所以基本上此Template應該是可以無痛通過資科工碩的系所審查，但是其餘科系真的不好說，QQ。
+
+### 我不知道怎麼分類
+* 有寫個GitHub Action啦，只要將專案Push Tag到GitHub就會觸發（Tag名稱須為`v*.*.*`），請GitHub幫你編譯並將編完的PDF發到Release。
 ## 資料夾結構
 
 ```bash

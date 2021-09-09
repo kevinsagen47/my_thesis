@@ -10,4 +10,4 @@ run:
 	$(LATEX_BUILD_TOOL) $(TEX_ARGS) $(ROOT_FILE).tex 
 	
 clean:
-	rm -f *.aux  *.bbl *.blg *.bcf *.idx *.ind *.lof *.lot *.out *.toc *.acn *.acr *.alg *.glg *.glo *.gls *.ist *.fls *.log *.run.xml *.fdb_latexmk *.synctex.g
+	rm -f *.aux  *.bbl *.blg *.bcf *.idx *.ind *.lof *.lot *.out *.toc *.acn *.acr *.alg *.glg *.glo *.gls *.ist *.fls *.log *.run.xml *.fdb_latexmk *.synctex.gz *.xdv
