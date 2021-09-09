@@ -24,7 +24,7 @@ jobs:
       # This action is to modify Chinese font name declared in the config
       #   1. Downliad the font file online.
       #   2. Add the required package to include ttf file directly.
-      #   3. Modift the font name declared in in the config.
+      #   3. Modify the font name declared in the config.
       - name: Modify Chinese Font
         run: |
           wget -O cwTeXKai.ttf https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.ttf
@@ -34,10 +34,12 @@ jobs:
       # This action is to install English font
       #   1. Accept the EULA that will pop-up during installation
       #   2. Install the font package
+      #   3. Modify the font name declared in the config.
       - name: Modify English Font
         run: |
           echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
           sudo apt-get install ttf-mscorefonts-installer
+          sed -i 's/Times New Roman/TimesNewRomanPSMT/1' Config/fonts.tex && cat Config/fonts.tex
 
       #  This action is to compile LaTeX documents
       - name: Compile LaTeX Documents
