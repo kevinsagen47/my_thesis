@@ -34,10 +34,14 @@ jobs:
       # This action is to install English font
       #   1. Accept the EULA that will pop-up during installation
       #   2. Install the font package
-      #   3. Modify the font name declared in the config.
+      #   3. Copy font file to local directory
+      #   4. Modify the font name declared in the config.
       - name: Modify English Font
         run: |
-          sed -i 's/Times New Roman/Liberation Serif/1' Config/fonts.tex && cat Config/fonts.tex
+          echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+          sudo apt-get install ttf-mscorefonts-installer
+          cp /usr/share/fonts/truetype/msttcorefonts/times.ttf .
+          sed -i 's/Times New Roman/\[times.ttf\]/1' Config/fonts.tex && cat Config/fonts.tex
 
       #  This action is to compile LaTeX documents
       - name: Compile LaTeX Documents
