@@ -1,15 +1,15 @@
 # The name of this action
-name: Compiler project to pdf
+name: Compile Project to PDF
 
-# Controls when the workflow will be run
+# Controls when the workflow will run
 on: 
-  # Triggers the workflow on push
+  # Triggers the workflow on push to any branch
   [push]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   
-  compile:
+  Compile:
     
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -20,8 +20,18 @@ jobs:
       # This action checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
       - name: Set up Git repository
         uses: actions/checkout@v2
+
+      # This action is to modify font name declared in the config
+      #   1. Downliad the font file online.
+      #   2. Add the required package to include ttf file directly.
+      #   3. Modift the font name declared in in the config.
+      - name: Modify font
+        run: |
+          wget -O cwTeXKai.ttf https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.ttf
+          echo -e "\n\\usepackage{fontspec}" >> Config/fonts.tex
+          sed -i 's/標楷體/\[cwTexKai.ttf\]/1' Config/fonts.tex && cat Config/fonts.tex
     
-      # Compile the document with this action
+      #  This action is to compile LaTeX documents
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
@@ -29,6 +39,7 @@ jobs:
           # compile with xelatex
           latexmk_use_xelatex: true
       
+      # This action is to create GitHub Releases
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
