@@ -1,6 +1,9 @@
 # The name of this action
 name: Compile Project to PDF
 
+permissions:
+  contents: write
+
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push to any tags
@@ -31,8 +34,7 @@ jobs:
         run: |
           wget -O cwTeXKai.ttf https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.ttf
           echo -e "\n\\usepackage{fontspec}" >> Config/fonts.tex
-          sed -i 's/標楷體/\[cwTexKai.ttf\]/1' Config/fonts.tex && cat Config/fonts.tex
-      
+          sed -i '/^\\zhFont/s/.*/\\zhFont{cwTexKai.ttf}/' Config/fonts.tex && cat Config/fonts.tex
       # This action is to install English font
       #   1. Accept the EULA that will pop-up during installation
       #   2. Install the font package
@@ -55,7 +57,7 @@ jobs:
       
       # This action is to create GitHub Releases
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.15
         with:
           files: |
             main.pdf
