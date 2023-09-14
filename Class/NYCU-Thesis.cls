@@ -24,19 +24,21 @@
 %   1.0 - Document Options Declaration
 %   2.0 - Include Required Package
 %   3.0 - Macro Definition
-%   4.0 - Font Configuration
-%   5.0 - Page Layout
-%       5.1 - Cover Page Layout
-%       5.2 - Title Page Layout
-%       5.3 - Authorization Page Layout
-%       5.4 - Approval Page Layout
-%       5.5 - Chinese Abstract Layout
-%       5.6 - English Abstract Layout
-%       5.7 - ToC, LoF, LoT Layout
-%       5.8 - Chapter Contents Layout
-%       5.9 - Reference Layout
-%       5.10 - Appendices Layout
-%   6.0 - Utility Command / Tools
+%   4.0 - Watermark Configuration
+%   5.0 - Font Configuration
+%   6.0 - Page Layout
+%       6.1 - Cover Page Layout
+%       6.2 - Title Page Layout
+%       6.3 - Authorization Page Layout
+%       6.4 - Approval Page Layout
+%       6.5 - Acknowledgement Page Layout
+%       6.6 - Chinese Abstract Layout
+%       6.7 - English Abstract Layout
+%       6.8 - ToC, LoF, LoT Layout
+%       6.9 - Chapter Contents Layout
+%       6.10 - Reference Layout
+%       6.11 - Appendices Layout
+%   7.0 - Utility Command / Tools
 %----------------------------------------------------------------------
 
 
@@ -226,32 +228,19 @@
 \def\enDegreeYear#1{\gdef\@enDegreeYear{#1}}
 \def\enDegreeMonth#1{\gdef\@enDegreeMonth{#1}}
 
-% The path to watermark
+% 浮水印路徑
 \def\watermark#1{\gdef\@watermark{#1}}
 
-%----------------------------------------------------------------------
-% WATERMARK (浮水印)
-%----------------------------------------------------------------------
+%======================================================================
+% 4.0 Watermark Configuration
+%======================================================================
 
 % Set the source of watermark
-\newcommand\BackgroundPicture{
-    % For draft mode, print "DRAFT"
-    \ifThesisModeDraft
-        \setlength{\@tempdimb}{.5\paperwidth}
-        \setlength{\@tempdimc}{.5\paperheight}
-        \setlength{\unitlength}{1pt}
-        \put(\strip@pt\@tempdimb,\strip@pt\@tempdimc){
-        \makebox(0,0){\rotatebox{45}{\textcolor[gray]{0.75}
-            {\fontsize{6cm}{6cm}\selectfont{DRAFT}}}}
-        }
-    \fi
-    % HINT: For final mode, print the watermark specified by \watermark{}
-    \ifThesisModeFinal
-        \begin{tikzpicture}
-            \node[minimum width=\paperwidth, minimum height=\paperheight, opacity=0.15]
-                {\includegraphics[width=0.85\textwidth]{\@watermark}};
-        \end{tikzpicture}
-    \fi
+\newcommand\WaterMarkPicture{
+    \begin{tikzpicture}
+        \node[minimum width=\paperwidth, minimum height=\paperheight, opacity=0.15]
+            {\includegraphics[width=0.85\textwidth]{\@watermark}};
+    \end{tikzpicture}
 }
 
 % Update \cleardoublepage to handle watermark
@@ -260,14 +249,14 @@
 \renewcommand{\cleardoublepage}{
 	% Remove watermark if previous page is a blank even page in twoside mode.
 	\newpage
-	\ClearShipoutPicture
-	\oldcleardoublepage
+
+    \oldcleardoublepage
 	% Add watermark
-	\AddToShipoutPicture{\BackgroundPicture}
+	\AddToShipoutPicture{\WaterMarkPicture}
 }
 
 %======================================================================
-% 4.0 Font Configuration
+% 5.0 Font Configuration
 %======================================================================
 
 %%% CHINESE Font %%%
@@ -299,7 +288,7 @@
 \urlstyle{same}
 
 %======================================================================
-% 5.0 Page Layout
+% 6.0 Page Layout
 %======================================================================
 
 %%% Page Layout %%%
@@ -321,7 +310,7 @@
 %%% Show link in draft mode either %%%
 \hypersetup{final}
 
-%=================================  5.1 Cover Page Layout  =================================
+%=================================  6.1 Cover Page Layout  =================================
 
 %%% Cover Page Generator %%%
 \def\makeCoverPage{
@@ -379,7 +368,7 @@
     \restoregeometry
 }
 
-%=================================  5.2 Title Page Layout  =================================
+%=================================  6.2 Title Page Layout  =================================
 
 %%% Title Page Generator %%%
 \def\makeTitlePage{
@@ -387,7 +376,7 @@
     \thispagestyle{empty}
 
 	% Add watermark
-	\AddToShipoutPicture*{\BackgroundPicture}
+	\AddToShipoutPicture*{\WaterMarkPicture}
 
     \begin{center}
         \begin{doublespacing}
@@ -444,7 +433,7 @@
     \end{center}
 }
 
-%=================================  5.3 Authorization Page Layout  =========================
+%=================================  6.3 Authorization Page Layout  =========================
 
 %%% Authorization Page %%%
 \newcommand{\makeAuthPage}[1]{
@@ -456,7 +445,7 @@
     \fi
 }
 
-%=================================  5.4 Approval Page Layout  ==============================
+%=================================  6.4 Approval Page Layout  ==============================
 
 %%% Approval Page %%%
 \newcommand{\makeApprovalPage}[1]{
@@ -468,7 +457,7 @@
     \fi
 }
 
-%=================================  5.5 Acknowledgement Page Layout  =======================
+%=================================  6.5 Acknowledgement Page Layout  =======================
 
 %%% Acknowledgement Page %%%
 \newenvironment{acknowledgement}{
@@ -484,7 +473,7 @@
 
 }
 
-%=================================  5.5 Chinese Abstract Layout  ===========================
+%=================================  6.6 Chinese Abstract Layout  ===========================
 
 %%% Environment %%%
 \newenvironment{zhAbstract}{
@@ -509,7 +498,7 @@
     \end{flushleft}
 }
 
-%=================================  5.6 English Abstract Layout  ===========================
+%=================================  6.7 English Abstract Layout  ===========================
 
 %%% Environment %%%
 \newenvironment{enAbstract}{
@@ -534,7 +523,7 @@
     \end{flushleft}
 }
 
-%=================================  5.7 ToC, LoF, LoT Layout  ==============================
+%=================================  6.8 ToC, LoF, LoT Layout  ==============================
 
 % Add dots between title and page number
 \renewcommand{\cftchapdotsep}{\cftdotsep}
@@ -584,7 +573,7 @@
     \listoftables
 }
 
-%=================================  5.8 Chapter Contents Layout  ===========================
+%=================================  6.9 Chapter Contents Layout  ===========================
 
 %%% Chapter Title Content %%%
 \titleformat{\chapter}[block]
@@ -624,7 +613,7 @@
 % Set default figures placement
 \graphicspath{{Figures/}}
 
-%=================================  5.9 Reference Layout  ==================================
+%=================================  6.10 Reference Layout  ==================================
 
 %%% Bibliography Generator %%%
 \newcommand{\makeBib}{
@@ -638,7 +627,7 @@
     \printbibliography[title={\makebox[5.5em][s]{參考文獻}}]
 }
 
-%=================================  5.10 Appendices Layout  ================================
+%=================================  6.11 Appendices Layout  ================================
 
 \newcounter{appendix}
 \setcounter{appendix}{0}
