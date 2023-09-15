@@ -7,8 +7,8 @@
 % 必須按照著作人指定的方式表彰其姓名。
 %----------------------------------------------------------------------
 % Template Name: NYCU-Thesis
-% Version: 2.1.0
-% Version: Update: Sep. 09, 2021
+% Version: 2.2.0
+% Update: Sep. 15, 2023
 % Author: JingWangTW
 % Author's GitHub Page: https://github.com/JingWangTW
 %----------------------------------------------------------------------
@@ -17,7 +17,7 @@
 % Origin Author's GitHub Page: https://github.com/yungshenglu
 %----------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{Class/NYCU-Thesis}[2021-09-09 v2.1.0 by JingWangTW]
+\ProvidesClass{Class/NYCU-Thesis}[2023-09-15 v2.2.0 by JingWangTW]
 \gdef\@ClassName{NYCU-Thesis}
 %----------------------------------------------------------------------
 % Table of Contents
