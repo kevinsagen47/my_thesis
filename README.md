@@ -93,7 +93,7 @@
 
 ### 我不知道怎麼分類
 * 有寫個GitHub Action啦，只要將專案Push Tag到GitHub就會觸發（Tag名稱須為`v*.*.*`），請GitHub幫你編譯並將編完的PDF發到Release。
-    * 需要從 Windows 作業系統把標楷體字體幹出來，然後放在該專案根目錄並命名為 `kaiu.ttf`
+    > 在編譯過程中會自動下載google標楷體，但是他的缺字很多，所以建議從 Windows 作業系統把標楷體字體幹出來，然後放在該專案根目錄並命名為 **`kaiu.ttf`**，在編譯過程會自動抓這個字體放進去。
 ## 資料夾結構
 
 ```bash
@@ -140,6 +140,7 @@ NYCU-Thesis-Template
 ├── Otherss/                                # * 貼心的提供一些文件
 │   └── 國立陽明交通大學博碩士學位論文格式規範_中英對照.pdf
 ├── .gitignore                              # git檔案忽略清單
+├── latexmkrc                               # 給overleaf看的編譯環境設定
 ├── Makefile                                # Linux makefile
 ├── WinMakefile                             # Winodws makefile
 ├── LICENSE                                 # 本專案授權
