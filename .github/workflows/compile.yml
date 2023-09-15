@@ -29,6 +29,7 @@ jobs:
       #   3. Modify the font name declared in the config.
       - name: Modify Chinese Font
         run: |
+          if [ ! -f ./kaiu.ttf ]; then wget -O kaiu.ttf https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.ttf ; fi
           echo -e "\n\\usepackage{fontspec}" >> Config/fonts.tex
           sed -i '/^\\zhFont/s/.*/\\zhFont{kaiu.ttf}/' Config/fonts.tex && cat Config/fonts.tex
       # This action is to install English font
