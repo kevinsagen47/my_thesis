@@ -54,8 +54,8 @@
 % Declare options for print modes: (default: draft)
 %   1. draft    : draft for defence
 %   2. final    : print version
-\newif\ifThesisModeDraft        
-\newif\ifThesisModeFinal        
+\newif\ifThesisModeDraft
+\newif\ifThesisModeFinal
 
 % Default mode for print mode
 \ThesisModeDrafttrue
@@ -64,7 +64,7 @@
 \DeclareOption{draft}{
     \ThesisModeDrafttrue
     \ThesisModeFinalfalse
-    
+
     \PackageWarningNoLine{\@ClassName}{Set \hbadness to 10000 in draft mode}
     \hbadness 10000
 }
@@ -77,8 +77,8 @@
 % Declare options for usage: (default: print)
 %   1. print    : output with cover page
 %   2. upload   : output without cover and auth page
-\newif\ifThesisUsagePrint               
-\newif\ifThesisUsageUpload              
+\newif\ifThesisUsagePrint
+\newif\ifThesisUsageUpload
 
 % Default mode for usage
 \ThesisUsagePrinttrue
@@ -239,7 +239,7 @@
 \newcommand\WaterMarkPicture{
     \begin{tikzpicture}
         \node[minimum width=\paperwidth, minimum height=\paperheight, opacity=0.15]
-            {\includegraphics[width=0.85\textwidth]{\@watermark}};
+        {\includegraphics[width=0.85\textwidth]{\@watermark}};
     \end{tikzpicture}
 }
 
@@ -247,12 +247,12 @@
 % 	\chapter{} implicity calls \cleardoublepage first, then starts to print chapter title and contents
 \let\oldcleardoublepage\cleardoublepage
 \renewcommand{\cleardoublepage}{
-	% Remove watermark if previous page is a blank even page in twoside mode.
-	\newpage
+    % Remove watermark if previous page is a blank even page in twoside mode.
+    \newpage
 
     \oldcleardoublepage
-	% Add watermark
-	\AddToShipoutPicture{\WaterMarkPicture}
+    % Add watermark
+    \AddToShipoutPicture{\WaterMarkPicture}
 }
 
 %======================================================================
@@ -375,8 +375,8 @@
 
     \thispagestyle{empty}
 
-	% Add watermark
-	\AddToShipoutPicture*{\WaterMarkPicture}
+    % Add watermark
+    \AddToShipoutPicture*{\WaterMarkPicture}
 
     \begin{center}
         \begin{doublespacing}
@@ -387,11 +387,11 @@
         \end{doublespacing}
 
         \vfill
-        
+
         \renewcommand{\arraystretch}{1.5}
         \fontsize{14}{14}{\selectfont
             \begin{tabularx}{\textwidth}{@{}p{2.5cm}@{}Xl@{}}
-                \makebox[2.5cm][s]{研究生：}   & \@zhStudentName \hfill Student：       & \@enStudentName      \\
+                \makebox[2.5cm][s]{研究生：}  & \@zhStudentName \hfill Student：     & \@enStudentName      \\
                 \makebox[2.5cm][s]{指導教授：} & \@zhAdvisorName\ 博士 \hfill Advisor： & Dr.\ \@enAdvisorName \\
             \end{tabularx}
         }
@@ -566,7 +566,7 @@
 }
 
 %%% LoT Generator %%%
-\def\makelot{    
+\def\makelot{
     \cleardoublepage
     \phantomsection
     \addcontentsline{toc}{chapter}{\textbf{表目錄}}
@@ -617,7 +617,7 @@
 
 %%% Bibliography Generator %%%
 \newcommand{\makeBib}{
-    
+
     % Add Bibliography to ToC
     \cleardoublepage
     \phantomsection
@@ -647,7 +647,7 @@
 
 %%% Appendix Page %%%
 \newenvironment{Appx}[1]{
-    
+
     % Increase appendix counter by one
     \stepcounter{appendix}
 

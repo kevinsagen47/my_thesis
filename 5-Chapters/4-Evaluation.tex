@@ -14,15 +14,15 @@
 
     \begin{tabular}{ c | l l }
 
-        \diagbox[innerwidth=6em,trim=l]{$\alpha$}{$\beta$} & \multicolumn{2}{c}{這一格透過\textbackslash multicolumn可以跨2欄並且置中}                          \\
+        \diagbox[innerwidth=6em,trim=l]{$\alpha$}{$\beta$} & \multicolumn{2}{c}{這一格透過\textbackslash multicolumn可以跨2欄並且置中}                   \\
         \hline\hline
-        \multirow{2}{*}{跨列A}                             & 這邊2欄的內容會靠左對齊                                                   & 而且不會平均分配       \\\cline{2-3}
-                                                           & 要平均分配的話                                                            & 請看下面的另外一個範例 \\\hline
-        \multirow{5}{*}{跨列B}                             & $\alpha  $                                                                & $\beta  $              \\\cline{2-3}
-                                                           & $\gamma  $                                                                & $\delta  $             \\\cline{2-3}
-                                                           & $\epsilon  $                                                              & $\varepsilon  $        \\\cline{2-3}
-                                                           & $\zeta  $                                                                 & $\eta  $               \\\cline{2-3}
-                                                           & $\theta  $                                                                & $\vartheta $           \\\hline
+        \multirow{2}{*}{跨列A}                               & 這邊2欄的內容會靠左對齊                                                 & 而且不會平均分配        \\\cline{2-3}
+                                                           & 要平均分配的話                                                      & 請看下面的另外一個範例     \\\hline
+        \multirow{5}{*}{跨列B}                               & $\alpha  $                                                   & $\beta  $       \\\cline{2-3}
+                                                           & $\gamma  $                                                   & $\delta  $      \\\cline{2-3}
+                                                           & $\epsilon  $                                                 & $\varepsilon  $ \\\cline{2-3}
+                                                           & $\zeta  $                                                    & $\eta  $        \\\cline{2-3}
+                                                           & $\theta  $                                                   & $\vartheta $    \\\hline
     \end{tabular}
 
     \renewcommand{\arraystretch}{1}
@@ -39,8 +39,8 @@
         \hline
         $\iota $   & $\kappa $ & 這一個欄位會自動被撐開到滿足表格總寬度 \\
         \hline\hline
-        $\lambda $ & $\mu $    & $\nu $                                 \\
-        $\xi $     & $o $      & $\pi $                                 \\
+        $\lambda $ & $\mu $    & $\nu $              \\
+        $\xi $     & $o $      & $\pi $              \\
         \hline
     \end{tabularx}
 
@@ -54,9 +54,9 @@
 
     \begin{tabular}{ c | c | C{10em}}
         $\varpi $   & $\rho  $      & 這是一個內容有點多的格子，它會自動換行而且置中 \\ \hline\hline
-        $\varrho  $ & $\sigma  $    & $\varsigma  $                                  \\\hline
-        $\tau  $    & $\upsilon   $ & $\phi   $                                      \\\hline
-        $\varphi $  & $\chi   $     & $\psi   $                                      \\\hline
+        $\varrho  $ & $\sigma  $    & $\varsigma  $           \\\hline
+        $\tau  $    & $\upsilon   $ & $\phi   $               \\\hline
+        $\varphi $  & $\chi   $     & $\psi   $               \\\hline
     \end{tabular}
 
     \renewcommand{\arraystretch}{1}
@@ -78,13 +78,13 @@
 
     \begin{tabularx}{\textwidth}{ c *{6}{|Y} }
         \multirow{3}{*}{$\omega  $} & \multicolumn{6}{c}{這邊底下的六個欄位會好好的平均分好}                                                                                                           \\\cline{2-7}
-                                    & \multicolumn{3}{c|}{$A  $}                             & \multicolumn{3}{c}{$B  $}                                                                               \\\cline{2-7}
-                                    & $\Gamma $                                              & $\varGamma $                       & $\Delta  $ & $\varDelta $              & $E $       & $Z $         \\
+                                    & \multicolumn{3}{c|}{$A  $}            & \multicolumn{3}{c}{$B  $}                                                                               \\\cline{2-7}
+                                    & $\Gamma $                             & $\varGamma $                       & $\Delta  $ & $\varDelta $              & $E $       & $Z $         \\
         \hline\hline
-        $H  $                       & $\Theta  $                                             & \multicolumn{2}{c|}{$\varTheta  $} & $I  $      & \multicolumn{2}{c}{$K  $}                             \\\hline
-        $\Lambda  $                 & $\varLambda  $                                         & $M  $                              & $N  $      & $\Xi  $                   & $\varXi  $ & $O  $        \\
+        $H  $                       & $\Theta  $                            & \multicolumn{2}{c|}{$\varTheta  $} & $I  $      & \multicolumn{2}{c}{$K  $}                             \\\hline
+        $\Lambda  $                 & $\varLambda  $                        & $M  $                              & $N  $      & $\Xi  $                   & $\varXi  $ & $O  $        \\
         \hline\hline
-        $\Pi  $                     & $\varPi $                                              & $P  $                              & $\Sigma  $ & $\varSigma  $             & $T  $      & $\Upsilon  $ \\\hline
+        $\Pi  $                     & $\varPi $                             & $P  $                              & $\Sigma  $ & $\varSigma  $             & $T  $      & $\Upsilon  $ \\\hline
     \end{tabularx}
     \renewcommand{\arraystretch}{1}
 
