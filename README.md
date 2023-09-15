@@ -41,11 +41,15 @@
 4. 阿如果只是想要看一下剛剛打的一行字會有甚麼效果的話，就只要使用`xelatex main.tex`編一次就可以看到了（link、目錄和編號都有可能會壞掉，但是東西出現的位置和順序基本上不會有差），這樣比較快。
 ### 輸出格式選項
 1.  可選格式
-    * 論文階段：
-        * 初稿/定稿 (**`draft`**/`final`)
-    * 論文使用模式：
-        * 印刷/圖書館上傳格式 (**`print`**/`upload`)
-2.  修改方式
+    * 論文階段：初稿/定稿 (**`draft`**/`final`)
+        * `draft` - 會幫你在封面加上"初稿"
+        * `final` - 就是正式版的東西，nothing special
+        * 不管哪一個都會有校徽浮水印，因為我不喜歡"DRAFT"浮水印，很醜。
+    * 論文使用模式：* 印刷/圖書館上傳格式 (**`print`**/`upload`)
+        * `print` - 輸出是指印出來的時候會包含的東西，所以會幫你把那一堆審定書、授權書都加上來。
+        * `upload` - 顧名思義，是拿來上傳圖書館用的，就不會有那一堆文件。
+        
+1.  修改方式
     * 修改 [`main.tex: 9`](main.tex#L9)
     * 將欲輸出的格式填入方框中以逗號隔開，如下例為「論文印刷定稿」。
         ```latex=9
@@ -137,16 +141,17 @@ NYCU-Thesis-Template
 │   ├── config.tex                          #   設定論文標題、作者資訊等
 │   └── fonts.tex                           #   字型設定 (請拜託填一下你的系統字體名稱)
 ├── Figures/                                # * 論文圖片 (可自行新增)
+│   ├── watermark.png                       #   校徽浮水印本人
 │   └── ...
 ├── Otherss/                                # * 貼心的提供一些文件
 │   └── 國立陽明交通大學博碩士學位論文格式規範_中英對照.pdf
 ├── .gitignore                              # git檔案忽略清單
-├── latexmkrc                               # 給overleaf看的編譯環境設定
-├── Makefile                                # Linux makefile
-├── WinMakefile                             # Winodws makefile
 ├── LICENSE                                 # 本專案授權
-├── main.tex                                # 論文主要檔案
-└── README.md                               # 說明文件 (本檔案)
+├── Makefile                                # Linux makefile
+├── README.md                               # 說明文件 (本檔案)
+├── WinMakefile                             # Winodws makefile
+├── latexmkrc                               # 給overleaf看的編譯環境設定
+└── main.tex                                # 論文主要檔案
 ```
 
 ## 工商服務時間
