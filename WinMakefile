@@ -2,10 +2,11 @@ ROOT_FILE		= main
 LATEX_BUILD_TOOL= xelatex 
 BIB_TOOL		= biber
 TEX_ARGS 		= -synctex=1 -shell-escape -interaction=nonstopmode
+BIB_ARGS		= --winunicode
 
 run:
 	$(LATEX_BUILD_TOOL) $(TEX_ARGS) $(ROOT_FILE).tex 
-	$(BIB_TOOL)	$(ROOT_FILE)
+	$(BIB_TOOL)	$(ROOT_FILE) $(BIB_ARGS)
 	$(LATEX_BUILD_TOOL) $(TEX_ARGS) $(ROOT_FILE).tex 
 	$(LATEX_BUILD_TOOL) $(TEX_ARGS) $(ROOT_FILE).tex 
 	
