@@ -438,10 +438,11 @@
 
 %%% Authorization Page %%%
 \newcommand{\makeAuthPage}[1]{
-    % include the authorization page only when it's a final edtion and is used to print out
+    % include the authorization page only when it's a final edition and is used to print out
     \ifThesisModeFinal
         \ifThesisUsagePrint
-            \includepdf{#1}
+            \ClearShipoutPicture
+            \includepdf[pages=-]{#1}
         \fi
     \fi
 }
@@ -450,10 +451,11 @@
 
 %%% Approval Page %%%
 \newcommand{\makeApprovalPage}[1]{
-    % include the approval page only when it's a final edtion and is used to print out
+    % include the approval page only when it's a final edition and is used to print out
     \ifThesisModeFinal
         \ifThesisUsagePrint
-            \includepdf{#1}
+            \ClearShipoutPicture
+            \includepdf[pages=-]{#1}
         \fi
     \fi
 }
@@ -678,7 +680,8 @@
 \newcommand{\makeCoAuthorStatementPage}[1]{
     % include the statement page only when it's a final edition
     \ifThesisModeFinal
-        \includepdf{#1}
+        \ClearShipoutPicture
+        \includepdf[pages=-]{#1}
     \fi
 }
 
