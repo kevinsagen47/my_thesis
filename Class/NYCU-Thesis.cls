@@ -38,6 +38,7 @@
 %       6.9 - Chapter Contents Layout
 %       6.10 - Reference Layout
 %       6.11 - Appendices Layout
+%       6.12 - Co-author Contribution Statement Layout
 %   7.0 - Utility Command / Tools
 %----------------------------------------------------------------------
 
@@ -671,8 +672,18 @@
     \renewcommand\thesection{\thechapter.\arabic{section}}
 }
 
+%====================  6.12 Co-author Contribution Statement Page Layout  =================
+
+%%% Co-author Contribution Statement Page %%%
+\newcommand{\makeCoAuthorStatementPage}[1]{
+    % include the statement page only when it's a final edition
+    \ifThesisModeFinal
+        \includepdf{#1}
+    \fi
+}
+
 %======================================================================
-% 6.0 Utility Command / Tools
+% 7.0 Utility Command / Tools
 %======================================================================
 
 % Horizon Line in Algorithm Block

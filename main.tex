@@ -36,6 +36,7 @@
 % https://aa.nycu.edu.tw/reg/regulation/ 
 % 底下的 博碩士學位論文格式規範(中、英文說明)。
 % 窩有留一份在Others裡面
+% 最近一次更新是Sep. 16th, 2023
 
 % 1. 封面頁
 \makeCoverPage
@@ -120,7 +121,18 @@
 \input{7-Appendices/1-Data}
 \input{7-Appendices/2-Spec}
 
-% 15. 封底
+% 15.著作彙編之學位論文資訊及彙編學術著作之共同作者貢獻聲明書
+%       - 學校新規定需要加入的文件
+%           因為我的時代不需要這種東西，所以我也不是很確定喇
+%           但是看起來就是如果有需要聲明的話，不管上傳或是印刷都需要附上這一張
+%           所以如果有寫這一行的話，只要是定稿都會有這一份
+%       - 這邊有附一個學校提供的公版：
+%           https://aa.nycu.edu.tw/reg/regulation/
+%       - 如果有多份聲明書需加入，如同時有中英文兩份之類的，
+%           請先合併成一個PDF然後在這邊指定路徑
+%       - 如果不需要，就請將這一行註解。
+\makeCoAuthorStatementPage{8-CoAuthor/1-CoAuthor.pdf}
+% 16. 封底
 %       - 這一行就是窩寫開心的，Yeah。
 
 % 論文結束喇
