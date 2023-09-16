@@ -3,7 +3,8 @@
 * 此專案為「國立陽明交通大學」「中文碩士」論文模板。
 * 本人論文已上傳圖書館通過審核，請放心服用。
     > 除了「附錄」以外。請查閱[「免責聲明」](#一些免責聲明)段落。
-* 為了方便閱讀和改寫，大部分的註解和說明都已經是寫中文了，麻煩可以看一下再動筆。
+* 為了方便閱讀和改寫，大部分的註解和說明都已經是寫中文了，可以看一下再動筆。
+* 已更新學校提供之範本與相關格式規範（Sep. 16th, 2023）
 ## Template編譯與輸出方法
 
 ### 編譯方法與順序
@@ -42,15 +43,15 @@
 ### 輸出格式選項
 1.  可選格式
     * 論文階段：初稿/定稿 (**`draft`**/`final`)
-        * `draft` - 會幫你在封面加上"初稿"
+        * `draft` - 會幫你在封面加上「初稿」
         * `final` - 就是正式版的東西，nothing special
-        * 不管哪一個都會有校徽浮水印，因為我不喜歡"DRAFT"浮水印，很醜。
+        * 不管哪一個都會有校徽浮水印，因為我不喜歡「DRAFT」浮水印，很醜。
     * 論文使用模式：* 印刷/圖書館上傳格式 (**`print`**/`upload`)
         * `print` - 輸出是指印出來的時候會包含的東西，所以會幫你把那一堆審定書、授權書都加上來。
         * `upload` - 顧名思義，是拿來上傳圖書館用的，就不會有那一堆文件。
         
 1.  修改方式
-    * 修改 [`main.tex: 9`](main.tex#L9)
+    * 修改 [`main.tex: 14`](main.tex#L14)
     * 將欲輸出的格式填入方框中以逗號隔開，如下例為「論文印刷定稿」。
         ```latex=9
         \documentclass[final, print]{Class/NYCU-Thesis}
@@ -99,59 +100,69 @@
 ### 我不知道怎麼分類
 * 有寫個GitHub Action啦，只要將專案Push Tag到GitHub就會觸發（Tag名稱須為`v*.*.*`），請GitHub幫你編譯並將編完的PDF發到Release。
     > 在編譯過程中會自動下載google標楷體，但是他的缺字很多，所以建議從 Windows 作業系統把標楷體字體幹出來，然後放在該專案根目錄並命名為 **`kaiu.ttf`**，在編譯過程會自動抓這個字體放進去。
+* 本人是2021年畢業的，有些格式規範是後面新加的，所以這邊提供的範本可能不一定會跟上最新的規範。最近（Sep. 16th, 2023）因為比較閒，又剛好有貢獻者發了PR，所以就來順便更新一下，發現最近剛好要求要加入一份新的文件「著作彙編之學位論文資訊及彙編學術著作之共同作者貢獻聲明書」，就把它放進來啦。但是小弟也不會沒事在那邊看最新規範，所以請各位使用者還是要一下最新規範。
+
 ## 資料夾結構
 
 ```bash
 NYCU-Thesis-Template
-├── 0-Spine/                                # 0-書脊（書背）（就是論文印出來後面的那一條啦）
-│   ├── 書背範本_學校提供.pdf               #   學校提供的範本
-│   ├── 資科工碩書脊範本.pdf                #   資科工碩提供的範本
-├── 1-Authorization/                        # 1-授權書們 (將論文上傳至圖書館通過審核後，可以拿到的文件們)
-│   ├── 1-Authorization.pdf                 #   將底下兩份文件合併後的檔案（可以在main.tex中提供給模板使用）
-│   ├── Authorization.pdf                   #   電子檔著作權授權書（範本）
-│   └── PostponePublicationApplication.pdf  #   延後公開申請書（範本）
-├── 2-Approval/                             # 2-論文審定同意書書 (在口試當天要給口委簽名的一份文件)
-│   ├── 1-Approvale.pdf                     #   最後需要放進論文印出來的合併檔
-│   ├── Approval_en.pdf                     #   論文審定書（英文範本）
-│   ├── Approval_zh.pdf                     #   論文審定書（中文範本）
-│   ├── 國立陽明交通大學論文審定同意書.docx       #   論文審定書（中文範本）
-│   ├── 國立陽明交通大學論文審定同意書.odt        #   論文審定書（中文範本）
-│   ├── 國立陽明交通大學論文審定同意書英文版.docx #   論文審定書（英文範本）
-│   └── 國立陽明交通大學論文審定同意書英文版.odt  #   論文審定書（英文範本）
-├── 3-Acknowledgement/                      # 3-誌謝
-│   ├── 1-Acknowledgement.tex               #   誌謝，模板有提供`acknowledgement` enviroment可以使用。
-├── 4-Abstracts/                            # 4-摘要們
-│   ├── 1-Abstract_zh.tex                   #   中文摘要，模板有提供`zhAbstract` enviroment可以使用。
-│   └── 2-Abstract_en.tex                   #   英文摘要，模板有提供`enAbstract` enviroment可以使用。
-├── 5-Chapters/                             # 5-論文各節內容 (可自行新增)
-│   ├── 1-Introduction.tex                  #   這一份文件有提供切分段落的方法
-│   ├── 2-RelatedWorks.tex                  #   這一份文件有提供如何\cite別人的文獻的方法
-│   ├── 3-Design.tex                        #   這一份文件有提供如何在論文中插入公式和pseudo code段落的方法
-│   ├── 4-Evaluation.tex                    #   這一份文件有提供如何插入表格和圖片的方法
-│   └── 5-Conclusion.tex                    #   這一份文件有提供如何寫註腳的方法
-├── 6-Reference/                            # 6-參考文獻
-│   └── thesis.bib                          #   參考文獻檔，有提供一些常見的文獻引入範例
-├── 7-Appx/                                 # 7-附錄 (可自行新增)
-│   ├── 1-Data.tex                          #   就是一個附錄，模板有提供`Appx` environment可以使用。
-│   └── 1-Spec.tex                                     
-├── Class/                                  # * 論文模板 (如果沒事不要亂動)
-│   ├── NYCU-Thesis.cls                     #   國立陽明交通大學碩士中文論文模板
-│   └── xCJKnumb.sty                        #   中文套件
-├── Config/                                 # * 相關參數設定
-│   ├── config.tex                          #   設定論文標題、作者資訊等
-│   └── fonts.tex                           #   字型設定 (請拜託填一下你的系統字體名稱)
-├── Figures/                                # * 論文圖片 (可自行新增)
-│   ├── watermark.png                       #   校徽浮水印本人
+├── 0-Spine/                                    # 0-書脊（書背）（就是論文印出來後面的那一條啦）
+│   ├── 書背範本_學校提供.pdf                   #   學校提供的範本
+│   ├── 資科工碩書脊範本.pdf                    #   資科工碩提供的範本
+├── 1-Authorization/                            # 1-授權書們 (將論文上傳至圖書館通過審核後，可以拿到的文件們)
+│   ├── 1-Authorization.pdf                     #   將底下兩份文件合併後的檔案（可以在main.tex中提供給模板使用）
+│   ├── Authorization.pdf                       #   電子檔著作權授權書（範本）
+│   └── PostponePublicationApplication.pdf       #   延後公開申請書（範本）
+├── 2-Approval/                                  # 2-論文審定同意書書 (在口試當天要給口委簽名的一份文件)
+│   ├── 1-Approvale.pdf                          #   最後需要放進論文印出來的合併檔
+│   ├── Approval_en.pdf                          #   論文審定書（英文範本）
+│   ├── Approval_zh.pdf                          #   論文審定書（中文範本）
+│   ├── 國立陽明交通大學論文審定同意書_中文版_110.07版.docx  #   論文審定書（中文範本）
+│   ├── 國立陽明交通大學論文審定同意書_中文版_110.07版.odt   #   論文審定書（中文範本）
+│   ├── 國立陽明交通大學論文審定同意書_英文版_110.07版.docx  #   論文審定書（英文範本）
+│   └── 國立陽明交通大學論文審定同意書_英文版_110.07版.odt   #   論文審定書（英文範本）
+├── 3-Acknowledgement/                          # 3-誌謝
+│   ├── 1-Acknowledgement.tex                   #   誌謝，模板有提供`acknowledgement` enviroment可以使用。
+├── 4-Abstracts/                                # 4-摘要們
+│   ├── 1-Abstract_zh.tex                       #   中文摘要，模板有提供`zhAbstract` enviroment可以使用。
+│   └── 2-Abstract_en.tex                       #   英文摘要，模板有提供`enAbstract` enviroment可以使用。
+├── 5-Chapters/                                 # 5-論文各節內容 (可自行新增)
+│   ├── 1-Introduction.tex                      #   這一份文件有提供切分段落的方法
+│   ├── 2-RelatedWorks.tex                      #   這一份文件有提供如何\cite別人的文獻的方法
+│   ├── 3-Design.tex                            #   這一份文件有提供如何在論文中插入公式和pseudo code段落的方法
+│   ├── 4-Evaluation.tex                        #   這一份文件有提供如何插入表格和圖片的方法
+│   └── 5-Conclusion.tex                        #   這一份文件有提供如何寫註腳的方法
+├── 6-Reference/                                # 6-參考文獻
+│   └── thesis.bib                              #   參考文獻檔，有提供一些常見的文獻引入範例
+├── 7-Appx/                                     # 7-附錄 (可自行新增)
+│   ├── 1-Data.tex                              #   就是一個附錄，模板有提供`Appx` environment可以使用。
+│   └── 1-Spec.tex                               
+├── 8-CoAuthor/                                  # 8-著作彙編之學位論文資訊及彙編學術著作之共同作者貢獻聲明書
+│   ├── 1-CoAuthor.pdf                           #   最後需要放進論文印出來的合併檔
+│   ├── CoAuthor_en.pdf                          #   貢獻聲明書（英文範本）
+│   ├── CoAuthor_zh.pdf                          #   貢獻聲明書（中文範本）
+│   ├── 著作彙編之學位論文資訊及彙編學術著作之共同作者貢獻聲明書_中文版_20230721.docx  #   貢獻聲明書（中文範本）
+│   ├── 著作彙編之學位論文資訊及彙編學術著作之共同作者貢獻聲明書_中文版_20230721.odt   #   貢獻聲明書（中文範本）
+│   ├── 著作彙編之學位論文資訊及彙編學術著作之共同作者貢獻聲明書_英文版_20230721.docx  #   貢獻聲明書（英文範本）
+│   └── 著作彙編之學位論文資訊及彙編學術著作之共同作者貢獻聲明書_英文版_20230721.odt   #   貢獻聲明書（英文範本）      
+├── Class/                                      # * 論文模板 (如果沒事不要亂動)
+│   ├── NYCU-Thesis.cls                         #   國立陽明交通大學碩士中文論文模板
+│   └── xCJKnumb.sty                            #   中文套件
+├── Config/                                     # * 相關參數設定
+│   ├── config.tex                              #   設定論文標題、作者資訊等
+│   └── fonts.tex                               #   字型設定 (請拜託填一下你的系統字體名稱)
+├── Figures/                                    # * 論文圖片 (可自行新增)
+│   ├── watermark.png                           #   校徽浮水印本人
 │   └── ...
-├── Otherss/                                # * 貼心的提供一些文件
+├── Otherss/                                    # * 貼心的提供一些文件
 │   └── 國立陽明交通大學博碩士學位論文格式規範_中英對照.pdf
-├── .gitignore                              # git檔案忽略清單
-├── LICENSE                                 # 本專案授權
-├── Makefile                                # Linux makefile
-├── README.md                               # 說明文件 (本檔案)
-├── WinMakefile                             # Winodws makefile
-├── latexmkrc                               # 給overleaf看的編譯環境設定
-└── main.tex                                # 論文主要檔案
+├── .gitignore                                  # git檔案忽略清單
+├── LICENSE                                     # 本專案授權
+├── Makefile                                    # Linux makefile
+├── README.md                                   # 說明文件 (本檔案)
+├── WinMakefile                                 # Winodws makefile
+├── latexmkrc                                   # 給overleaf看的編譯環境設定
+└── main.tex                                    # 論文主要檔案
 ```
 
 ## 工商服務時間
@@ -170,6 +181,10 @@ NYCU-Thesis-Template
 * 此模板修改自原[交大模板](https://github.com/yungshenglu/NCTU-Thesis-Template)
     * 原作者：[yungshenglu](https://github.com/yungshenglu)
     * 原模板專案：[yungshenglu/NCTU-Thesis-Template](https://github.com/yungshenglu/NCTU-Thesis-Template)
+
+## Contribution
+* 如果因為使用了這份模板有被擋格式，或是有甚麼最新的文件需要夾進論文裡，歡迎發Issue，我有空看到就會更新，或是更歡迎發PR造福後面的學弟妹。
+* 或是也可以發個Issue，告訴大家你用了這份Template成功畢業惹。
 
 ## License
 
