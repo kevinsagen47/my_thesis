@@ -581,7 +581,7 @@
 %%% Chapter Title Content %%%
 \titleformat{\chapter}[block]
 {\centering\Huge\bfseries}
-{第\xCJKnumber{\thechapter}章}
+{Chapter \xCJKnumber{\thechapter}}
 {1em}
 {}
 
@@ -638,13 +638,13 @@
 % new title show in toc
 \renewcommand{\addappheadtotoc}[1]{
     \phantomsection
-    \addcontentsline{toc}{chapter}{\texorpdfstring{附錄\xCJKnumber{\theappendix}、#1}{#1}}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{Attachment\xCJKnumber{\theappendix}、#1}{#1}}
 }
 
 % new title for appendix
 \renewcommand{\appendixname}[1]{
     \begin{flushleft}
-        \LARGE\bfseries{附錄\xCJKnumber{\theappendix}、#1}
+        \LARGE\bfseries{Appendix\xCJKnumber{\theappendix}、#1}
     \end{flushleft}
 }
 

@@ -11,7 +11,7 @@
 %   用途：[print] | upload （輸出 | 上傳）
 %        print - 輸出是指印出來的時候會包含的東西，所以會幫你把那一堆審定書、授權書都加上來。
 %        upload - 是拿來上傳圖書館用的，就不會有那一堆文件。
-\documentclass[draft, print]{Class/NYCU-Thesis}
+\documentclass[final, print]{Class/NYCU-Thesis}
 
 %-----------------------------------------------------------------------------------------------------
 % 參數設定們
@@ -69,10 +69,8 @@
 %           請先合併成一個PDF然後在這邊指定路徑
 \makeApprovalPage{2-Approval/1-Approval.pdf}
 
-% 6. 誌謝
-%       依據學校的規定，可依個人意願自行決定是否撰寫，以不超過一頁為原則。
-%       如果不想寫，就請將這一行註解。
-\input{3-Acknowledgement/1-Acknowledgement}
+% 6. Acknoledgement
+%\input{3-Acknowledgement/1-Acknowledgement}<----------------------
 
 % 請不要動這一行
 % 這一行代表開始編頁碼，從這一行以後開始的頁面會編羅馬數字（i, ii, iii, ...）
@@ -80,12 +78,12 @@
 \frontmatter
 
 % 7. 中文摘要
-\input{4-Abstracts/1-Abstract_zh}
+%\input{4-Abstracts/1-Abstract_zh}
 
 % 8. 英文摘要
 \input{4-Abstracts/2-Abstract_en}
 
-% 9. 目錄
+% 9. 目錄 Table of contents
 \maketoc
 
 % 10. 圖目錄
@@ -99,25 +97,24 @@
 % 請不要動這一行
 % 這一行代表開始編頁碼，從這一行以後開始的頁面會編阿拉伯數字（1, 2, 3, ...）
 % 依據學校的規定，論文第一章以至附錄，均以 1，2，3…等阿拉伯數字連續編頁。
+% Please don't touch this line
+% This line represents the beginning of page numbering. Pages starting from this line will be numbered with Arabic numerals (1, 2, 3, ...)
+% According to the school's regulations, the first chapter of the paper and the appendix are consecutively numbered with Arabic numerals such as 1, 2, 3... etc.
+
 \mainmatter
 
-% 12. 論文正文
-%       - 各章節內容，窩有在裡面附一些常用的Sample。
-%           如果有需要，可隨意增減檔案。
+% 12.
 \input{5-Chapters/1-Introduction}
 \input{5-Chapters/2-RelatedWorks}
 \input{5-Chapters/3-Design}
 \input{5-Chapters/4-Evaluation}
 \input{5-Chapters/5-Conclusion}
 
-% 13. 參考文獻
+% 13. sources
 \makeBib
 
 % 14. 附錄
-%       - ㄅ歉，窩的論文沒有寫到附錄的部分，所以窩不是很確定這邊的格式該怎麼設。
-%           但學校的規定又偏鬆散。所以窩就提供了一個窩的設計給各位參考一下
-%       - 底下的兩個檔案裡面有sample說要怎麼使用，我是設計了一個新的environment，
-%           所以如果覺得很醜或是不想用的話，就直接去用其他套件就好了，應該不會有衝突。吧。
+%appendix
 \input{7-Appendices/1-Data}
 \input{7-Appendices/2-Spec}
 
@@ -131,9 +128,17 @@
 %       - 如果有多份聲明書需加入，如同時有中英文兩份之類的，
 %           請先合併成一個PDF然後在這邊指定路徑
 %       - 如果不需要，就請將這一行註解。
+% 15. Dissertation information in the compilation of works and statement of contribution of co-authors in the compilation of academic works
+% - Documents that need to be added to the new school regulations
+% Because I didn’t need this kind of thing in my time, so I’m not sure.
+% But it seems that if there is a need to declare, this one needs to be attached whether uploading or printing.
+% So if this line is written, this copy will be included in the final draft.
+% - Here is a public version provided by the school:
+% https://aa.nycu.edu.tw/reg/regulation/
+% - If there are multiple declarations that need to be added, such as two copies in Chinese and English, etc.,
+% Please merge into a PDF first and then specify the path here
+% - If not needed, please comment this line.
 \makeCoAuthorStatementPage{8-CoAuthor/1-CoAuthor.pdf}
-% 16. 封底
-%       - 這一行就是窩寫開心的，Yeah。
+% 16. back cover
 
-% 論文結束喇
 \end{document}
