@@ -1,0 +1,40 @@
+
+\chapter{Methodology}\label{chap:related_works}
+
+\section{Overview}\label{sec:2-overview}
+Overview block diagram of the project
+
+\section{Configuration}\label{sec:2-spec}
+The camera used in this experiment is a Realsense D435i, while the mmWave radar utilized is the AWR1843boost.
+Both of these sensors are housed within a custom 3D-printed enclosure.
+
+\section{Calibration}\label{sec:2-calibration}
+\subsection*{Camera Calibration}
+To accurately map the monocular camera's image coordinates to real-world coordinates, calibration of intrinsic and extrinsic is required.
+Using tools provided by <MonocularCalibration> in ROS.%https://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration
+<insert figure of calibration>
+
+\subsection*{Radar-Camera Calibration}
+In order to achieve accurate sensor fusion, it is essential to conduct proper calibration of the two sensors. 
+For this purpose, a corner reflector is employed, primarily due to its strong radar reflection characteristics. 
+Additionally, it offers the advantage of appearing as a single point in both radar and camera data, effectively reducing ambiguity.
+
+As illustrated in Figure <insert figure>, data points from both radar 
+and camera coordinates can be collected with the corner reflector positioned at various locations.
+
+
+
+\section{mmWave Radar Data Processing}\label{sec:2-kd_tree}
+explain about kd-tree
+
+\section{Image Recognition and Tracking}\label{sec:2-img_recognition}
+explain about yolov3 and deepsort
+
+\section{Kalman Filter}\label{sec:2-kalman_filter}
+
+
+\section{Data Association}\label{sec:2-association}
+how to determine if cluster and image belong to the same object
+
+\section{Bayes Fusion \small(to be done)}\label{sec:2-bayes_fusion}
+Bayes fusion kalman filter 

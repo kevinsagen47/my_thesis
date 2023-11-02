@@ -52,7 +52,7 @@
 %           就會拿到填好的各種授權書，所以這是輸出且為定稿才會出現的東西。
 %       - 如果有多份授權書需加入，如授權書與延後公開申請書，
 %           請先合併成一個PDF然後在這邊指定路徑。
-\makeAuthPage{1-Authorization/1-Authorization.pdf}
+%\makeAuthPage{1-Authorization/1-Authorization.pdf}<----------------------------------------------
 
 % 4. 博士論文指導教授推薦書(碩士論文免附)
 %       - 窩只有碩士畢業，所以窩沒有這個東西R。
@@ -67,10 +67,10 @@
 %           這個也是口試完才會有完整簽名的東西，所以初稿也不會出現這頁
 %       - 如果有多份審定書需加入，如同時有中英文兩份之類的，
 %           請先合併成一個PDF然後在這邊指定路徑
-\makeApprovalPage{2-Approval/1-Approval.pdf}
+%\makeApprovalPage{2-Approval/1-Approval.pdf}<----------------------------------------------
 
 % 6. Acknoledgement
-%\input{3-Acknowledgement/1-Acknowledgement}<----------------------
+%\input{3-Acknowledgement/1-Acknowledgement}<-------------------------------------------------------------
 
 % 請不要動這一行
 % 這一行代表開始編頁碼，從這一行以後開始的頁面會編羅馬數字（i, ii, iii, ...）
@@ -78,7 +78,7 @@
 \frontmatter
 
 % 7. 中文摘要
-%\input{4-Abstracts/1-Abstract_zh}
+%\input{4-Abstracts/1-Abstract_zh}<--------------------------------------------------------
 
 % 8. 英文摘要
 \input{4-Abstracts/2-Abstract_en}
@@ -105,8 +105,9 @@
 
 % 12.
 \input{5-Chapters/1-Introduction}
-\input{5-Chapters/2-RelatedWorks}
-\input{5-Chapters/3-Design}
+\input{5-Chapters/2-Methodology}
+%\input{5-Chapters/2-RelatedWorks}
+%\input{5-Chapters/3-Design}
 \input{5-Chapters/4-Evaluation}
 \input{5-Chapters/5-Conclusion}
 
@@ -115,8 +116,8 @@
 
 % 14. 附錄
 %appendix
-\input{7-Appendices/1-Data}
-\input{7-Appendices/2-Spec}
+%\input{7-Appendices/1-Data}
+%\input{7-Appendices/2-Spec}
 
 % 15.著作彙編之學位論文資訊及彙編學術著作之共同作者貢獻聲明書
 %       - 學校新規定需要加入的文件
@@ -138,7 +139,10 @@
 % - If there are multiple declarations that need to be added, such as two copies in Chinese and English, etc.,
 % Please merge into a PDF first and then specify the path here
 % - If not needed, please comment this line.
-\makeCoAuthorStatementPage{8-CoAuthor/1-CoAuthor.pdf}
+
+
+%\makeCoAuthorStatementPage{8-CoAuthor/1-CoAuthor.pdf}<-------------------------------------------------
+
 % 16. back cover
 
 \end{document}

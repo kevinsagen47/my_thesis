@@ -543,9 +543,9 @@
 \renewcommand{\cftbeforeloftitleskip}{0in}
 
 %%% Title for these tables %%%
-\renewcommand{\contentsname}{\makebox[3em][s]{目錄}}
-\renewcommand{\listfigurename}{\makebox[4em][s]{圖目錄}}
-\renewcommand{\listtablename}{\makebox[4em][s]{表目錄}}
+\renewcommand{\contentsname}{\makebox[3em][s]{Contents}}
+\renewcommand{\listfigurename}{\makebox[4em][s]{List of Figures}}
+\renewcommand{\listtablename}{\makebox[4em][s]{List of Tables}}
 
 %%% Numbering label %%%
 \renewcommand{\tablename}{表}
@@ -556,7 +556,7 @@
 \def\maketoc{
     \cleardoublepage
     \phantomsection
-    \addcontentsline{toc}{chapter}{\textbf{目錄}}
+    \addcontentsline{toc}{chapter}{\textbf{Contents}}
     \tableofcontents
 }
 
@@ -564,7 +564,7 @@
 \def\makelof{
     \cleardoublepage
     \phantomsection
-    \addcontentsline{toc}{chapter}{\textbf{圖目錄}}
+    \addcontentsline{toc}{chapter}{\textbf{List of Figures}}
     \listoffigures
 }
 
@@ -572,7 +572,7 @@
 \def\makelot{
     \cleardoublepage
     \phantomsection
-    \addcontentsline{toc}{chapter}{\textbf{表目錄}}
+    \addcontentsline{toc}{chapter}{\textbf{List of Tables}}
     \listoftables
 }
 
@@ -624,10 +624,10 @@
     % Add Bibliography to ToC
     \cleardoublepage
     \phantomsection
-    \addcontentsline{toc}{chapter}{\textbf{參考文獻}}
+    \addcontentsline{toc}{chapter}{\textbf{References}}
 
     % Print bib and set its title
-    \printbibliography[title={\makebox[5.5em][s]{參考文獻}}]
+    \printbibliography[title={\makebox[5.5em][s]{References}}]
 }
 
 %=================================  6.11 Appendices Layout  ================================
