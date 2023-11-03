@@ -548,8 +548,8 @@
 \renewcommand{\listtablename}{\makebox[4em][s]{List of Tables}}
 
 %%% Numbering label %%%
-\renewcommand{\tablename}{表}
-\renewcommand{\figurename}{圖}
+\renewcommand{\tablename}{Table}
+\renewcommand{\figurename}{Figure}
 \DeclareCaptionLabelSeparator{colon}{：}    % Re-defined colon in caption to fullwidth form
 
 %%% ToC Generator %%%
@@ -611,7 +611,7 @@
 
 % Custom Equation Label
 \numberwithin{equation}{chapter} % This line resets equation numbering when starting a new chapter.
-\renewcommand{\theequation}{式 \thechapter.\arabic{equation}} % This line add "式" in front of equation numbering.
+\renewcommand{\theequation}{ \thechapter.\arabic{equation}} % This line add "式" in front of equation numbering.
 
 % Set default figures placement
 \graphicspath{{Figures/}}
