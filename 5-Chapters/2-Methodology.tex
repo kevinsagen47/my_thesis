@@ -81,7 +81,9 @@ explain about yolov3 and deepsort
 \section{Radar-camera Data Association}\label{sec:2-association}
 how to determine if cluster and image belong to the same object
 resolution of theta 0.047
-
+\begin{equation}\label{equ:angular_resolution}
+    \Delta \theta= \frac{c_0}{f_c d N_R N_{TX} \cos(\theta _i)}
+\end{equation}
 \section{Bayes Fusion}\label{sec:2-bayes_fusion}
 Bayes fusion kalman filter 
 
@@ -91,17 +93,17 @@ The state matrix used in this Kalman Filter is from the single sensor maneuverin
 It has four elements and is defined with position and velocity, which projects onto the x-axis and y-axis:
 
 \begin{equation}\label{equ:state_eq}
-\mathbf{x} = 
-\begin{bmatrix} 
-p \\ 
-v 
-\end{bmatrix} = 
-\begin{bmatrix} 
-p_x \\ 
-p_y \\ 
-v_x \\ 
-v_y 
-\end{bmatrix}
+    \mathbf{x} = 
+        \begin{bmatrix} 
+        p \\ 
+        v 
+        \end{bmatrix} = 
+        \begin{bmatrix} 
+        p_x \\ 
+        p_y \\ 
+        v_x \\ 
+        v_y 
+        \end{bmatrix}
 \end{equation}
 
 \begin{equation}\label{equ:predict_eq}

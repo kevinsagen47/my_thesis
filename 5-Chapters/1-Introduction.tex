@@ -11,22 +11,37 @@ At the time, it was evident that existing obstacle-tracking and avoidance method
 The solutions in use were either incredibly unreliable or prohibitively expensive.
 For instance, cameras proved to be excellent for object tracking but struggled when it came to avoiding obstacles due to their limited range perception capabilities.
 Conversely, LiDAR excelled at obstacle detection, yet its reliability suffered in adverse weather conditions, and the associated costs could be exorbitant. 
-Radar, while promising, also had its limitations, characterized by sparse and noisy data, making the identification and tracking of objects a formidable task.
+Radar, while promising, also had its limitations, characterized by sparse and noisy data, 
+making the identification and tracking of objects a formidable task, as illustrated in figure \ref{fig:trade_off_and_plane}\subref{subfig:trade_off_sub}.
 
 The concept of fusing radar and camera technologies emerged as a promising approach.
 In theory, this fusion could provide accurate object tracking while maintaining the capability to avoid obstacles with great range accuracy. 
 Nevertheless, this approach presents several challenges. 
-Notably, radar and camera data exist in different planes, as illustrated in Figure <figure plane>.
+Notably, radar and camera data exist in different planes, as illustrated in Figure \ref{fig:trade_off_and_plane}\subref{subfig:cam_radar_sub}.
 This thesis shall explore a solution that can effectively process the raw data from both sensors 
 and fuse them to create an ultimate sensor, applicable across a wide spectrum of use cases
 
-
-\begin{figure}[hpbt]
+\begin{figure}[hbpt]
     \centering
-    \includegraphics[width=5cm]{Figures/trade_off.png}%\textwidth
-    \caption{Charts of radar and camera characteristics \cite{Yao_2023}}
-    \label{fig:trade_off}
+    \begin{subfigure}{0.25\linewidth}
+        \includegraphics[width=\textwidth]{Figures/trade_off.png}
+        \caption{Radar Corner Reflector}
+        \label{subfig:trade_off_sub}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.25\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/cam_radar_coordinates.png}
+        \caption{Camera-corner reflector calibration}
+        \label{subfig:cam_radar_sub}
+    \end{subfigure}
+
+    \caption{Radar camera calibration}
+    \label{fig:trade_off_and_plane}
 \end{figure}
+
+
+
 
 %\subsection{研究動機}
 %大跑前，照石戰呢：好過沒速朋。
