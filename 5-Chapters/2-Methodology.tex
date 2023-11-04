@@ -82,10 +82,60 @@ explain about yolov3 and deepsort
 how to determine if cluster and image belong to the same object
 resolution of theta 0.047
 \begin{equation}\label{equ:angular_resolution}
-    \Delta \theta= \frac{c_0}{f_c d N_R N_{TX} \cos(\theta _i)}
+    \Delta \theta= \frac{c_0}{f_c d N_{RX} N_{TX} \cos(\theta _i)}
 \end{equation}
+where
+\begin{align*}
+    f_c & = \text{center frequency} \\
+    \lambda & = \text{carrier signal wavelength} \\
+    d & =  \lambda/2 \\
+    N_{RX} & = \text{Number of receiving antenna}\\
+    N_{TX}& = \text{Number of transferring antenna}\\
+    \theta _i &= \text{angle of interest}
+\end{align*}
+
 \section{Bayes Fusion}\label{sec:2-bayes_fusion}
+
 Bayes fusion kalman filter 
+\begin{equation}\label{equ:bayes1}
+    P_{prob}(\frac{P}{X})=
+    \frac
+    {e \frac{−(P−X)^T R^{−1}(P−X)}{2}}
+    {2 \pi R^(0.5)}
+\end{equation}
+
+\begin{equation}\label{equ:bayes1}
+P
+\end{equation}
+
+\begin{equation}\label{equ:bayes2}
+    P
+\end{equation}
+
+\begin{equation}\label{equ:bayes3}
+    \frac{1}{R}=\frac{1}{R_1}+\frac{1}{R_2}
+\end{equation}
+\begin{equation}\label{equ:bayes4}
+    y
+\end{equation}
+\begin{equation}\label{equ:bayes5}
+    y
+\end{equation}
+
+\begin{equation}\label{equ:2-radar_R}
+    \mathbf{R}_{radar} = 
+    \begin{bmatrix}
+        \sigma_{radar_x}^2 & 0 \\
+        0 & \sigma_{radar_y}^2 \\
+      \end{bmatrix}
+\end{equation}
+\begin{equation}\label{equ:2-R_cam}
+    \mathbf{R}_{cam} = 
+    \begin{bmatrix}
+        \sigma_{cam_u}^2
+    \end{bmatrix}
+\end{equation}
+
 
 \section{Multimodal Kalman Filter}\label{sec:2-kalman_filter}
 \subsection{Predict}\label{sec:2-predict}
@@ -105,14 +155,92 @@ It has four elements and is defined with position and velocity, which projects o
         v_y 
         \end{bmatrix}
 \end{equation}
+where
+\begin{align*}
+    p_x &=\text{position x}\\
+    p_y &=\text{position y}\\
+    v_x &=\text{velocity x}\\
+    v_y &=\text{velocity y}\\
+\end{align*}
 
-\begin{equation}\label{equ:predict_eq}
-\mathbf{x}_k=\mathbf{F_k}\mathbf{x}_{k-1}+\mathbf{w}
+\begin{equation}\label{equ:transition_matrix_H}
+    \mathbf{F} = 
+    \begin{bmatrix}
+        1 & 0 & 1 & 0 \\
+        0 & 1 & 0 & 1 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+      \end{bmatrix}
 \end{equation}
 
-\subsection{Update}\label{sec:2-update}
-\subsubsection{Radar Update}\label{sec:2-radar_update}
+\begin{equation}\label{equ:predict_eq}
+    \mathbf{x}_k=\mathbf{F}_k\mathbf{x}_{k-1}+\mathbf{w}
+\end{equation}
+
+Error covariance update
+\begin{equation}\label{equ:error_covariance}
+    \mathbf{P}_k=\mathbf{F}_k \mathbf{P}_{k-1} \mathbf{F}_k^T+\mathbf{Q}_k
+\end{equation}
+
+\subsection{Update}\label{equ:2-update}
+To fuse two sensors with different update rates, Kalman Filter is updated seperately
+\subsubsection{Radar Update}\label{sec:2-radar_update}  
+Centroid of radar
+\begin{equation}
+    \mathbf{z}_{radar}=
+    \begin{bmatrix}
+        p_x \\ 
+        p_y
+    \end{bmatrix}
+\end{equation}
+
+Transition matrix
+\begin{equation}\label{equ:2-radar_transition_matrix}
+    \mathbf{H} = 
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+      \end{bmatrix}
+\end{equation}
+
+
+
 \subsubsection{Camera Update}\label{sec:2-camera_update}
+Center of bounding box.
+Only the horizontal image coordinate is fused with Kalman Filter.
+
+Conversion image to real-world vector (insert figure)
+\begin{equation}\label{equ:img2cart}
+u=c_x-\frac{p_x}{p_y}f
+\end{equation}
+where
+\begin{align*}
+    c_x &=\text{center of camera image in pixel}\\
+    p_x &=\text{x-axis position in cartesian}\\
+    p_y &=\text{y-axis position in cartesian}\\
+    f &=\text{camera focal length in pixel}\\
+    u &=\text{center of Bbox object detection in pixel}
+\end{align*}
+
+From equation \ref{equ:img2cart} we can obtain
+\begin{equation}\label{equ:2-img2cart2}
+    u=640-\frac{p_x}{p_y}950
+\end{equation}
+
+Thus
+\begin{equation}\label{equ:2-z_cam}
+    \mathbf{z}_{cam}=
+    \begin{bmatrix}c_x-u\end{bmatrix}=
+    \begin{bmatrix}640-u\end{bmatrix}
+\end{equation}
+
+\begin{equation}\label{equ:2-cam_transition_matrix}
+    \mathbf{H} = 
+    \begin{bmatrix}
+        \frac{950}{p_y} & 0 & 0 & 0 \\
+      \end{bmatrix}
+\end{equation}
+
 
 
 \begin{algorithm}[htbp]
