@@ -2,4 +2,167 @@
 % 實驗設計分析
 %----------------------------------------------------------------------
 
-\chapter{Result}\label{sec:evalutaion}
+\chapter{Evaluation}\label{sec:evalutaion}
+\section{Experiment }\label{sec:3-experiment}
+\subsection{Experiment Setup}\label{sec:3-setup}
+To test the performance of the algorithm, 3 specific scenarios were tested:
+1. Control scenario, when object 1 (white) and object 2 (yellow) do not crosspath.
+2. One object conceals another and continues their original trajectory after departing.
+3. One object conceals another and changes trajectory when departing.
+\begin{figure}[hbpt]
+    \centering
+    \begin{subfigure}{0.25\linewidth}
+        \includegraphics[width=5.5cm]{Figures/scenario_1_gt.png}
+        \caption{scenario 1}
+        \label{subfig:scenario1gt}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.25\linewidth}
+        \centering
+        \includegraphics[width=5.5cm]{Figures/scenario_2_gt.png}
+        \caption{scenario 2}
+        \label{subfig:scenario2gt}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.25\linewidth}
+        \centering
+        \includegraphics[width=5.5cm]{Figures/scenario_3_gt.jpg}
+        \caption{scenario 3}
+        \label{subfig:scenario3gt}
+    \end{subfigure}
+
+    \caption{Ground truth of multi-object tracking experiments}
+    \label{fig:ground_truth}
+\end{figure}
+
+\subsection{Challenges to Overcome}\label{sec:3-challenge}
+Blind spot of both sensors.
+Challenges the algorithm to correctly predict objects when data is obstructed.
+\begin{figure}[hbpt]
+    \centering
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/before_conceal_radar.png}
+        \caption{Raw radar data}
+        \label{subfig:before_conceal_radar_fig}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/before_conceal_image.png}
+        \caption{Image frame}
+        \label{subfig:before_conceal_image_fig}
+    \end{subfigure}
+
+    \caption{Object 1 and object 2 before crossingpath}
+    \label{fig:before_conceal_fig}
+\end{figure}
+
+From figure \ref*{fig:concealing_fig}\subref{subfig:concealing_radar_fig} can be seen that both object clusters disappear.
+\begin{figure}[hbpt]
+    \centering
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/concealing_radar.png}
+        \caption{Raw radar data}
+        \label{subfig:concealing_radar_fig}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/concealing_image.png}
+        \caption{Image frame}
+        \label{subfig:concealing_image_fig}
+    \end{subfigure}
+
+    \caption{Object 1 covers object 2}
+    \label{fig:concealing_fig}
+\end{figure}
+
+\begin{figure}[hbpt]
+    \centering
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/after_conceal_radar.png}
+        \caption{Raw radar data}
+        \label{subfig:after_conceal_radar_fig}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/after_conceal_image.png}
+        \caption{Image frame}
+        \label{subfig:after_conceal_image_fig}
+    \end{subfigure}
+
+    \caption{Object 1 and object 2 seperates}
+    \label{fig:after_conceal_fig}
+\end{figure}
+
+
+\subsection{Experiment Result}\label{sec:3-exp_result}
+\subsubsection{Scenario 1}\label{sec:3-exp_result1}
+Scenario 1 is the control when object 1 and object 2 do not crosspath.
+\begin{figure}[hbpt]
+    \centering
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/1_before.png}
+        \caption{Without fusion}
+        \label{subfig:without_fusion_1}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/1_after.png}
+        \caption{With fusion}
+        \label{subfig:with_fusion_1}
+    \end{subfigure}
+
+    \caption{Scenario 1 multi-object tracking}
+    \label{fig:scenario_result_1}
+\end{figure}
+
+\subsubsection{Scenario 2}\label{sec:3-exp_result2}
+In scenario 2, object 1 crosses path with object 2 in a straight line horizontally.
+After concealing object 2 from both camera and radar, both objects continue their original trajectory.
+In figure \ref*{fig:scenario_result_2}\subref{subfig:without_fusion_2} can be seen that object 1 and object 2 switch places.
+The algorithm is able to track and identify objects 1 and 2 correctly (figure \ref*{fig:scenario_result_2}\subref{subfig:with_fusion_2}).
+\begin{figure}[hbpt]
+    \centering
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/2_before.png}
+        \caption{Without fusion}
+        \label{subfig:without_fusion_2}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/2_after.png}
+        \caption{With fusion}
+        \label{subfig:with_fusion_2}
+    \end{subfigure}
+
+    \caption{Scenario 2 multi-object tracking}
+    \label{fig:scenario_result_2}
+\end{figure}
+
+\subsubsection{Scenario 3}\label{sec:3-exp_result3}
+In scenario 3, object 1 covers object 2, and in the next few frames, object 2 covers object 1.
+In this scenario, both objects change trajectory when departing from each other.
+In figure \ref*{fig:scenario_result_3}\subref{subfig:without_fusion_3} can be seen that object 1 and object 2 switch places.
+The algorithm is able to track and identify objects 1 and 2 correctly (figure \ref*{fig:scenario_result_3}\subref{subfig:with_fusion_3}).
+\begin{figure}[hbpt]
+    \centering
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/3_before.png}
+        \caption{Without fusion}
+        \label{subfig:without_fusion_3}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=7cm]{Figures/3_after.png}
+        \caption{With fusion}
+        \label{subfig:with_fusion_3}
+    \end{subfigure}
+
+    \caption{Scenario 3 multi-object tracking}
+    \label{fig:scenario_result_3}
+\end{figure}

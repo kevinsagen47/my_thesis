@@ -7,24 +7,24 @@ In this experimental setup, two fundamental sensors are employed to acquire and 
 The Realsense D435i camera, 
 known for its high-resolution image capture and depth-sensing capabilities, is utilized for visual data acquisition. 
 Complementing the camera is the AWR1843boost mmWave radar, operating in the 77-81GHz frequency range. 
-Both sensors are securely housed within a custom 3D-printed enclosure, 
+Both sensors are securely housed within a custom 3D-printed enclosure as seen in figure \ref{fig:radar_camera_setup_fig}, 
 which not only safeguards them but also minimizes external interference, ensuring the integrity of data acquisition. 
 The mmWave radar config that is used is a 77-81GHz chirp, with settings balanced between range and resolution,
 collecting data at 20 frames per second.
 
 \begin{figure}[hpbt]
     \centering
-    \includegraphics[width=10cm]{Figures/radar_camera_setup.png}%\textwidth
+    \includegraphics[width=5cm]{Figures/radar_camera_setup.png}%\textwidth
     \caption{Radar camera setup}
     \label{fig:radar_camera_setup_fig}
 \end{figure}
 
 
 \section{Overview}\label{sec:2-overview}
-Overview block diagram of the project  
+Overview block diagram of the algorithm shown in figure \ref*{fig:kf_update}.
 \begin{figure}[hpbt]
     \centering
-    \includegraphics[width=12cm]{Figures/kf_update-modified.png}%\textwidth
+    \includegraphics[width=10cm]{Figures/kf_update-modified.png}%\textwidth
     \caption{Radar camera Kalman Filter workflow}
     \label{fig:kf_update}
 \end{figure}
@@ -32,7 +32,7 @@ Overview block diagram of the project
 \section{Calibration}\label{sec:2-calibration}
 \subsection{Camera Calibration}
 To accurately map the monocular camera's image coordinates to real-world coordinates, calibration of intrinsic and extrinsic is required.
-Using tools provided by ROS \cite{cam_calib}.
+Using tools provided by ROS \cite{cam_calib} as shown in figure \ref*{fig:camera_calibration}.
 
 \begin{figure}[hpbt]
     \centering
@@ -43,28 +43,32 @@ Using tools provided by ROS \cite{cam_calib}.
 
 \subsection{Radar-Camera Calibration}
 In order to achieve accurate sensor fusion, it is essential to conduct proper calibration of the two sensors. 
-For this purpose, a corner reflector is employed, primarily due to its strong radar reflection characteristics. 
-Additionally, it offers the advantage of appearing as a single point in both radar and camera data, effectively reducing ambiguity.
+For this purpose, a corner reflector is employed (figure \ref*{fig:radar_camera_calibration} \subref{subfig:corner_reflector_fig}), primarily due to its strong radar reflection characteristics(white point in figure \ref*{fig:radar_camera_calibration} \subref{subfig:radar_view_fig}). 
+Additionally, it offers the advantage of appearing as a single point in both radar and camera data, effectively reducing ambiguity (figure \ref*{fig:radar_camera_calibration} \subref{subfig:camera_view_fig}).
 
 As illustrated in Figure <insert figure>, data points from both radar 
 and camera coordinates can be collected with the corner reflector positioned at various locations.
+After data is collected, radar points are associated with image points based on equation \ref*{equ:2_img2cart2}
 \begin{figure}[hbpt]
     \centering
     \begin{subfigure}{0.25\linewidth}
         \includegraphics[width=5.5cm]{Figures/corner_reflector.jpg}
         \caption{Radar Corner Reflector}
+        \label{subfig:corner_reflector_fig}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.25\linewidth}
         \centering
         \includegraphics[width=5.5cm]{Figures/camera_corner.png}
         \caption{Camera-corner reflector calibration}
+        \label{subfig:camera_view_fig}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.25\linewidth}
         \centering
         \includegraphics[width=5.5cm]{Figures/radar_corner.png}
         \caption{Radar-corner reflector calibration}
+        \label{subfig:radar_view_fig}
     \end{subfigure}
 
     \caption{Radar camera calibration}
@@ -73,14 +77,20 @@ and camera coordinates can be collected with the corner reflector positioned at 
 
 \section{Data Pre-Processing}\label{sec:2-preprocessing}
 \subsection{mmWave Radar Data Pre-Processing}\label{sec:2-kd_tree}
-explain about kd-tree
+Given that radar data is inherently sparse and noisy, its data needed to be filtered.
+For this purpose, k-d tree is employed to cluster the pointcloud.
+A k-d tree, short for k-dimensional tree, is a hierarchical data structure used for efficient multidimensional data organization and search operations. 
+It arranges data points in k-dimensional space, such as spatial coordinates, in a binary tree structure. 
 
-\subsection{Image Recognition and Tracking}\label{sec:2-img_recognition}
-explain about yolov3 and deepsort
+\subsection{Image Recognition and Tracking\small(to be done)}\label{sec:2-img_recognition}
+yolov3 \cite{redmon2018yolov3} and deepsort \cite{Wojke2017simple}.
 
 \section{Radar-camera Data Association}\label{sec:2-association}
-how to determine if cluster and image belong to the same object
-resolution of theta 0.047
+Before fusion, radar clusters have to be associated with tracked objects from deepsort.
+First, centroids of radar clusters are mapped into image coordinates.
+Second, is to find the theoretical error of radar's measurement \cite{8844649}, which is radar's resolution, determined by equation \ref*{equ:angular_resolution}
+Finally, if the distance between the calculated radar centroid and the image detection lies within the theoretical boundary
+, we can safely assume both measurements belong to the same object of interest.
 \begin{equation}\label{equ:angular_resolution}
     \Delta \theta= \frac{c_0}{f_c d N_{RX} N_{TX} \cos(\theta _i)}
 \end{equation}
@@ -94,9 +104,17 @@ where
     \theta _i &= \text{angle of interest}
 \end{align*}
 
-\section{Bayes Fusion}\label{sec:2-bayes_fusion}
+\section{Bayes Fusion\small(to be implemented)}\label{sec:2-bayes_fusion}
 
-Bayes fusion kalman filter 
+The coordinates that undergo fusion from both radar and image sensors are the horizontal coordinates,
+specifically the radar's azimuth and the image's "u" coordinate. 
+This constraint arises from the fact that these are the only coordinates where both sensors provide measurements, 
+as illustrated in Figure \ref{fig:trade_off_and_plane}\subref{subfig:cam_radar_sub}. \ref{fig:trade_off_and_plane}\subref{subfig:cam_radar_sub}.
+It's important to note that radar's elevation measurement resolution is limited and subject to noise. 
+Additionally, the image sensor does not provide depth information.
+
+If X is the real position of the object, then Bayes' theorem predicts that the probability of the fused position is shown in equation \ref{equ:bayes1}.
+
 \begin{equation}\label{equ:bayes1}
     P_{prob}(\frac{P}{X})=
     \frac
@@ -104,29 +122,36 @@ Bayes fusion kalman filter
     {2 \pi R^(0.5)}
 \end{equation}
 
-\begin{equation}\label{equ:bayes1}
-P
-\end{equation}
-
+Finally, the value of the measured measurements is provided by equation \ref{equ:bayes2}.
 \begin{equation}\label{equ:bayes2}
-    P
+P_x=\frac
+{\frac{P_1}{R_1}+\frac{P_2}{R_2}}
+{\frac{1}{R_1}+\frac{1}{R_2}}
 \end{equation}
 
-\begin{equation}\label{equ:bayes3}
+where
+\begin{align*}
+    P_x &= \text{fused position}
+    P_1 &= radar x-axis in cartesian
+    P_2 &= camera x-axis in cartesian
+    R_1 &= radar covariance
+    R_2 &= camera covariance
+\end{align*}
+
+\begin{equation}\label{equ:bayes4}
     \frac{1}{R}=\frac{1}{R_1}+\frac{1}{R_2}
 \end{equation}
-\begin{equation}\label{equ:bayes4}
-    y
-\end{equation}
 \begin{equation}\label{equ:bayes5}
-    y
+    p_x=(\sum_{k=1}^{m}R_k^{-1})^{-1}\sum_{k=1}^{m}{R_k^{-1}y_k}
+\end{equation}
+\begin{equation}\label{equ:bayes6}
+    p_x=\frac{R_1^{-1}y_1+R_2^{-1}y_2}{R_1^{-1}+R_2^{-1}}
 \end{equation}
 
 \begin{equation}\label{equ:2-radar_R}
     \mathbf{R}_{radar} = 
     \begin{bmatrix}
-        \sigma_{radar_x}^2 & 0 \\
-        0 & \sigma_{radar_y}^2 \\
+        \sigma_{radar_x}^2 
       \end{bmatrix}
 \end{equation}
 \begin{equation}\label{equ:2-R_cam}
@@ -182,7 +207,7 @@ Error covariance update
     \mathbf{P}_k=\mathbf{F}_k \mathbf{P}_{k-1} \mathbf{F}_k^T+\mathbf{Q}_k
 \end{equation}
 
-\subsection{Update}\label{equ:2-update}
+\subsection{Update}\label{equ:2_update}
 To fuse two sensors with different update rates, Kalman Filter is updated seperately
 \subsubsection{Radar Update}\label{sec:2-radar_update}  
 Centroid of radar
@@ -193,9 +218,15 @@ Centroid of radar
         p_y
     \end{bmatrix}
 \end{equation}
-
+\begin{equation}\label{equ:2_radar_R_kf}
+    \mathbf{R}_{radar} = 
+    \begin{bmatrix}
+        \sigma_{radar_x}^2 & 0 \\
+        0 & \sigma_{radar_y}^2 \\
+      \end{bmatrix}
+\end{equation}
 Transition matrix
-\begin{equation}\label{equ:2-radar_transition_matrix}
+\begin{equation}\label{equ:2_radar_transition_matrix}
     \mathbf{H} = 
     \begin{bmatrix}
         1 & 0 & 0 & 0 \\
@@ -223,18 +254,18 @@ where
 \end{align*}
 
 From equation \ref{equ:img2cart} we can obtain
-\begin{equation}\label{equ:2-img2cart2}
+\begin{equation}\label{equ:2_img2cart2}
     u=640-\frac{p_x}{p_y}950
 \end{equation}
 
 Thus
-\begin{equation}\label{equ:2-z_cam}
+\begin{equation}\label{equ:2_z_cam}
     \mathbf{z}_{cam}=
     \begin{bmatrix}c_x-u\end{bmatrix}=
     \begin{bmatrix}640-u\end{bmatrix}
 \end{equation}
 
-\begin{equation}\label{equ:2-cam_transition_matrix}
+\begin{equation}\label{equ:2_cam_transition_matrix}
     \mathbf{H} = 
     \begin{bmatrix}
         \frac{950}{p_y} & 0 & 0 & 0 \\

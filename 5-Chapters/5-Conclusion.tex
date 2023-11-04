@@ -3,10 +3,13 @@
 %----------------------------------------------------------------------
 
 \chapter{Conclusion}\label{chap:conclusion}
-result of my research
+
 
 \section{Further Improvement}
-Image to radar mapping assumes that both sensors are perfectly parallel
-The algorithm cannot determine true center of an object, 
-it just assumes the average center of the cluster.
-Although there is intensity in data input, it is not used.
+\begin{enumerate}
+    \item Image-to-radar mapping assumes that both sensors are perfectly parallel.
+    \item The algorithm assumes the object's centroid point is the average point of radar cluster.
+    \item Radar point reflection intensity is not taken into consideration.
+    \item Radar elevation is not utilized due to its sparse resolution and noisy measurement.
+    \item Ground truth is not truly accurate since the objects tracked are humans.
+\end{enumerate}
