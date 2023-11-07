@@ -36,7 +36,7 @@ Using tools provided by ROS \cite{cam_calib} as shown in figure \ref*{fig:camera
 
 \begin{figure}[hpbt]
     \centering
-    \includegraphics[width=8cm]{Figures/cam_calib.png}%\textwidth
+    \includegraphics[width=6cm]{Figures/cam_calib.png}%\textwidth
     \caption{Camera extrinsic and intrinsic calibration}
     \label{fig:camera_calibration}
 \end{figure}
@@ -81,9 +81,10 @@ For this purpose, k-d tree is employed to cluster the pointcloud.
 A k-d tree, short for k-dimensional tree, is a hierarchical data structure used for efficient multidimensional data organization and search operations. 
 It arranges data points in k-dimensional space, such as spatial coordinates, in a binary tree structure. 
 
-\subsection{Image Recognition and Tracking\small(to be done)}\label{sec:2-img_recognition}
+\subsection{Image Data Pre-Processing}\label{sec:2-img_recognition}
+\subsubsection{Image Recognition and Tracking\small(to be done)}
 yolov3 \cite{redmon2018yolov3} and deepsort \cite{Wojke2017simple}.
-
+\subsubsection{Image to Real-world projection}
 Before fusing, the detection results need to be converted into cartesian coordinates.
 
 Conversion image to real-world vector, seen in figure \ref{fig:camera_projection}.
@@ -123,7 +124,7 @@ Thus
     \caption{Camera to real-world projection}
     \label{fig:camera_projection}
 \end{figure}
-
+\newpage
 \section{Radar-camera Data Association}\label{sec:2-association}
 Before fusion, radar clusters have to be associated with tracked objects from deepsort.
 First, centroids of radar clusters are mapped into image coordinates.
@@ -206,7 +207,7 @@ It has four elements and is defined with position and velocity, which projects o
         v 
         \end{bmatrix} = 
         \begin{bmatrix} 
-        P_{x_{bayes}} \\ 
+        p_x \\ 
         p_y \\ 
         v_x \\ 
         v_y 
@@ -214,7 +215,7 @@ It has four elements and is defined with position and velocity, which projects o
 \end{equation}
 where
 \begin{align*}
-    P_{x_{bayes}} &=\text{Bayes fusion position x}\\
+    p_x &=\text{position x}\\
     p_y &=\text{position y}\\
     v_x &=\text{velocity x}\\
     v_y &=\text{velocity y}\\
@@ -247,7 +248,7 @@ To fuse two sensors with different update rates, Kalman Filter is updated sepera
     \caption{Update timing \cite{7472511}}
     \label{fig:sync_fig}
 \end{figure}
-\newpage
+
 \subsubsection{Radar Update}\label{sec:2-radar_update}  
 Centroid of radar
 \begin{equation}
