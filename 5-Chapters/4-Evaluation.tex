@@ -111,17 +111,31 @@ Scenario 1 is the control when object 1 and object 2 do not crosspath.
 \href{https://drive.google.com/file/d/1SL30CC6EpyI4NLOcGnfALKAP44P82u9n/view?usp=sharing}{\color{blue}{Video click me}}
 \begin{figure}[!htb]
     \centering
-    \begin{subfigure}{0.3\linewidth}
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
         \includegraphics[width=7cm]{Figures/1_before.png}
-        \caption{Without fusion}
+        \caption{Only radar object tracking}
         \label{subfig:without_fusion_1}
     \end{subfigure}
-    \hspace{0.15\textwidth}
+    %\hspace{0.15\textwidth}
+    \hfill
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/raw_scene1.png}
+        \caption{Raw radar and image data after data association}
+        \label{subfig:raw_fusion_1}
+    \end{subfigure}
     %\hfill
-    \begin{subfigure}{0.3\linewidth}
-        \includegraphics[width=7cm]{Figures/1_after.png}
-        \caption{With fusion}
-        \label{subfig:with_fusion_1}
+    \vskip\baselineskip
+
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/fusion_scene1.png}
+        \caption{Fused data}
+        \label{subfig:fusion_1}
+    \end{subfigure}
+
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/RMSE1.png}
+        \caption{RMSE to ground truth}
+        \label{subfig:RMSE_1}
     \end{subfigure}
 
     \caption{Scenario 1 multi-object tracking}
@@ -136,19 +150,31 @@ The algorithm is able to track and identify objects 1 and 2 correctly (figure \r
 \href{https://drive.google.com/file/d/1YnliV7YRzahYNpIehctzrNrf0Z0ZpIeY/view?usp=sharing}{\color{blue}{Video click me}}
 \begin{figure}[!htb]
     \centering
-    \begin{subfigure}{0.3\linewidth}
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
         \includegraphics[width=7cm]{Figures/2_before.png}
-        \caption{Without fusion}
+        \caption{Only radar object tracking}
         \label{subfig:without_fusion_2}
     \end{subfigure}
-    \hspace{0.15\textwidth}
+    %\hspace{0.15\textwidth}
+    \hfill
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/raw_scene2.png}
+        \caption{Raw radar and image data after data association}
+        \label{subfig:raw_fusion_2}
+    \end{subfigure}
     %\hfill
-    \begin{subfigure}{0.3\linewidth}
-        \includegraphics[width=7cm]{Figures/2_after.png}
-        \caption{With fusion}
+    \vskip\baselineskip
+
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/fusion_scene2.png}
+        \caption{Fused data}
         \label{subfig:with_fusion_2}
     \end{subfigure}
-
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/RMSE2.png}
+        \caption{RMSE to ground truth}
+        \label{subfig:RMSE_2}
+    \end{subfigure}
     \caption{Scenario 2 multi-object tracking}
     \label{fig:scenario_result_2}
 \end{figure}
@@ -161,19 +187,71 @@ The algorithm is able to track and identify objects 1 and 2 correctly (figure \r
 \href{https://drive.google.com/file/d/1bd92Bu6CJeL1QIIbBlW42cAozxEcis-d/view?usp=sharing}{\color{blue}{Video click me}}
 \begin{figure}[!htb]
     \centering
-    \begin{subfigure}{0.3\linewidth}
+    %\begin{adjustwidth}{-8em}{0em}
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
         \includegraphics[width=7cm]{Figures/3_before.png}
-        \caption{Without fusion}
+        \caption{Only radar object tracking}
         \label{subfig:without_fusion_3}
     \end{subfigure}
-    \hspace{0.15\textwidth}
+    %\hspace{0.05\textwidth}
+    \hfill
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/raw_scene3.png}
+        \caption{Raw radar and image data after data association}
+        \label{subfig:raw_fusion_3}
+    \end{subfigure}
+    \vskip\baselineskip
+%\end{adjustwidth}
     %\hfill
-    \begin{subfigure}{0.3\linewidth}
-        \includegraphics[width=7cm]{Figures/3_after.png}
-        \caption{With fusion}
+    %\hspace{0.05\textwidth}
+
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/fusion_scene3.png}
+        \caption{Fused data}
         \label{subfig:with_fusion_3}
     \end{subfigure}
-
+    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/RMSE3.png}
+        \caption{RMSE to ground truth}
+        \label{subfig:RMSE_3}
+    \end{subfigure}
     \caption{Scenario 3 multi-object tracking}
     \label{fig:scenario_result_3}
 \end{figure}
+
+\subsection{Evaluation}\label{sec:3-evaluation}
+\begin{table}[h!]
+    \begin{center}
+      \label{tab:table2}
+      \begin{tabular}{l|c|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \textbf{Scenario} & \textbf{Object 1} & \textbf{Object 2}\\
+        \hline
+        Scenario 1 & 0.1222  & 0.0879 \\
+        Scenario 2 & 0.0816 & 0.1118\\
+        Scenario 3 & 0.0678 & 0.1846\\
+      \end{tabular}
+    \end{center}
+    \caption{All scenarios RMSE compared (m)}
+    \label{tab:scenarios_rmse}
+  \end{table}
+
+  Which gives the average RMSE 0.1093m
+
+
+  \begin{table}[h!]
+    \begin{center}
+      \label{tab:table1}
+      \begin{tabular}{l|c|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \textbf{Method} & \textbf{RMSE} \\
+        \hline
+        Proposed & 0.1093 m  \\
+        \citeauthor{9081940}\cite{9081940} & 0.18 m \\
+        \citeauthor{method1}\cite{method1} & longitudinal 0.2210 m lateral 0.1828 m\\
+        \citeauthor{8932892}\cite{8932892} & 0.2486 m\\
+        \citeauthor{8844649}\cite{8844649} & 0.2902 m \\
+        
+      \end{tabular}
+    \end{center}
+    \caption{Comparison of other tracking method}
+    \label{tab:method_rmse}
+  \end{table}
