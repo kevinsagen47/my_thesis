@@ -1,5 +1,5 @@
 
-\chapter{Methodology}\label{chap:related_works}
+\chapter{Methodology}\label{chap:Methodology}
 
 
 \section{Configuration}\label{sec:2-spec}
@@ -84,6 +84,8 @@ It arranges data points in k-dimensional space, such as spatial coordinates, in 
 \subsection{Image Data Pre-Processing}\label{sec:2-img_recognition}
 \subsubsection{Image Recognition and Tracking\small(to be done)}
 yolov3 \cite{redmon2018yolov3} and deepsort \cite{Wojke2017simple}.
+To generate BBox and ROI use yolov3
+to track the bbox, we use deepsort 
 \subsubsection{Image to Real-world projection}
 Before fusing, the detection results need to be converted into cartesian coordinates.
 
@@ -144,7 +146,19 @@ where
     \theta _i &= \text{angle of interest}
 \end{align*}
 
-\section{Bayes Fusion}\label{sec:2-bayes_fusion}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PROBLEM FORMULATION OR STATEMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Problem Statement}\label{chap:Problem_statement}
+
+\section{Fusion Algorithm}\label{sec:2-bayes_fusion}
+Fusing measurements from two heterogeneous sensors that have few cross-correlations can be challenging. 
+To take inputs from two different sensors and give them weight, we use Bayes Fusion in this thesis.
+Bayes fusion takes the noises of both sensors to determine their reliability at a given point of the measurement.
+Thus giving us a reliable way to give scores of trust to each sensor.
 
 The coordinates that undergo fusion from both radar and image sensors are the horizontal coordinates,
 specifically the radar's azimuth and the image's "u" coordinate. 
@@ -166,7 +180,7 @@ then Bayes' theorem predicts that the probability of the fused position is shown
 Applying Bayes' fusion, the value of the measured measurements is provided by equation \ref{equ:bayes2}.
 
 \begingroup
-\Large
+\large
 \begin{equation}\label{equ:bayes2}
 P_{x_{bayes}}=\frac
 {\frac{p_{x_{radar}}}{R_{radar}}+\frac{p_{x_{cam}}} {R_{cam}}}
@@ -195,7 +209,8 @@ where
 \end{equation}
 
 
-\section{Multimodal Kalman Filter}\label{sec:2-kalman_filter}
+\section{Motion Model}\label{sec:2-kalman_filter}
+To predict the movement model of our subjects, we use a multimodal kalman filter.
 \subsection{Predict}\label{sec:2-predict}
 The state matrix used in this Kalman Filter is from the single sensor maneuvering tracking, with constant velocity.
 It has four elements and is defined with position and velocity, which projects onto the x-axis and y-axis:

@@ -45,13 +45,27 @@ and fuse them to create an ultimate sensor, applicable across a wide spectrum of
 %\subsection{研究動機}
 %大跑前，照石戰呢：好過沒速朋。
 
-\section{Related Work\small(to be done)}\label{sec:1-related_work}
-In recent years, there have been growing trends of lidar-radar fusion and lidar-camera fusion in academia.
-However, there is little to no attention to radar-camera fusion research. 
+\section{Related Work}\label{sec:1-related_work}
+In recent years, the trend toward lidar-radar fusion has seen significant growth, as evidenced by numerous studies [cite]. 
+The fusion of radar and lidar presents a comparatively simpler scenario due to their ability to provide a Bird's Eye View (BEV), 
+aligning their measurements within the same plane. Conversely, research efforts focusing on camera-lidar fusion [cite] have emerged, 
+yet both fusion approaches share a common drawback:
+the inherent cost inefficiency and susceptibility to interference associated with lidar technology.
+
+However, there is less heterogeneous sensor-focused fusion research, such as radar camera fusion.
+The fusion of radar and camera poses challenges due to the inherent dissimilarities between the sensors, necessitating certain assumptions during integration.
+In a recent comprehensive review article by \citeauthor{Yao_2023}\cite{Yao_2023}, 
+various methods employing neural networks to fuse radar and camera data were explored.
+These methods are resource-intensive and primarily focus on object detection, 
+which diverges from the primary focus of this thesis on tracking. 
+Notably, two works cited in this context \cite{8932892}\cite{8844649} share similarities with the approach adopted in this thesis. 
+Both studies employ an Extended Kalman Filter (EKF) to linearize radar measurements. 
+Additionally, the work by \citeauthor{8844649} introduces the concept of "Error Bound" to correlate radar and camera planes.
 %\begin{enumerate}
 %    \item 花完造講，心城時……速政沒常，文他員這不星便說人，他的許管；家世上有案。整值八。
 %\end{enumerate}
 
+\newpage
 
 \section{Contribution}\label{sec:1-contribution}
 
@@ -59,12 +73,10 @@ However, there is little to no attention to radar-camera fusion research.
 In this thesis, our primary objective is to harness the strengths of camera and radar sensors, 
 while simultaneously mitigating their inherent limitations. To achieve this, several notable contributions have been made:
 
-1. \textbf{Development of a Novel Multimodal Kalman Filter Model: }
-We introduce an innovative framework that leverages a multimodal Kalman Filter model. 
+1. \textbf{Development of a Multimodal Kalman Filter Model: }
+We utilized a framework that leverages a multimodal Kalman Filter model. 
 This model enables the fusion of data from both camera and radar sensors, 
 facilitating more accurate and robust object tracking and identification. 
-By combining the temporal and spatial data characteristics of these sensors, 
-our approach enhances tracking precision and minimizes errors.
 
 2. \textbf{Correlation of Radar and Image Detection Data: }
 A critical aspect of our work is the introduction of a method to correlate radar and image detection results. 
@@ -73,7 +85,7 @@ By correlating the data effectively, we improve the accuracy of object tracking 
 
 3. \textbf{Utilization of Bayesian Fusion for Noise Reduction: }
 We employ Bayesian fusion techniques to reduce noise in the fused data.
-This step not only enhances the overall data quality but also significantly improves the reliability of the output. 
+This step not only enhances the overall data quality but also significantly improves the accuracy of the output. 
 
 4. \textbf{Versatility in Challenging Scenarios: }
 The contribution of this thesis is highlighted by the algorithm's comprehensive testing across various conditions, 
@@ -81,9 +93,7 @@ with a specific focus on addressing the challenging "blind spot" scenarios.
 The research demonstrates instances where sensor fusion complements the capabilities of individual sensors, 
 which will be further explored in this thesis.
 
-
 In summary, this thesis offers a significant contribution to the field of sensor fusion by introducing a comprehensive solution 
 that harnesses the advantages of camera and radar sensors while addressing their respective limitations.
- The proposed multimodal Kalman Filter model, correlation methods, and Bayesian fusion techniques collectively form 
- a powerful framework that enhances object tracking, reduces noise, and enables the system to excel in scenarios that were previously challenging for individual sensors.
-
+The proposed multimodal Kalman Filter model, correlation methods, and Bayesian fusion techniques collectively form 
+a powerful framework that enhances object tracking, reduces noise and achieves an accuracy of \textbf{0.1561m}.

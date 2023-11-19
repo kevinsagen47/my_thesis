@@ -178,7 +178,7 @@ The algorithm is able to track and identify objects 1 and 2 correctly (figure \r
     \caption{Scenario 2 multi-object tracking}
     \label{fig:scenario_result_2}
 \end{figure}
-
+\newpage
 \subsubsection{Scenario 3}\label{sec:3-exp_result3}
 In scenario 3, object 1 covers object 2, and in the next few frames, object 2 covers object 1.
 In this scenario, both objects change trajectory when departing from each other.
@@ -218,40 +218,44 @@ The algorithm is able to track and identify objects 1 and 2 correctly (figure \r
     \caption{Scenario 3 multi-object tracking}
     \label{fig:scenario_result_3}
 \end{figure}
-
+\newpage
 \subsection{Evaluation}\label{sec:3-evaluation}
 \begin{table}[h!]
     \begin{center}
       \label{tab:table2}
-      \begin{tabular}{l|c|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
-        \textbf{Scenario} & \textbf{Object 1} & \textbf{Object 2}\\
+      \begin{tabular}{c|c|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \multirow{2}{*}{\textbf{Scenario}} & \multicolumn{3}{c|}{\textbf{Object 1}}  & \multicolumn{3}{c|}{\textbf{Object 2}}\\
+        \cline{2-7}
+                   & Fusion & Camera & Radar & Fusion & Camera & Radar \\
         \hline
-        Scenario 1 & 0.1222  & 0.0879 \\
-        Scenario 2 & 0.0816 & 0.1118\\
-        Scenario 3 & 0.0678 & 0.1846\\
+        Scenario 1 & 0.1388 & 0.1922 & \textbf{0.1124} & \textbf{0.105}  & 0.1236 & 0.1201 \\
+        Scenario 2 & \textbf{0.1206} & 0.1211 & 0.1228 & \textbf{0.1687} & 0.3728 & 0.2014 \\
+        Scenario 3 & \textbf{0.0903} & 0.1211 & 0.0928 & 0.3075 & \textbf{0.2381} & 0.2487 \\
       \end{tabular}
     \end{center}
     \caption{All scenarios RMSE compared (m)}
     \label{tab:scenarios_rmse}
   \end{table}
 
-  Which gives the average RMSE 0.1093m
+  Which gives the average RMSE 0.1561m
 
 
   \begin{table}[h!]
     \begin{center}
       \label{tab:table1}
-      \begin{tabular}{l|c|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
-        \textbf{Method} & \textbf{RMSE} \\
+      \begin{tabular}{l|c|c|c|l} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \textbf{Method} & \textbf{Radar} & \textbf{Object} & \textbf{Max Range} & \textbf{RMSE} \\% %object detected
         \hline
-        Proposed & 0.1093 m  \\
-        \citeauthor{9081940}\cite{9081940} & 0.18 m \\
-        \citeauthor{method1}\cite{method1} & longitudinal 0.2210 m lateral 0.1828 m\\
-        \citeauthor{8932892}\cite{8932892} & 0.2486 m\\
-        \citeauthor{8844649}\cite{8844649} & 0.2902 m \\
+        Proposed & AWR1843 & human & 6m & 0.1561 m  \\%& 6m 
+        \citeauthor{9081940}\cite{9081940} &  RT3002 & human & 40m & 0.18 m \\%
+        \citeauthor{method1}\cite{method1} & AWR1642 & vehicle & 50m & 0.1828 m\\%& 50m
+        \citeauthor{8932892}\cite{8932892} & IWR1443 & human & 6m & 0.2486 m\\%
+        \citeauthor{8844649}\cite{8844649} & AWR1642 & human & 10m & 0.2902 m \\%
         
       \end{tabular}
     \end{center}
     \caption{Comparison of other tracking method}
     \label{tab:method_rmse}
   \end{table}
+
+
