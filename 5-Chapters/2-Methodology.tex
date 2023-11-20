@@ -83,9 +83,10 @@ It arranges data points in k-dimensional space, such as spatial coordinates, in 
 
 \subsection{Image Data Pre-Processing}\label{sec:2-img_recognition}
 \subsubsection{Image Recognition and Tracking\small(to be done)}
-yolov3 \cite{redmon2018yolov3} and deepsort \cite{Wojke2017simple}.
-To generate BBox and ROI use yolov3
-to track the bbox, we use deepsort 
+YOLOv3 is utilized to generate bounding boxes (BBox) and regions of interest (ROI)\cite{redmon2018yolov3}.
+Subsequently, DeepSORT is applied for tracking the generated bounding boxes, 
+enabling robust and efficient object tracking throughout the analysis\cite{Wojke2017simple}.
+
 \subsubsection{Image to Real-world projection}
 Before fusing, the detection results need to be converted into cartesian coordinates.
 
@@ -116,9 +117,56 @@ Thus
 \end{equation}
 
 
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    \textbf{u} & \textbf{v } & \textbf{range } & \textbf{azimuth} & \textbf{$p_{x_{cam}}$ (from eq \ref{equ:2_cam_px})} & \textbf{abs error} \\ 
+    (pixel)   &(pixel)&(m)&ground truth(m)&(m)&(m)\\
+    \hline
+    639 & 297 & 1.002969742 & 0.0313581191 & 0.001055757623 & 0.03030236148 \\ \hline
+    589 & 299 & 1.045041323 & 0.06544303149 & 0.05610221838 & 0.009340813113 \\ \hline
+    564 & 303 & 1.042476892 & 0.09816454351 & 0.0833981514 & 0.01476639211 \\ \hline
+    493 & 304 & 1.028517962 & 0.196329087 & 0.1591496214 & 0.03717946561 \\ \hline
+    433 & 306 & 1.013839126 & 0.261772126 & 0.2209102095 & 0.04086191648 \\ \hline
+    356 & 307 & 0.9946479797 & 0.3272151649 & 0.297347396 & 0.02986776885 \\ \hline
+    240 & 317 & 1.03652215 & 0.4608280063 & 0.436430379 & 0.0243976273 \\ \hline
+    200 & 315 & 1.020024657 & 0.496276319 & 0.4724324728 & 0.0238438462 \\ \hline
+    100 & 316 & 1.057939529 & 0.6108016372 & 0.6013551009 & 0.00944653624 \\ \hline
+    23 & 321 & 1.071923614 & 0.6721544862 & 0.6961861785 & 0.0240316923 \\ \hline
+    973 & 230 & 0.6216549873 & -0.2045094818 & -0.2179064324 & 0.01339695062 \\ \hline
+    945 & 241 & 0.6698815227 & -0.1963291019 & -0.2150672257 & 0.01873812377 \\ \hline
+    885 & 270 & 0.8026226759 & -0.2072362751 & -0.2069921638 & 0.0002441112932 \\ \hline
+    848 & 293 & 1.028517962 & -0.196329087 & -0.225191301 & 0.02886221403 \\ \hline
+    801 & 318 & 1.422063112 & -0.2249604315 & -0.2410022748 & 0.01604184336 \\ \hline
+    390 & 272 & 0.7117491364 & 0.2085996717 & 0.1873024043 & 0.02129726739 \\ \hline
+    432 & 281 & 0.8026226759 & 0.2072362751 & 0.1757321227 & 0.03150415235 \\ \hline
+    467 & 289 & 0.8514408469 & 0.1908755153 & 0.1550518595 & 0.03582365585 \\ \hline
+    461 & 299 & 0.9365850091 & 0.2099630684 & 0.1764723333 & 0.03349073507 \\ \hline
+    485 & 313 & 1.114227772 & 0.2126898468 & 0.1817950575 & 0.03089478926 \\ \hline
+    512 & 317 & 1.16350615 & 0.1840585321 & 0.1567671445 & 0.02729138766 \\ \hline
+    515 & 328 & 1.422063112 & 0.2249604315 & 0.1871135674 & 0.03784686405 \\ \hline
+    533 & 330 & 1.428454399 & 0.1799683422 & 0.1608890744 & 0.019079 \\
+    \hline
+\end{tabular}
+\caption{Real-world camera data converted to cartesian compared to real radar data}
+\label{tab:data}
+\end{table}
 
-
-
+\begin{table}[h!]
+    \begin{center}
+      \label{tab:table4}
+      \begin{tabular}{l|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \textbf{Method} & \textbf{RMSE} \\% %object detected
+        \hline
+        Proposed                            & 0.0271 m \\%& 6m 
+        \citeauthor{8794186}\cite{8794186} & 0.018 m \\%
+        
+      \end{tabular}
+    \end{center}
+    \caption{callibration method RMSE compared}
+    \label{tab:callib_rmse}
+  \end{table}
 
 \begin{figure}[hpbt]
     \centering
@@ -149,158 +197,5 @@ where
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PROBLEM FORMULATION OR STATEMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\chapter{Problem Statement}\label{chap:Problem_statement}
-
-\section{Fusion Algorithm}\label{sec:2-bayes_fusion}
-Fusing measurements from two heterogeneous sensors that have few cross-correlations can be challenging. 
-To take inputs from two different sensors and give them weight, we use Bayes Fusion in this thesis.
-Bayes fusion takes the noises of both sensors to determine their reliability at a given point of the measurement.
-Thus giving us a reliable way to give scores of trust to each sensor.
-
-The coordinates that undergo fusion from both radar and image sensors are the horizontal coordinates,
-specifically the radar's azimuth and the image's "u" coordinate. 
-This constraint arises from the fact that these are the only coordinates where both sensors provide measurements, 
-as illustrated in Figure \ref{fig:trade_off_and_plane}\subref{subfig:cam_radar_sub}.
-It's important to note that radar's elevation measurement resolution is limited and subject to noise. 
-Additionally, the image sensor does not provide depth information.
-
-If X is the real position of the object, 
-then Bayes' theorem predicts that the probability of the fused position is shown in equation \ref{equ:bayes1} \cite{10.1007/978-981-16-2248-9_32}.
-
-\begin{equation}\label{equ:bayes1}
-    P_{prob}(\frac{P}{X})=
-    \frac
-    {e \frac{−(P−X)^T R^{−1}(P−X)}{2}}
-    {2 \pi R^(0.5)}
-\end{equation}
-
-Applying Bayes' fusion, the value of the measured measurements is provided by equation \ref{equ:bayes2}.
-
-\begingroup
-\large
-\begin{equation}\label{equ:bayes2}
-P_{x_{bayes}}=\frac
-{\frac{p_{x_{radar}}}{R_{radar}}+\frac{p_{x_{cam}}} {R_{cam}}}
-{\frac{1}{R_{radar}}+\frac{1}{R_{cam}}}
-\end{equation}
-\endgroup
-
-where
-\begin{align*}
-    P_{x_{bayes}} &= \text{fused position}\\
-    p_{x_{radar}} &= \text{radar x-axis in cartesian}\\
-    p_{x_{cam}} &= \text{camera x-axis in cartesian}\\
-    R_{radar} &= \text{radar covariance}\\
-    R_{cam} &= \text{camera covariance}
-\end{align*}
-\begin{equation}\label{equ:bayes4}
-    \frac{1}{R}=\frac{1}{R_1}+\frac{1}{R_2}
-\end{equation}
-\begin{equation}\label{equ:2-radar_R}
-    \mathbf{R}_{radar} = 
-        \sigma_{radar_x}^2 
-\end{equation}
-\begin{equation}\label{equ:2-R_cam}
-    \mathbf{R}_{cam} = 
-        \sigma_{cam_u}^2
-\end{equation}
-
-
-\section{Motion Model}\label{sec:2-kalman_filter}
-To predict the movement model of our subjects, we use a multimodal kalman filter.
-\subsection{Predict}\label{sec:2-predict}
-The state matrix used in this Kalman Filter is from the single sensor maneuvering tracking, with constant velocity.
-It has four elements and is defined with position and velocity, which projects onto the x-axis and y-axis:
-
-\begin{equation}\label{equ:state_eq}
-    \mathbf{x} = 
-        \begin{bmatrix} 
-        p \\ 
-        v 
-        \end{bmatrix} = 
-        \begin{bmatrix} 
-        p_x \\ 
-        p_y \\ 
-        v_x \\ 
-        v_y 
-        \end{bmatrix}
-\end{equation}
-where
-\begin{align*}
-    p_x &=\text{position x}\\
-    p_y &=\text{position y}\\
-    v_x &=\text{velocity x}\\
-    v_y &=\text{velocity y}\\
-\end{align*}
-
-\begin{equation}\label{equ:transition_matrix_H}
-    \mathbf{F} = 
-    \begin{bmatrix}
-        1 & 0 & 1 & 0 \\
-        0 & 1 & 0 & 1 \\
-        0 & 0 & 0 & 0 \\
-        0 & 0 & 0 & 0 \\
-      \end{bmatrix}
-\end{equation}
-
-\begin{equation}\label{equ:predict_eq}
-    \mathbf{x}_k=\mathbf{F}_k\mathbf{x}_{k-1}+\mathbf{w}
-\end{equation}
-
-Error covariance update
-\begin{equation}\label{equ:error_covariance}
-    \mathbf{P}_k=\mathbf{F}_k \mathbf{P}_{k-1} \mathbf{F}_k^T+\mathbf{Q}_k
-\end{equation}
-
-\subsection{Update}\label{equ:2_update}
-To fuse two sensors with different update rates, Kalman Filter is updated seperately (figure \ref{fig:sync_fig})
-\begin{figure}[hpbt]
-    \centering
-    \includegraphics[width=\textwidth]{Figures/sync.png}%\textwidth
-    \caption{Update timing \cite{7472511}}
-    \label{fig:sync_fig}
-\end{figure}
-
-\subsubsection{Radar Update}\label{sec:2-radar_update}  
-Centroid of radar
-\begin{equation}
-    \mathbf{z}_{radar}=
-    \begin{bmatrix}
-        P_{x_{bayes}} \\ 
-        p_y
-    \end{bmatrix}
-\end{equation}
-\begin{equation}\label{equ:2_radar_R_kf}
-    \mathbf{R}_{radar} = 
-    \begin{bmatrix}
-        \sigma_{radar_x}^2 & 0 \\
-        0 & \sigma_{radar_y}^2 \\
-      \end{bmatrix}
-\end{equation}
-Transition matrix
-\begin{equation}\label{equ:2_radar_transition_matrix}
-    \mathbf{H} = 
-    \begin{bmatrix}
-        1 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 \\
-      \end{bmatrix}
-\end{equation}
-
-
-
-\subsubsection{Camera Update}\label{sec:2-camera_update}
-\begin{equation}\label{equ:2_z_cam}
-    \mathbf{z}_{cam}=
-    \begin{bmatrix}P_{x_{bayes}}\end{bmatrix}
-\end{equation}
-
-\begin{equation}\label{equ:2_cam_transition_matrix}
-    \mathbf{H} = 
-    \begin{bmatrix}
-        1 & 0 & 0 & 0 \\
-      \end{bmatrix}
-\end{equation}
 
