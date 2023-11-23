@@ -46,7 +46,8 @@ In order to achieve accurate sensor fusion, it is essential to conduct proper ca
 For this purpose, a corner reflector is employed (figure \ref*{fig:radar_camera_calibration} \subref{subfig:corner_reflector_fig}), primarily due to its strong radar reflection characteristics(white point in figure \ref*{fig:radar_camera_calibration} \subref{subfig:radar_view_fig}). 
 Additionally, it offers the advantage of appearing as a single point in both radar and camera data, effectively reducing ambiguity (figure \ref*{fig:radar_camera_calibration} \subref{subfig:camera_view_fig}).
 
-Data points from both radar and camera coordinates can be collected with the corner reflector positioned at various locations.
+Data points from both radar and camera coordinates can be collected with the corner reflector positioned at various locations
+(table \ref{tab:cam_radar_data}).
 After data is collected, radar points are associated with image points based on equation \ref*{equ:img2cart}
 \begin{figure}[hbpt]
     \centering
@@ -115,7 +116,12 @@ Thus
     {(640-u)p_{y_{radar}}}
     {950}
 \end{equation}
-
+\begin{figure}[hpbt]
+    \centering
+    \includegraphics[width=8cm]{Figures/cam_projection.png}%\textwidth
+    \caption{Camera to real-world projection}
+    \label{fig:camera_projection}
+\end{figure}
 
 \begin{table}[htbp]
     \centering
@@ -149,8 +155,8 @@ Thus
     533 & 330 & 1.428454399 & 0.1799683422 & 0.1608890744 & 0.019079 \\
     \hline
 \end{tabular}
-\caption{Real-world camera data converted to cartesian compared to real radar data}
-\label{tab:data}
+\caption{Real-world camera data converted to cartesian compared to real radar measurements}
+\label{tab:cam_radar_data}
 \end{table}
 
 \begin{table}[h!]
@@ -160,26 +166,21 @@ Thus
         \textbf{Method} & \textbf{RMSE} \\% %object detected
         \hline
         Proposed                            & 0.0271 m \\%& 6m 
-        \citeauthor{8794186}\cite{8794186} & 0.018 m \\%
+        \citeauthor{8794186}\cite{8794186}  & 0.025 m \\%
         
       \end{tabular}
     \end{center}
-    \caption{callibration method RMSE compared}
+    \caption{calibration method RMSE compared}
     \label{tab:callib_rmse}
   \end{table}
 
-\begin{figure}[hpbt]
-    \centering
-    \includegraphics[width=8cm]{Figures/cam_projection.png}%\textwidth
-    \caption{Camera to real-world projection}
-    \label{fig:camera_projection}
-\end{figure}
+
 \newpage
 \section{Radar-camera Data Association}\label{sec:2-association}
 Before fusion, radar clusters have to be associated with tracked objects from deepsort.
 First, centroids of radar clusters are mapped into image coordinates.
 Second, is to find the theoretical error of radar's measurement \cite{8844649}, which is radar's resolution, determined by equation \ref*{equ:angular_resolution}
-Finally, if the distance between the calculated radar centroid and the image detection lies within the theoretical boundary
+Finally, if the distance between the calculated radar centroid and the image detection BBox lies within the theoretical boundary
 , we can safely assume both measurements belong to the same object of interest.
 \begin{equation}\label{equ:angular_resolution}
     \Delta \theta= \frac{c_0}{f_c d N_{RX} N_{TX} \cos(\theta _i)}
