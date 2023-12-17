@@ -31,17 +31,17 @@ Applying Bayes' fusion, the value of the measured measurements is provided by eq
 \begingroup
 \large
 \begin{equation}\label{equ:bayes2}
-P_{x_{bayes}}=\frac
-{\frac{p_{x_{radar}}}{R_{radar}}+\frac{p_{x_{cam}}} {R_{cam}}}
+\theta_{bayes}=\frac
+{\frac{\theta_{radar}}{R_{radar}}+\frac{\theta_{cam}} {R_{cam}}}
 {\frac{1}{R_{radar}}+\frac{1}{R_{cam}}}
 \end{equation}
 \endgroup
 
 where
 \begin{align*}
-    P_{x_{bayes}} &= \text{fused position}\\
-    p_{x_{radar}} &= \text{radar x-axis in cartesian}\\
-    p_{x_{cam}} &= \text{camera x-axis in cartesian}\\
+    \theta_{bayes} &= \text{fused position}\\
+    \theta_{radar} &= \text{radar azimuth angle}\\
+    \theta_{cam} &= \text{camera azimuth angle}\\
     R_{radar} &= \text{radar covariance}\\
     R_{cam} &= \text{camera covariance}
 \end{align*}
@@ -69,13 +69,14 @@ It has four elements and is defined with position and velocity, which projects o
     \mathbf{x} = 
         \begin{bmatrix} 
         p \\ 
-        v 
+        v \\
+        
         \end{bmatrix} = 
         \begin{bmatrix} 
         p_x \\ 
         p_y \\ 
         v_x \\ 
-        v_y 
+        v_y \\
         \end{bmatrix}
 \end{equation}
 where
