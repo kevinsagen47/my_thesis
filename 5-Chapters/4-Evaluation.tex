@@ -38,7 +38,7 @@ To test the performance of the algorithm, 3 specific scenarios were tested:
         \label{subfig:scenario3gt}
     \end{subfigure}
 
-    \caption{Bird Eye View of multi-object tracking experiments' ground truth}
+    \caption{Bird Eye View of multi-object tracking}
     \label{fig:ground_truth}
 \end{figure}
 
@@ -117,113 +117,183 @@ From figure \ref*{fig:concealing_fig}\subref{subfig:concealing_radar_fig} can be
 Scenario 1 is the control when object 1 and object 2 do not crosspath.
 \href{https://drive.google.com/file/d/1SL30CC6EpyI4NLOcGnfALKAP44P82u9n/view?usp=sharing}{\color{blue}{Video}}
 \begin{figure}[!htb]
-    \centering
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/1_before.png}
-        \caption{Only radar object tracking}
-        \label{subfig:without_fusion_1}
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Radar Only Object Tracking Scenario 1.png}
+        \caption{Radar Only Object Tracking Scenario 1}
+        \label{subfig:radar_1}
     \end{subfigure}
-    %\hspace{0.15\textwidth}
-    \hfill
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/rad_v_cam_1.png}
+    \hspace{0.1\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Radar vs Camera Azimuth Angle Scenario 1.png}
         \caption{Raw radar and image data after data association}
         \label{subfig:raw_fusion_1}
     \end{subfigure}
+
+    \caption{Raw Data of Scenario 1}
+    \label{fig:raw_1}
+\end{figure}
+\begin{figure}[!htb]
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/EKF Output in Cartesian Scenario 1.png}
+        \caption{EKF Output in Cartesian Scenario 1}
+        \label{subfig:ekf_cart_1}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
     %\hfill
-    \vskip\baselineskip
-
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/fusion_scene1.png}
-        \caption{Fused data}
-        \label{subfig:fusion_1}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/EKF Output Azimuth Scenario 1.png}
+        \caption{EKF Output Azimuth Scenario 1}
+        \label{subfig:ekf_azi_1}
     \end{subfigure}
 
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/RMSE1.png}
-        \caption{RMSE to ground truth}
-        \label{subfig:RMSE_1}
+    \caption{EKF Output of Scenario 1}
+    \label{fig:ekf_1}
+\end{figure}
+
+\begin{figure}[!htb]
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 1 Cartesian Error.png}
+        \caption{Fused Scenario 1 Cartesian Error}
+        \label{subfig:err_cart_1}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 1 Azimuth Error.png}
+        \caption{Fused Scenario 1 Azimuth Error}
+        \label{subfig:err_azi_1}
     \end{subfigure}
 
-    \caption{Scenario 1 multi-object tracking}
-    \label{fig:scenario_result_1}
+    \caption{EKF Error of Scenario 1}
+    \label{fig:error_1}
 \end{figure}
 
 \subsection{Scenario 2}\label{sec:3-exp_result2}
 In scenario 2, object 1 crosses path with object 2 in a straight line horizontally.
 After concealing object 2 from both camera and radar, both objects continue their original trajectory.
-In figure \ref*{fig:scenario_result_2}\subref{subfig:without_fusion_2} can be seen that object 1 and object 2 switch places.
-The algorithm is able to track and identify objects 1 and 2 correctly (figure \ref*{fig:scenario_result_2}\subref{subfig:with_fusion_2}).
+In figure \ref*{fig:raw_2}\subref{subfig:radar_2} can be seen that object 1 and object 2 switch places.
+The algorithm is able to track and identify objects 1 and 2 correctly (figure \ref*{fig:ekf_2}\subref{subfig:ekf_cart_2}).
 \href{https://drive.google.com/file/d/1YnliV7YRzahYNpIehctzrNrf0Z0ZpIeY/view?usp=sharing}{\color{blue}{Video}}
 \begin{figure}[!htb]
-    \centering
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/2_before.png}
-        \caption{Only radar object tracking}
-        \label{subfig:without_fusion_2}
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Radar Only Object Tracking Scenario 2.png}
+        \caption{Radar Only Object Tracking Scenario 2}
+        \label{subfig:radar_2}
     \end{subfigure}
-    %\hspace{0.15\textwidth}
-    \hfill
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/rad_v_cam_2.png}
+    \hspace{0.1\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Radar vs Camera Azimuth Angle Scenario 2.png}
         \caption{Raw radar and image data after data association}
         \label{subfig:raw_fusion_2}
     \end{subfigure}
-    %\hfill
-    \vskip\baselineskip
 
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/fusion_scene2.png}
-        \caption{Fused data}
-        \label{subfig:with_fusion_2}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/RMSE2.png}
-        \caption{RMSE to ground truth}
-        \label{subfig:RMSE_2}
-    \end{subfigure}
-    \caption{Scenario 2 multi-object tracking}
-    \label{fig:scenario_result_2}
+    \caption{Raw Data of Scenario 2}
+    \label{fig:raw_2}
 \end{figure}
-\newpage
+\begin{figure}[!htb]
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/EKF Output in Cartesian Scenario 2.png}
+        \caption{EKF Output in Cartesian Scenario 2}
+        \label{subfig:ekf_cart_2}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/EKF Output Azimuth Scenario 2.png}
+        \caption{EKF Output Azimuth Scenario 2}
+        \label{subfig:ekf_azi_2}
+    \end{subfigure}
+
+    \caption{EKF Output of Scenario 2}
+    \label{fig:ekf_2}
+\end{figure}
+
+\begin{figure}[!htb]
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 2 Cartesian Error.png}
+        \caption{Fused Scenario 2 Cartesian Error}
+        \label{subfig:err_cart_2}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 2 Azimuth Error.png}
+        \caption{Fused Scenario 2 Azimuth Error}
+        \label{subfig:err_azi2}
+    \end{subfigure}
+
+    \caption{EKF Error of Scenario 2}
+    \label{fig:error_2}
+\end{figure}
+\newpage 
 \subsection{Scenario 3}\label{sec:3-exp_result3}
 In scenario 3, object 1 covers object 2, and in the next few frames, object 2 covers object 1.
 In this scenario, both objects change trajectory when departing from each other.
-In figure \ref*{fig:scenario_result_3}\subref{subfig:without_fusion_3} can be seen that object 1 and object 2 switch places.
-The algorithm is able to track and identify objects 1 and 2 correctly (figure \ref*{fig:scenario_result_3}\subref{subfig:with_fusion_3}).
+In figure \ref*{fig:raw_3}\subref{subfig:radar_3} can be seen that object 1 and object 2 switch places.
+The algorithm is able to track and identify objects 1 and 2 correctly (figure \ref*{fig:ekf_3}\subref{subfig:ekf_cart_3}).
 \href{https://drive.google.com/file/d/1bd92Bu6CJeL1QIIbBlW42cAozxEcis-d/view?usp=sharing}{\color{blue}{Video}}
 \begin{figure}[!htb]
-    \centering
-    %\begin{adjustwidth}{-8em}{0em}
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/3_before.png}
-        \caption{Only radar object tracking}
-        \label{subfig:without_fusion_3}
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Radar Only Object Tracking Scenario 3.png}
+        \caption{Radar Only Object Tracking Scenario 3}
+        \label{subfig:radar_3}
     \end{subfigure}
-    %\hspace{0.05\textwidth}
-    \hfill
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/rad_v_cam_3.png}
+    \hspace{0.1\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Radar vs Camera Azimuth Angle Scenario 3.png}
         \caption{Raw radar and image data after data association}
         \label{subfig:raw_fusion_3}
     \end{subfigure}
-    \vskip\baselineskip
-%\end{adjustwidth}
-    %\hfill
-    %\hspace{0.05\textwidth}
 
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/fusion_scene3.png}
-        \caption{Fused data}
-        \label{subfig:with_fusion_3}
+    \caption{Raw Data of Scenario 3}
+    \label{fig:raw_3}
+\end{figure}
+\begin{figure}[!htb]
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/EKF Output in Cartesian Scenario 3.png}
+        \caption{EKF Output in Cartesian Scenario 3}
+        \label{subfig:ekf_cart_3}
     \end{subfigure}
-    \begin{subfigure}[b]{0.475\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/RMSE3.png}
-        \caption{RMSE to ground truth}
-        \label{subfig:RMSE_3}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/EKF Output Azimuth Scenario 3.png}
+        \caption{EKF Output Azimuth Scenario 3}
+        \label{subfig:ekf_azi_3}
     \end{subfigure}
-    \caption{Scenario 3 multi-object tracking}
-    \label{fig:scenario_result_3}
+
+    \caption{EKF Output of Scenario 3}
+    \label{fig:ekf_3}
+\end{figure}
+
+\begin{figure}[!htb]
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 3 Cartesian Error.png}
+        \caption{Fused Scenario 3 Cartesian Error}
+        \label{subfig:err_cart_3}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 3 Azimuth Error.png}
+        \caption{Fused Scenario 3 Azimuth Error}
+        \label{subfig:err_azi_3}
+    \end{subfigure}
+
+    \caption{EKF Error of Scenario 3}
+    \label{fig:error_3}
 \end{figure}
 \newpage
 
@@ -245,17 +315,17 @@ The collective analysis across all scenarios yields an average RMSE of 0.1561m.
     \begin{center}
       \label{tab:table2}
       \begin{tabular}{c|c|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
-        \multirow{3}{*}{\textbf{Scenario}} & \multicolumn{6}{c}{\textbf{RMSE (m)}}\\\cline{2-7}
+        \multirow{3}{*}{\textbf{Scenario}} & \multicolumn{6}{c}{\textbf{RMSE (rad)}}\\\cline{2-7}
                                             & \multicolumn{3}{c|}{\textbf{Object 1}}  & \multicolumn{3}{c}{\textbf{Object 2}}\\
         \cline{2-7}
-                   & Fusion & Camera \tablefootnote{\label{note1}only lateral error}& Radar & Fusion & Camera\footref{note1} & Radar \\
+                   & Fusion & Camera & Radar & Fusion & Camera & Radar \\
         \hline
-        Scenario 1 & 0.1388 & 0.1922 & \textbf{0.1124} & \textbf{0.105}  & 0.1236 & 0.1201 \\
-        Scenario 2 & \textbf{0.1206} & 0.1211 & 0.1228 & \textbf{0.1687} & 0.1982 & 0.2014 \\
-        Scenario 3 & \textbf{0.0903} & 0.1211 & 0.0928 & 0.3075 & \textbf{0.2381} & 0.3592 \\
+        Scenario 1 & \textbf{0.0242} & 0.0312 & 0.0358 & \textbf{0.0443}  & 0.0977 & 0.0493 \\
+        Scenario 2 & 0.0566 & \textbf{0.0555} & 0.1228 & \textbf{0.0644} & 0.0917 & 0.0749 \\
+        Scenario 3 & 0.0512 & \textbf{0.0366} & 0.1158 & 0.0672 & \textbf{0.0611} & 0.1537 \\
       \end{tabular}
     \end{center}
-    \caption{All scenarios RMSE compared}
+    \caption{All scenarios azimuth error compared}
     \label{tab:scenarios_rmse}
   \end{table}
 
