@@ -73,10 +73,11 @@ Additionally, the work by \citeauthor{8844649} introduces the concept of "Error 
 In this thesis, our primary objective is to harness the strengths of camera and radar sensors, 
 while simultaneously mitigating their inherent limitations. To achieve this, several notable contributions have been made:
 
-1. \textbf{Development of a Multimodal Kalman Filter Model: }
-We utilized a framework that leverages a multimodal Kalman Filter model. 
+1. \textbf{Development of an Extended Kalman Filter Model: }
+We utilized a framework that leverages an Extended Kalman Filter model. 
 This model enables the fusion of data from both camera and radar sensors, 
-facilitating more accurate and robust object tracking and identification. 
+facilitating more accurate and robust object tracking and identification
+ while addressing non-linearity in the equations.
 
 2. \textbf{Correlation of Radar and Image Detection Data: }
 A critical aspect of our work is the introduction of a method to correlate radar and image detection results. 
@@ -92,6 +93,13 @@ The contribution of this thesis is highlighted by the algorithm's comprehensive 
 with a specific focus on addressing the challenging "blind spot" scenarios. 
 The research demonstrates instances where sensor fusion complements the capabilities of individual sensors, 
 which will be further explored in this thesis.
+
+4. \textbf{Producing 3D BBox: }
+The conventional approach for producing a Cartesian 3D Bounding Box typically involves the use of high-resolution 3D sensors, 
+such as LiDAR. 
+However, this thesis explores an alternative by the utilization of width and height information in pixels from the camera. 
+The algorithm developed herein demonstrates its capability to generate real-world 3D bounding boxes with high accuracy, 
+leveraging sparse radar data as a key input.
 
 In summary, this thesis offers a significant contribution to the field of sensor fusion by introducing a comprehensive solution 
 that harnesses the advantages of camera and radar sensors while addressing their respective limitations.

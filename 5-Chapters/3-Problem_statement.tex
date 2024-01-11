@@ -70,6 +70,8 @@ It has four elements and is defined with position and velocity, which projects o
         \begin{bmatrix} 
         p \\ 
         v \\
+        w \\
+        h \\
 
         \end{bmatrix} = 
         \begin{bmatrix} 
@@ -77,23 +79,30 @@ It has four elements and is defined with position and velocity, which projects o
         p_y \\ 
         v_x \\ 
         v_y \\
+        w \\
+        h \\
         \end{bmatrix}
 \end{equation}
 where
 \begin{align*}
-    p_x &=\text{position x}\\
-    p_y &=\text{position y}\\
-    v_x &=\text{velocity x}\\
-    v_y &=\text{velocity y}\\
+    p_x &=\text{position in x-axis}\\
+    p_y &=\text{position in y-axis}\\
+    v_x &=\text{velocity in x-axis}\\
+    v_y &=\text{velocity in y-axis}\\
+    w &=\text{width}\\%\footnote{\label{note1}Obtained from equation} \\
+    h &=\text{height}\\
 \end{align*}
+%\footnotetext{Obtained from equation \ref{equ:2_cam_height}}
 
 \begin{equation}\label{equ:transition_matrix_H}
     \mathbf{F} = 
     \begin{bmatrix}
-        1 & 0 & 1 & 0 \\
-        0 & 1 & 0 & 1 \\
-        0 & 0 & 0 & 0 \\
-        0 & 0 & 0 & 0 \\
+        1 & 0 & 1 & 0 & 0 & 0\\
+        0 & 1 & 0 & 1 & 0 & 0\\
+        0 & 0 & 0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 0 & 0 & 1\\
       \end{bmatrix}
 \end{equation}
 
@@ -131,6 +140,8 @@ These radar coordinates are derived from the centroids of the k-d tree clusters.
     \begin{bmatrix}
         \rho \\ 
         \theta_{bayes}\\
+        w \\
+        h \\
     \end{bmatrix}
 \end{equation}
 
@@ -158,10 +169,14 @@ EKF
     \begin{bmatrix}
         \rho \\ 
         \theta_{bayes}\\
+        w \\
+        h \\
     \end{bmatrix}=
     \begin{bmatrix}
     \sqrt{p_x^2+p_y^2}\\
-    \tan^{-1}(\frac{p_x}{p_y})
+    \tan^{-1}(\frac{p_x}{p_y})\\
+    w \\
+    h \\
     \end{bmatrix}
     \end{equation}
     Transition matrix
@@ -174,18 +189,30 @@ EKF
             \end{bmatrix}=
             \begin{bmatrix}
                 \frac{\partial \rho}{\partial p_x} & \frac{\partial \rho}{\partial p_y}
-                & \frac{\partial \rho}{\partial v_x}& \frac{\partial \rho}{\partial v_y} \\
+                & \frac{\partial \rho}{\partial v_x}& \frac{\partial \rho}{\partial v_y} 
+                & \frac{\partial \rho}{\partial w}& \frac{\partial \rho}{\partial h}\\
         
                 \frac{\partial \theta}{\partial p_x} & \frac{\partial \theta}{\partial p_y} 
-                & \frac{\partial \theta}{\partial v_x}& \frac{\partial \theta}{\partial v_y} \\
+                & \frac{\partial \theta}{\partial v_x}& \frac{\partial \theta}{\partial v_y} 
+                & \frac{\partial \theta}{\partial w}& \frac{\partial \theta}{\partial h} \\
+
+                \frac{\partial w}{\partial p_x} & \frac{\partial w}{\partial p_y} 
+                & \frac{\partial w}{\partial v_x}& \frac{\partial w}{\partial v_y} 
+                & \frac{\partial w}{\partial w}& \frac{\partial w}{\partial h} \\
+
+                \frac{\partial h}{\partial p_x} & \frac{\partial h}{\partial p_y} 
+                & \frac{\partial h}{\partial v_x}& \frac{\partial h}{\partial v_y} 
+                & \frac{\partial h}{\partial w}& \frac{\partial h}{\partial h} \\
             \end{bmatrix}
         \end{equation}
         
         \begin{equation}
             \mathbf{H}=
             \begin{bmatrix}
-                \frac{p_x}{\sqrt{p_x^2+p_y^2}} & \frac{p_y}{\sqrt{p_x^2+p_y^2}} & 0 & 0 \\
-                -\frac{p_y}{p_x^2+p_y^2} & \frac{p_x}{p_x^2+p_y^2} & 0 & 0 \\
+                \frac{p_x}{\sqrt{p_x^2+p_y^2}} & \frac{p_y}{\sqrt{p_x^2+p_y^2}} & 0 & 0 & 0 & 0\\
+                -\frac{p_y}{p_x^2+p_y^2} & \frac{p_x}{p_x^2+p_y^2} & 0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0 & 1 & 0\\
+                0 & 0 & 0 & 0 & 0 & 1
             \end{bmatrix}
         \end{equation}
     \endgroup

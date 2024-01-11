@@ -1,4 +1,3 @@
-
 \chapter{Methodology}\label{chap:Methodology}
 
 
@@ -41,6 +40,68 @@ Using tools provided by ROS \cite{cam_calib} as shown in figure \ref*{fig:camera
     \label{fig:camera_calibration}
 \end{figure}
 
+\subsection{Radar-Camera Transformation Matrix}
+While the camera and radar are physically housed as closely as possible, 
+as illustrated in Figure \ref{fig:radar_camera_setup_fig}, 
+theoretical discrepancies exist.
+Accurate fusion of both sensors requires the transformation of their measurements. 
+In this scenario, given the challenges in calibrating radar elevation and camera depth, 
+a two-dimensional Euclidean space is employed.
+
+\begin{figure}[hpbt]
+    \centering
+    \includegraphics[width=6cm]{Figures/transformation.png}%\textwidth
+    \caption{Two rigid body Transformation in 2D coordinate system}
+    \label{fig:transformation_figure}
+\end{figure}
+Let radar coordinates be represented as (x, y), 
+and camera coordinates as (x', y'). 
+The rotation matrix for the camera with respect to the radar, 
+originating from the origin, can be expressed as follows:
+\begin{equation}\label{equ:2d_rotation_eq}
+    R=
+    \begin{bmatrix}
+        i_1 & j_1\\
+        i_2 & j_2\\
+        \end{bmatrix}=
+    \begin{bmatrix}
+    cos\theta & -sin\theta\\
+    sin\theta & cos\theta\\
+    \end{bmatrix}
+\end{equation}
+To relate an arbitrary point in radar coordinates (x, y) to camera coordinates (x', y'), 
+the following vector can be employed:
+\begin{equation}\label{equ:2d_vector_eq}
+    \begin{bmatrix}
+        x'\\ 
+        y'\\
+    \end{bmatrix}=
+    \mathbf{t}+x\mathbf{i}+y\mathbf{j}=\mathbf{t}+R
+    \begin{bmatrix}
+    x\\
+    y\\
+    \end{bmatrix}
+\end{equation}
+After encoding the rotation matrix $R$ and the vector, the resulting transformation equation is as follows:
+\begin{equation}\label{equ:2d_trans_eq}
+    \begin{bmatrix}
+        x'\\ 
+        y'\\
+        1\\
+    \end{bmatrix}=
+    \begin{bmatrix}
+    cos\theta & -sin\theta & t_x\\
+    sin\theta & cos\theta & t_y\\
+    0 & 0 & 1\\
+    \end{bmatrix}
+    \begin{bmatrix}
+        x\\ 
+        y\\
+        1\\
+    \end{bmatrix}
+\end{equation}
+
+\newpage
 \subsection{Radar-Camera Calibration}
 In order to achieve accurate sensor fusion, it is essential to conduct proper calibration of the two sensors. 
 For this purpose, a corner reflector is employed (figure \ref*{fig:radar_camera_calibration} \subref{subfig:corner_reflector_fig}), primarily due to its strong radar reflection characteristics(white point in figure \ref*{fig:radar_camera_calibration} \subref{subfig:radar_view_fig}). 
@@ -80,18 +141,20 @@ After data is collected, radar points are associated with image points based on 
 Given that radar data is inherently sparse and noisy, its data needed to be filtered.
 For this purpose, k-d tree is employed to cluster the pointcloud.
 A k-d tree, short for k-dimensional tree, is a hierarchical data structure used for efficient multidimensional data organization and search operations. 
-It arranges data points in k-dimensional space, such as spatial coordinates, in a binary tree structure. 
+It arranges data points in k-dimensional space, such as spatial coordinates, in a binary tree structure. \cite{praveen_palanisamy_2019_3559187}
 
 \subsection{Image Data Pre-Processing}\label{sec:2-img_recognition}
-\subsubsection{Image Recognition and Tracking\small(to be done)}
+\subsubsection{Image Recognition and Tracking}
 YOLOv3 is utilized to generate bounding boxes (BBox) and regions of interest (ROI)\cite{redmon2018yolov3}.
-Subsequently, DeepSORT is applied for tracking the generated bounding boxes, 
+Subsequently, DeepSORT is applied for tracking the generated bounding boxes for objects, 
 enabling robust and efficient object tracking throughout the analysis\cite{Wojke2017simple}.
 
-\subsubsection{Image to Real-world projection}
-Before fusing, the detection results need to be converted into cartesian coordinates.
-
-Conversion image to real-world vector, seen in figure \ref{fig:camera_projection}.
+\subsubsection{Image to Polar Coordinate}
+The only plane of intersection between the camera and radar in polar coordinates is characterized by theta. 
+To integrate the camera data into radar measurements, 
+we convert the center of the object detection result into theta. 
+Figure \ref{fig:camera_projection} illustrates the relationship of theta within the camera's plane. 
+Equation \ref{equ:img2cart} demonstrates the conversion of pixels to Cartesian coordinates.
 \begin{equation}\label{equ:img2cart}
 u=c_x-\tan^{-1}(\frac{p_x}{p_y})f
 \end{equation}
@@ -104,12 +167,12 @@ where
     u &=\text{center of Bbox object detection in pixel}
 \end{align*}
 
-From calibration, equation \ref{equ:img2cart}:
+Through calibration, as indicated by Equation \ref{equ:img2cart}, we derive:
 \begin{equation}\label{equ:2_img2cart2}
     u=640-\tan^{-1}(\frac{p_x}{p_y})876
 \end{equation}
 
-Thus
+Camera's theta can thus be calculated using this equation:
 \begin{equation}\label{equ:2_cam_px}
     \theta_{cam}=
     \tan^{-1}(\frac{p_x}{p_y})=
@@ -124,24 +187,27 @@ Thus
     \label{fig:camera_projection}
 \end{figure}
 
-To calculate height of 3D Bounding Box
-\begin{equation}\label{equ:2_cam_height}
-    height=
-    \frac
-    {(y_{max}-y_{min})\rho}
-    {950}
-\end{equation}
+The camera's bounding box detection result is initially expressed in pixels. 
+To transform these pixel coordinates into a meaningful real-world 3D bounding box, 
+it is essential to acquire the distance of the object, 
+a measurement obtained from the radar. 
+Once the distance to the object is known, the width of the object can be readily derived using Equation \ref{equ:2_cam_px}.
+Where $x_{min}$, $x_{max}$, $x_{min}$, and $x_{max}$ the size of the bbox in pixel obtained from Yolo detection. 
 
-To calculate width of 3D Bounding Box
 \begin{equation}\label{equ:2_cam_width}
-    width=
+    \text{width}=
     \frac
     {(x_{max}-x_{min})\rho}
     {950}
 \end{equation}
 
-where $x_{min}$, $x_{max}$, $x_{min}$, and $x_{max}$ obtained from Yolo detection. 
-Meanwhile, $\rho$ is range obtained from radar detection.
+The same equation can also be applied to derive the height of the detected image. 
+\begin{equation}\label{equ:2_cam_height}
+    \text{height}=
+    \frac
+    {(y_{max}-y_{min})\rho}
+    {950}
+\end{equation}
 
 
 \begin{table}[htbp]
@@ -149,7 +215,7 @@ Meanwhile, $\rho$ is range obtained from radar detection.
     \begin{tabular}{|c|c|c|c|c|}
     \hline
     \textbf{u} & \textbf{v }  & \textbf{radar azimuth} & \textbf{camera azimuth} & \textbf{abs error} \\ 
-    (pixel)   &(pixel)          &(rad)                  &from eq \ref{equ:2_cam_px}(rad)&(rad)\\
+    (pixel)   &(pixel)          &(rad)                  &(rad)&(rad)\\%from eq \ref{equ:2_cam_px}
     \hline
         639 & 297 & 0.03125508785 & 0.001141552511 & 0.03011353534 \\
         589 & 299 & 0.06254076689 & 0.05821917808 & 0.004321588807 \\
