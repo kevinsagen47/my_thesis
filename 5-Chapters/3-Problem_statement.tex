@@ -63,8 +63,8 @@ where
 
 \subsection{Predict}\label{sec:2-predict}
 The state matrix used in this Kalman Filter \cite{kalman} is from the single sensor maneuvering tracking, with constant velocity.
-It has four elements and is defined with position and velocity, which projects onto the x-axis and y-axis:
-
+It has four elements and is defined with position and velocity, which projects onto the x-axis and y-axis.
+State vector also includes the width and the height of the object\cite{4732695}.
 \begin{equation}\label{equ:state_eq}
     \mathbf{x} = 
         \begin{bmatrix} 
@@ -93,7 +93,7 @@ where
     h &=\text{height}\\
 \end{align*}
 %\footnotetext{Obtained from equation \ref{equ:2_cam_height}}
-
+Transition Matrix is expressed as follows:
 \begin{equation}\label{equ:transition_matrix_H}
     \mathbf{F} = 
     \begin{bmatrix}
@@ -105,27 +105,18 @@ where
         0 & 0 & 0 & 0 & 0 & 1\\
       \end{bmatrix}
 \end{equation}
-
+Thus state vector is updated as below:
 \begin{equation}\label{equ:predict_eq}
     \mathbf{x}_k=\mathbf{F}_k\mathbf{x}_{k-1}+\mathbf{w}
 \end{equation}
 
-Error covariance update
+Error covariance update:
 \begin{equation}\label{equ:error_covariance}
     \mathbf{P}_k=\mathbf{F}_k \mathbf{P}_{k-1} \mathbf{F}_k^T+\mathbf{Q}_k
 \end{equation}
 
-\newpage
+%\newpage
 \subsection{Update}\label{equ:2_update}
-To fuse two sensors with different update rates, Kalman Filter is updated seperately (figure \ref{fig:sync_fig}).
-Updates are based on the fps of each sensor.
-\begin{figure}[hpbt]
-    \centering
-    \includegraphics[width=\textwidth]{Figures/sync.png}%\textwidth
-    \caption{Update timing \cite{7472511}}
-    \label{fig:sync_fig}
-\end{figure}
-
 
 Both radar and camera undergo the same update procedure within the Kalman filter framework. 
 Nevertheless, variations exist in their measurement data, 
@@ -133,7 +124,7 @@ leading to distinct measurement matrices and noise covariance.
 Radar measurements encompass two parameters: azimuth and range, 
 both presented in polar coordinates. 
 These radar coordinates are derived from the centroids of the k-d tree clusters.
-
+Meanwhile, the width and height measurements are taken from equation \ref{equ:2_cam_width} and equation \ref{equ:2_cam_height}.
 
 \begin{equation}
     \mathbf{z}=
@@ -160,10 +151,12 @@ Finally, the current state estimation is updated based on this adjusted measurem
     \mathbf{P}_k = (\mathbf{I} - \mathbf{G}_k\mathbf{H})\mathbf{P}_k
 \end{equation}
 
-\newpage
+%\newpage
 
 \subsection{Non-linearity}\label{equ:2_non_linear}
-EKF
+Since measurements and Bayes fusion results are obtained and calculated in polar coordinates, 
+the application of the Extended Kalman Filter becomes crucial to linearize these results into Cartesian coordinates. 
+$h(\mathbf{x}_k)$ matrix represents conversion of polar coordinate to the cartesian coordinate, which is defined as follows:
 \begin{equation}
     h(\mathbf{x}_k)=
     \begin{bmatrix}
@@ -178,9 +171,11 @@ EKF
     w \\
     h \\
     \end{bmatrix}
-    \end{equation}
-    Transition matrix
-    \begingroup
+\end{equation}
+
+Because the solution comprises higher-dimensional components than the equations, 
+a first-order Jacobian matrix is employed on $\mathbf{H}$: 
+\begingroup
         \large
         \begin{equation}
             \mathbf{H}=
@@ -205,8 +200,8 @@ EKF
                 & \frac{\partial h}{\partial w}& \frac{\partial h}{\partial h} \\
             \end{bmatrix}
         \end{equation}
-        
-        \begin{equation}
+    Thus giving the transition matrix as follows:    
+    \begin{equation}
             \mathbf{H}=
             \begin{bmatrix}
                 \frac{p_x}{\sqrt{p_x^2+p_y^2}} & \frac{p_y}{\sqrt{p_x^2+p_y^2}} & 0 & 0 & 0 & 0\\
