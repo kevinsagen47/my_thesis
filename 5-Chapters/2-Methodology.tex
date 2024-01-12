@@ -155,6 +155,13 @@ To integrate the camera data into radar measurements,
 we convert the center of the object detection result into theta. 
 Figure \ref{fig:camera_projection} illustrates the relationship of theta within the camera's plane. 
 Equation \ref{equ:img2cart} demonstrates the conversion of pixels to Cartesian coordinates.
+\begin{figure}[hpbt]
+    \centering
+    \includegraphics[width=8cm]{Figures/cam_projection.png}%\textwidth
+    \caption{Camera to real-world projection}
+    \label{fig:camera_projection}
+\end{figure}
+
 \begin{equation}\label{equ:img2cart}
 u=c_x-\tan^{-1}(\frac{p_x}{p_y})f
 \end{equation}
@@ -167,7 +174,7 @@ where
     u &=\text{center of Bbox object detection in pixel}
 \end{align*}
 
-Through calibration, as indicated by Equation \ref{equ:img2cart}, we derive:
+Through calibration, as indicated by Equation \ref{equ:img2cart}, and table \ref{tab:cam_radar_data} we derive:
 \begin{equation}\label{equ:2_img2cart2}
     u=640-\tan^{-1}(\frac{p_x}{p_y})876
 \end{equation}
@@ -180,12 +187,7 @@ Camera's theta can thus be calculated using this equation:
     {(640-u)}
     {876}
 \end{equation}
-\begin{figure}[hpbt]
-    \centering
-    \includegraphics[width=8cm]{Figures/cam_projection.png}%\textwidth
-    \caption{Camera to real-world projection}
-    \label{fig:camera_projection}
-\end{figure}
+
 
 The camera's bounding box detection result is initially expressed in pixels. 
 To transform these pixel coordinates into a meaningful real-world 3D bounding box, 
@@ -209,8 +211,7 @@ The same equation can also be applied to derive the height of the detected image
     {950}
 \end{equation}
 
-
-
+\newpage
 
 \begin{table}[h!]
     \begin{center}
@@ -220,17 +221,55 @@ The same equation can also be applied to derive the height of the detected image
         \hline
         Proposed                            & 0.0271 m \\%& 6m 
         \citeauthor{8794186}\cite{8794186}  & 0.025 m \\%
-        
       \end{tabular}
     \end{center}
     \caption{calibration method RMSE compared}
     \label{tab:callib_rmse}
   \end{table}
-
+  \begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \textbf{u} & \textbf{v }  & \textbf{radar azimuth} & \textbf{camera azimuth} & \textbf{abs error} \\ 
+    (pixel)   &(pixel)          &(rad)                  &(rad)&(rad)\\%from eq \ref{equ:2_cam_px}
+    \hline
+        639 & 297 & 0.03125508785 & 0.001141552511 & 0.03011353534 \\
+        589 & 299 & 0.06254076689 & 0.05821917808 & 0.004321588807 \\
+        564 & 303 & 0.09388787093 & 0.08675799087 & 0.007129880062 \\
+        493 & 304 & 0.1886163813 & 0.1678082192 & 0.02080816213 \\
+        433 & 306 & 0.2526802453 & 0.2363013699 & 0.01637887542 \\
+        356 & 307 & 0.3178237065 & 0.3242009132 & 0.006377206754 \\
+        240 & 317 & 0.4183463717 & 0.4566210046 & 0.03827463284 \\
+        200 & 315 & 0.4528166082 & 0.502283105 & 0.04946649681 \\
+        100 & 316 & 0.5235987508 & 0.6164383562 & 0.09283960532 \\
+        23 & 321 & 0.5600753183 & 0.7043378995 & 0.1442625813 \\
+        973 & 230 & -0.3178237119 & -0.3801369863 & 0.06231327441 \\
+        945 & 241 & -0.2850964515 & -0.348173516 & 0.06307706449 \\
+        885 & 270 & -0.252680245 & -0.2796803653 & 0.02700012035 \\
+        848 & 293 & -0.1886163813 & -0.2374429224 & 0.04882654106 \\
+        801 & 318 & -0.1568928728 & -0.1837899543 & 0.02689708157 \\
+        390 & 272 & 0.2850964456 & 0.2853881279 & 0.0002916822178 \\
+        432 & 281 & 0.252680245 & 0.2374429224 & 0.01523732258 \\
+        467 & 289 & 0.2205332655 & 0.1974885845 & 0.02304468102 \\
+        461 & 299 & 0.2205332494 & 0.2043378995 & 0.01619534981 \\
+        485 & 313 & 0.1886163867 & 0.1769406393 & 0.01167574748 \\
+        512 & 317 & 0.1568928748 & 0.1461187215 & 0.01077415335 \\
+        515 & 328 & 0.1568928728 & 0.1426940639 & 0.01419880884 \\
+        533 & 330 & 0.125327834 & 0.1221461187 & 0.00318171529 \\
+        1103 & 265 & -0.4528165732 & -0.5285388128 & 0.07572223958 \\
+        875 & 282 & -0.2205332494 & -0.2682648402 & 0.04773159083 \\
+%        583 & 291 & 0.09388787395 & 0.06506849315 & 0.0288193808 \\
+%        339 & 303 & 0.3509073244 & 0.3436073059 & 0.007300018467 \\
+%        124 & 316 & 0.5235987814 & 0.5890410959 & 0.06544231452 \\
+    \hline
+\end{tabular}
+\caption{Camera data converted into polar coordinate compared to radar measurements (RMSE 0.0465 rad)}
+\label{tab:cam_radar_data}
+\end{table}
 
 \newpage
 \section{Radar-camera Data Association}\label{sec:2-association}
-Before fusion, radar clusters have to be associated with tracked objects from deepsort.
+Prior to fusion, radar clusters have to be associated with tracked objects from deepsort.
 First, centroids of radar clusters are mapped into image coordinates.
 Second, is to find the theoretical error of radar's measurement \cite{8844649}, which is radar's resolution, determined by equation \ref*{equ:angular_resolution}
 Finally, if the distance between the calculated radar centroid and the image detection BBox lies within the theoretical boundary
@@ -264,44 +303,5 @@ as depicted in Figure \ref{fig:sync_radar_cam}.
 
 
 
-\begin{table}[htbp]
-    \centering
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-    \textbf{u} & \textbf{v }  & \textbf{radar azimuth} & \textbf{camera azimuth} & \textbf{abs error} \\ 
-    (pixel)   &(pixel)          &(rad)                  &(rad)&(rad)\\%from eq \ref{equ:2_cam_px}
-    \hline
-        639 & 297 & 0.03125508785 & 0.001141552511 & 0.03011353534 \\
-        589 & 299 & 0.06254076689 & 0.05821917808 & 0.004321588807 \\
-        564 & 303 & 0.09388787093 & 0.08675799087 & 0.007129880062 \\
-        493 & 304 & 0.1886163813 & 0.1678082192 & 0.02080816213 \\
-        433 & 306 & 0.2526802453 & 0.2363013699 & 0.01637887542 \\
-        356 & 307 & 0.3178237065 & 0.3242009132 & 0.006377206754 \\
-        240 & 317 & 0.4183463717 & 0.4566210046 & 0.03827463284 \\
-        200 & 315 & 0.4528166082 & 0.502283105 & 0.04946649681 \\
-        100 & 316 & 0.5235987508 & 0.6164383562 & 0.09283960532 \\
-        23 & 321 & 0.5600753183 & 0.7043378995 & 0.1442625813 \\
-        973 & 230 & -0.3178237119 & -0.3801369863 & 0.06231327441 \\
-        945 & 241 & -0.2850964515 & -0.348173516 & 0.06307706449 \\
-        885 & 270 & -0.252680245 & -0.2796803653 & 0.02700012035 \\
-        848 & 293 & -0.1886163813 & -0.2374429224 & 0.04882654106 \\
-        801 & 318 & -0.1568928728 & -0.1837899543 & 0.02689708157 \\
-        390 & 272 & 0.2850964456 & 0.2853881279 & 0.0002916822178 \\
-        432 & 281 & 0.252680245 & 0.2374429224 & 0.01523732258 \\
-        467 & 289 & 0.2205332655 & 0.1974885845 & 0.02304468102 \\
-        461 & 299 & 0.2205332494 & 0.2043378995 & 0.01619534981 \\
-        485 & 313 & 0.1886163867 & 0.1769406393 & 0.01167574748 \\
-        512 & 317 & 0.1568928748 & 0.1461187215 & 0.01077415335 \\
-        515 & 328 & 0.1568928728 & 0.1426940639 & 0.01419880884 \\
-        533 & 330 & 0.125327834 & 0.1221461187 & 0.00318171529 \\
-        1103 & 265 & -0.4528165732 & -0.5285388128 & 0.07572223958 \\
-        875 & 282 & -0.2205332494 & -0.2682648402 & 0.04773159083 \\
-        583 & 291 & 0.09388787395 & 0.06506849315 & 0.0288193808 \\
-        339 & 303 & 0.3509073244 & 0.3436073059 & 0.007300018467 \\
-        124 & 316 & 0.5235987814 & 0.5890410959 & 0.06544231452 \\
-    \hline
-\end{tabular}
-\caption{Camera data converted into polar coordinate compared to radar measurements (RMSE 0.0465 rad)}
-\label{tab:cam_radar_data}
-\end{table}
+
 

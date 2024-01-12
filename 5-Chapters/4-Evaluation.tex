@@ -111,11 +111,12 @@ From figure \ref*{fig:concealing_fig}\subref{subfig:concealing_radar_fig} can be
 
 
 
-\vspace*{5cm}
+%\vspace*{5cm}
+\newpage 
 \section{Experiment Result}\label{sec:3-exp_result}
 \subsection{Scenario 1}\label{sec:3-exp_result1}
 Scenario 1 is the control when object 1 and object 2 do not crosspath.
-\href{https://drive.google.com/file/d/1SL30CC6EpyI4NLOcGnfALKAP44P82u9n/view?usp=sharing}{\color{blue}{Video}}
+%\href{https://drive.google.com/file/d/1SL30CC6EpyI4NLOcGnfALKAP44P82u9n/view?usp=sharing}{\color{blue}{Video}}
 \begin{figure}[!htb]
     \hspace{0.1\textwidth}
     \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
@@ -153,31 +154,14 @@ Scenario 1 is the control when object 1 and object 2 do not crosspath.
     \label{fig:ekf_1}
 \end{figure}
 
-\begin{figure}[!htb]
-    \hspace{0.1\textwidth}
-    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 1 Cartesian Error.png}
-        \caption{Fused Scenario 1 Cartesian Error}
-        \label{subfig:err_cart_1}
-    \end{subfigure}
-    \hspace{0.15\textwidth}
-    %\hfill
-    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 1 Azimuth Error.png}
-        \caption{Fused Scenario 1 Azimuth Error}
-        \label{subfig:err_azi_1}
-    \end{subfigure}
 
-    \caption{EKF Error of Scenario 1}
-    \label{fig:error_1}
-\end{figure}
-
+\newpage 
 \subsection{Scenario 2}\label{sec:3-exp_result2}
 In scenario 2, object 1 crosses path with object 2 in a straight line horizontally.
 After concealing object 2 from both camera and radar, both objects continue their original trajectory.
 In figure \ref*{fig:raw_2}\subref{subfig:radar_2} can be seen that object 1 and object 2 switch places.
 The algorithm is able to track and identify objects 1 and 2 correctly (figure \ref*{fig:ekf_2}\subref{subfig:ekf_cart_2}).
-\href{https://drive.google.com/file/d/1YnliV7YRzahYNpIehctzrNrf0Z0ZpIeY/view?usp=sharing}{\color{blue}{Video}}
+%\href{https://drive.google.com/file/d/1YnliV7YRzahYNpIehctzrNrf0Z0ZpIeY/view?usp=sharing}{\color{blue}{Video}}
 \begin{figure}[!htb]
     \hspace{0.1\textwidth}
     \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
@@ -215,41 +199,24 @@ The algorithm is able to track and identify objects 1 and 2 correctly (figure \r
     \label{fig:ekf_2}
 \end{figure}
 
-\begin{figure}[!htb]
-    \hspace{0.1\textwidth}
-    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 2 Cartesian Error.png}
-        \caption{Fused Scenario 2 Cartesian Error}
-        \label{subfig:err_cart_2}
-    \end{subfigure}
-    \hspace{0.15\textwidth}
-    %\hfill
-    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 2 Azimuth Error.png}
-        \caption{Fused Scenario 2 Azimuth Error}
-        \label{subfig:err_azi2}
-    \end{subfigure}
 
-    \caption{EKF Error of Scenario 2}
-    \label{fig:error_2}
-\end{figure}
 \newpage 
 \subsection{Scenario 3}\label{sec:3-exp_result3}
 In scenario 3, object 1 covers object 2, and in the next few frames, object 2 covers object 1.
 In this scenario, both objects change trajectory when departing from each other.
 In figure \ref*{fig:raw_3}\subref{subfig:radar_3} can be seen that object 1 and object 2 switch places.
 The algorithm is able to track and identify objects 1 and 2 correctly (figure \ref*{fig:ekf_3}\subref{subfig:ekf_cart_3}).
-\href{https://drive.google.com/file/d/1bd92Bu6CJeL1QIIbBlW42cAozxEcis-d/view?usp=sharing}{\color{blue}{Video}}
+%\href{https://drive.google.com/file/d/1bd92Bu6CJeL1QIIbBlW42cAozxEcis-d/view?usp=sharing}{\color{blue}{Video}}
 \begin{figure}[!htb]
     \hspace{0.1\textwidth}
-    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+    \begin{subfigure}[b]{0.35\textwidth}%{0.25\linewidth}
         \includegraphics[width=7cm]{Figures/matlab/Radar Only Object Tracking Scenario 3.png}
         \caption{Radar Only Object Tracking Scenario 3}
         \label{subfig:radar_3}
     \end{subfigure}
     \hspace{0.1\textwidth}
     %\hfill
-    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+    \begin{subfigure}[b]{0.35\textwidth}%{0.25\linewidth}
         \includegraphics[width=7cm]{Figures/matlab/Radar vs Camera Azimuth Angle Scenario 3.png}
         \caption{Raw radar and image data after data association}
         \label{subfig:raw_fusion_3}
@@ -277,40 +244,55 @@ The algorithm is able to track and identify objects 1 and 2 correctly (figure \r
     \label{fig:ekf_3}
 \end{figure}
 
-\begin{figure}[!htb]
-    \hspace{0.1\textwidth}
-    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 3 Cartesian Error.png}
-        \caption{Fused Scenario 3 Cartesian Error}
-        \label{subfig:err_cart_3}
-    \end{subfigure}
-    \hspace{0.15\textwidth}
-    %\hfill
-    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
-        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 3 Azimuth Error.png}
-        \caption{Fused Scenario 3 Azimuth Error}
-        \label{subfig:err_azi_3}
-    \end{subfigure}
 
-    \caption{EKF Error of Scenario 3}
-    \label{fig:error_3}
-\end{figure}
 \newpage
 
 
 
-\section{Error Evaluation}\label{sec:3-evaluation}
+\section{Object Tracking Performance Evaluation}\label{sec:3-evaluation}
 \begin{equation}\label{equ:4_RMSE}
 \text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}
 \end{equation}
-From Scenario 1, it becomes apparent that all components—fusion, radar, 
-or camera—deliver commendable performance. 
-Although the camera slightly outperforms in x-axis accuracy. 
-In scenario 2, where the algorithm showcases its strengths, 
-it combines the best of both sensors to produce better a result.
-Conversely, in Scenario 3, radar struggles significantly in tracking object 2 as it enters its blind spot. 
-Nevertheless, the algorithm maintains its performance by incorporating camera data. 
-The collective analysis across all scenarios yields an average RMSE of 0.1561m.
+
+\subsection{3D Bounding Box Error Evaluation}\label{sec:3-bbox}
+The accuracy of the 3D Bounding Box depends on the precision of both the radar's range and, notably, 
+Yolo's Bounding Box (BBox). 
+Additionally, the accuracy of the width and height of the bounding box is contingent upon capturing the subject of interest entirely within the camera frame. 
+In our scenarios, the accuracy of the subjects' height is reliable only when they are 3.7 meters or farther away. 
+Width prediction performance is not analyzed since our setup does not have a reliable way to collect subjects' widths.
+The tables below demonstrate that the algorithm can predict the subject's height with accuracy within 0.1 meters throughout the experiment.
+\begin{table}[h!]
+    \begin{center}
+      \label{tab:table3}
+      \begin{tabular}{c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \multirow{4}{*}{\textbf{Scenario}} & \multicolumn{4}{c}{\textbf{Height (m)}}\\\cline{2-5}
+                                            & \multicolumn{2}{c|}{\textbf{Object 1}}  & \multicolumn{2}{c}{\textbf{Object 2}}\\
+                                            & \multicolumn{2}{c|}{Ground Truth = 1.67m }& \multicolumn{2}{c}{Ground Truth = 1.80m}\\
+                                            \cline{2-5}
+                                            & Height & Covariance & Height & Covariance \\
+        \hline
+        Scenario 1                          & 1.6954 & 0.0072 & 1.8190 & 0.0333   \\
+        Scenario 2                          & 1.7677 & 0.0061 & 1.9494 & 0.2058  \\
+        Scenario 3                          & 1.7583 & 0.1554 & 1.8470 & 0.0932  \\
+      \end{tabular}
+    \end{center}
+    \caption{All scenarios BBox prediction compared}
+    \label{tab:bbox_table}
+  \end{table}
+
+
+\subsection{Azimuth Error Evaluation}\label{sec:3-theta}
+The table presents azimuth errors (Root Mean Square Error - RMSE) for three different scenarios, 
+considering two objects in each scenario.
+The RMSE (rad) columns provide a comparison of errors in radians 
+for the fusion of radar and camera data, 
+as well as individual errors for camera-only and radar-only measurements.
+Despite the difference in theta accuracy between radar and camera, 
+the algorithm effectively leverages the higher accuracy of the camera's angle while incorporating data from both sources.
+The "Fusion" column represents the azimuth error when the algorithm fuses data from both radar and camera. 
+In some cases (e.g., Scenario 1), the fusion result outperforms both individual camera and radar measurements, 
+showcasing the benefits of integrating information from both sources.
+In some cases, the fusion result can lag behind the camera's result, but not by a large margin.
 \begin{table}[h!]
     \begin{center}
       \label{tab:table2}
@@ -330,8 +312,32 @@ The collective analysis across all scenarios yields an average RMSE of 0.1561m.
   \end{table}
 
   
+\subsection{Cartesian Error Evaluation}\label{sec:3-cart}
+From Scenario 1, it becomes apparent that all components—fusion and radar commendable performance. 
+In scenario 2, where the algorithm showcases its strengths, it combines the best of both sensors to produce better a result.
+Conversely, in Scenario 3, radar struggles significantly in tracking object 2 as it enters its blind spot. 
+Nevertheless, the algorithm maintains its performance by incorporating camera data. 
+The collective analysis across all scenarios yields an average RMSE of 0.1561m.
+\begin{table}[h!]
+    \begin{center}
+      \label{tab:table5}
+      \begin{tabular}{c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \multirow{3}{*}{\textbf{Scenario}} & \multicolumn{4}{c}{\textbf{RMSE (m)}}\\\cline{2-5}
+                                            & \multicolumn{2}{c|}{\textbf{Object 1}}  & \multicolumn{2}{c}{\textbf{Object 2}}\\
+        \cline{2-5}
+                   & Fusion & Radar & Fusion & Radar \\
+        \hline
+        Scenario 1 & 0.1388  & \textbf{0.1124} & \textbf{0.105}   & 0.1201 \\
+        Scenario 2 & \textbf{0.1206}  & 0.1228 & \textbf{0.1687}  & 0.2014 \\
+        Scenario 3 & \textbf{0.0903}  & 0.0928 & \textbf{0.3075}  & 0.3592 \\
+      \end{tabular}
+    \end{center}
+    \caption{Cartesian RMSE compared}
+    \label{tab:cart_rmse}
+  \end{table}
 
 Comparison of errors between the author's proposed method and other radar-camera tracking algorithms.
+Please note that the author did not benchmark the results of other algorithms with the same dataset.
   \begin{table}[h!]
     \begin{center}
       \label{tab:table1}
@@ -350,4 +356,58 @@ Comparison of errors between the author's proposed method and other radar-camera
     \label{tab:method_rmse}
   \end{table}
 
+  \newpage 
+  \begin{figure}[!htb]
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 1 Cartesian Error.png}
+        \caption{Fused Scenario 1 Cartesian Error}
+        \label{subfig:err_cart_1}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.3\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 1 Azimuth Error.png}
+        \caption{Fused Scenario 1 Azimuth Error}
+        \label{subfig:err_azi_1}
+    \end{subfigure}
 
+    \caption{EKF Error of Scenario 1}
+    \label{fig:error_1}
+\end{figure}
+\begin{figure}[!htb]
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.35\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 2 Cartesian Error.png}
+        \caption{Fused Scenario 2 Cartesian Error}
+        \label{subfig:err_cart_2}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.35\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 2 Azimuth Error.png}
+        \caption{Fused Scenario 2 Azimuth Error}
+        \label{subfig:err_azi2}
+    \end{subfigure}
+
+    \caption{EKF Error of Scenario 2}
+    \label{fig:error_2}
+\end{figure}
+\begin{figure}[!htb]
+    \hspace{0.1\textwidth}
+    \begin{subfigure}[b]{0.35\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 3 Cartesian Error.png}
+        \caption{Fused Scenario 3 Cartesian Error}
+        \label{subfig:err_cart_3}
+    \end{subfigure}
+    \hspace{0.15\textwidth}
+    %\hfill
+    \begin{subfigure}[b]{0.35\textwidth}%{0.25\linewidth}
+        \includegraphics[width=7cm]{Figures/matlab/Fused Scenario 3 Azimuth Error.png}
+        \caption{Fused Scenario 3 Azimuth Error}
+        \label{subfig:err_azi_3}
+    \end{subfigure}
+
+    \caption{EKF Error of Scenario 3}
+    \label{fig:error_3}
+\end{figure}
