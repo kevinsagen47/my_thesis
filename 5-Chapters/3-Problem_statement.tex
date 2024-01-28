@@ -79,8 +79,10 @@ State vector also includes the width and the height of the object\cite{4732695}.
         p_y \\ 
         v_x \\ 
         v_y \\
-        w \\
-        h \\
+        p_{x-max} \\
+        p_{x-min} \\
+        p_{y-max} \\
+        p_{y-min} \\
         \end{bmatrix}
 \end{equation}
 where
@@ -89,8 +91,8 @@ where
     p_y &=\text{position in y-axis}\\
     v_x &=\text{velocity in x-axis}\\
     v_y &=\text{velocity in y-axis}\\
-    w &=\text{width}\\%\footnote{\label{note1}Obtained from equation} \\
-    h &=\text{height}\\
+    w &=\text{width(meter)}\\%\footnote{\label{note1}Obtained from equation} \\
+    h &=\text{height(meter)}\\
 \end{align*}
 %\footnotetext{Obtained from equation \ref{equ:2_cam_height}}
 Transition Matrix is expressed as follows:
@@ -131,8 +133,10 @@ Meanwhile, the width and height measurements are taken from equation \ref{equ:2_
     \begin{bmatrix}
         \rho \\ 
         \theta_{bayes}\\
-        w \\
-        h \\
+        \theta_{x-max}\\
+        \theta_{x-min}\\
+        \theta_{y-max}\\
+        \theta_{y-min}\\
     \end{bmatrix}
 \end{equation}
 
@@ -162,14 +166,18 @@ $h(\mathbf{x}_k)$ matrix represents conversion of polar coordinate to the cartes
     \begin{bmatrix}
         \rho \\ 
         \theta_{bayes}\\
-        w \\
-        h \\
+        \theta_{x-max} \\
+        \theta_{x-min} \\
+        \theta_{y-max} \\
+        \theta_{y-min} \\
     \end{bmatrix}=
     \begin{bmatrix}
     \sqrt{p_x^2+p_y^2}\\
     \tan^{-1}(\frac{p_x}{p_y})\\
-    w \\
-    h \\
+    \tan^{-1}(\frac{p_{x-max}}{p_y})\\
+    \tan^{-1}(\frac{p_{x-min}}{p_y})\\
+    \tan^{-1}(\frac{p_{y-max}}{p_y})\\
+    \tan^{-1}(\frac{p_{y-min}}{p_y})\\
     \end{bmatrix}
 \end{equation}
 
