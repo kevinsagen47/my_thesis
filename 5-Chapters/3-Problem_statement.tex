@@ -79,10 +79,8 @@ State vector also includes the width and the height of the object\cite{4732695}.
         p_y \\ 
         v_x \\ 
         v_y \\
-        p_{x-max} \\
-        p_{x-min} \\
-        p_{y-max} \\
-        p_{y-min} \\
+        w \\
+        h \\
         \end{bmatrix}
 \end{equation}
 where
@@ -133,13 +131,15 @@ Meanwhile, the width and height measurements are taken from equation \ref{equ:2_
     \begin{bmatrix}
         \rho \\ 
         \theta_{bayes}\\
-        \theta_{x-max}\\
-        \theta_{x-min}\\
-        \theta_{y-max}\\
-        \theta_{y-min}\\
+        w \\
+        h \\
     \end{bmatrix}
 \end{equation}
 
+%\theta_{x-max}\\
+%\theta_{x-min}\\
+%\theta_{y-max} \\
+%\theta_{y-min} \\
 
 After the measurement matrix $\mathbf{z}_k$ is obtained, 
 it is subtracted from the previously predicted values by the Kalman Filter. 
@@ -166,18 +166,14 @@ $h(\mathbf{x}_k)$ matrix represents conversion of polar coordinate to the cartes
     \begin{bmatrix}
         \rho \\ 
         \theta_{bayes}\\
-        \theta_{x-max} \\
-        \theta_{x-min} \\
-        \theta_{y-max} \\
-        \theta_{y-min} \\
+        w\\
+        h\\
     \end{bmatrix}=
     \begin{bmatrix}
     \sqrt{p_x^2+p_y^2}\\
     \tan^{-1}(\frac{p_x}{p_y})\\
-    \tan^{-1}(\frac{p_{x-max}}{p_y})\\
-    \tan^{-1}(\frac{p_{x-min}}{p_y})\\
-    \tan^{-1}(\frac{p_{y-max}}{p_y})\\
-    \tan^{-1}(\frac{p_{y-min}}{p_y})\\
+    p_y (tan(\theta_{x-max}) - tan(\theta_{x-min}))\\
+    p_y (tan(\theta_{y-max}) - tan(\theta_{y-min}))\\
     \end{bmatrix}
 \end{equation}
 
@@ -214,8 +210,8 @@ a first-order Jacobian matrix is employed on $\mathbf{H}$:
             \begin{bmatrix}
                 \frac{p_x}{\sqrt{p_x^2+p_y^2}} & \frac{p_y}{\sqrt{p_x^2+p_y^2}} & 0 & 0 & 0 & 0\\
                 -\frac{p_y}{p_x^2+p_y^2} & \frac{p_x}{p_x^2+p_y^2} & 0 & 0 & 0 & 0\\
-                0 & 0 & 0 & 0 & 1 & 0\\
-                0 & 0 & 0 & 0 & 0 & 1
+                0 & (tan(\theta_{x-max}) - tan(\theta_{x-min})) & 0 & 0 & 1 & 0\\
+                0 & (tan(\theta_{y-max}) - tan(\theta_{y-min})) & 0 & 0 & 0 & 1
             \end{bmatrix}
         \end{equation}
     \endgroup

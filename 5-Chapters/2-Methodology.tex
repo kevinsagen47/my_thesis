@@ -18,7 +18,7 @@ collecting data at 20 frames per second.
     \label{fig:radar_camera_setup_fig}
 \end{figure}
 
-
+\newpage
 \section{Overview}\label{sec:2-overview}
 Overview block diagram of the algorithm shown in figure \ref*{fig:kf_update}.
 \begin{figure}[hpbt]
@@ -28,18 +28,63 @@ Overview block diagram of the algorithm shown in figure \ref*{fig:kf_update}.
     \label{fig:kf_update}
 \end{figure}
 
+\newpage
 \section{Calibration}\label{sec:2-calibration}
-\subsection{Camera Intrinsic Calibration}
-To accurately map the monocular camera's image coordinates to real-world coordinates, calibration of intrinsic and extrinsic is required.
-Using tools provided by ROS \cite{cam_calib} as shown in figure \ref*{fig:camera_calibration}.
+\subsection{Homography}\label{subsec:2-1-Homography}
+Accurate fusion of both sensors requires the transformation of their measurements. 
+In this scenario, given the challenges in mapping image coordinates to polar coordinates, 
+homography method mentioned in this paper \cite{KIM2014641} is employed.
 
 \begin{figure}[hpbt]
     \centering
-    \includegraphics[width=6cm]{Figures/cam_calib.png}%\textwidth
-    \caption{Camera extrinsic and intrinsic calibration}
-    \label{fig:camera_calibration}
+    \includegraphics[width=12cm]{Figures/homography.png}%\textwidth
+    \caption{Homography of two coordinate system}
+    \label{fig:homography_figure}
 \end{figure}
+Let radar coordinates be represented as ($\rho$, $\theta$), 
+and camera coordinates as (u, v), as described in fig \ref{fig:homography_figure}. 
+The rotation homography matrix $H=[h_{ij}]_{ij}$ for the camera with respect to the radar, 
+originating from the origin and $\omega$ is an unknown constant; can be expressed as follows:
 
+\begin{equation}\label{equ:homography_eq}
+    \omega
+    \begin{bmatrix}
+        u\\
+        v\\
+        1\\
+        \end{bmatrix}=
+    \begin{bmatrix}  
+        h_{11} & h_{12} & h_{13}\\
+        h_{21} & h_{22} & h_{23}\\
+        h_{31} & h_{32} & h_{33}\\
+    \end{bmatrix}  
+    \begin{bmatrix}
+    {\rho}\\
+    {\theta}\\
+    1\\
+    \end{bmatrix}
+\end{equation}
+The equation is similar to the linear least square problem,
+with enough data collected in the next section, it is solved with Singular Value Decomposition (SVD).
+Some assumptions have to be made to solve the equation:
+\begin{enumerate}
+    \item Radar's plane lies inside the camera plane ($y_r$=0), affine homography is assumed.
+    \item Sensor uncertainty (sensor noise) is not considered, which will be reduced in the Kalman Filter.
+    \item This mapping method is unable to accurately project from image coordinates to range in polar coordinates, 
+            which is expected
+\end{enumerate}
+%\subsection{Camera Intrinsic Calibration}
+%To accurately map the monocular camera's image coordinates to real-world coordinates, calibration of intrinsic and extrinsic is required.
+%Using tools provided by ROS \cite{cam_calib} as shown in figure \ref*{fig:camera_calibration}.
+
+%\begin{figure}[hpbt]
+%    \centering
+%    \includegraphics[width=6cm]{Figures/cam_calib.png}%\textwidth
+%    \caption{Camera extrinsic and intrinsic calibration}
+%    \label{fig:camera_calibration}
+%\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
 \subsection{Radar-Camera Transformation Matrix}
 While the camera and radar are physically housed as closely as possible, 
 as illustrated in Figure \ref{fig:radar_camera_setup_fig}, 
@@ -140,11 +185,13 @@ Since fusion happens in polar coordinates, we need to rearrange the equation to 
     {(c_x-u)}
     {f}
 \end{equation}
-
-\subsubsection{Calibrating Camera to Polar Coordinate}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Calibration Approach}\label{subsec:2-1-data_collect}
 
 Data points from both radar and camera coordinates can be collected with the corner reflector positioned at various locations.
-After data is collected, radar points are associated with image points based on equation \ref*{equ:img2cart}
+After data is collected, radar points are associated with image points based on equation \ref*{equ:homography_eq}
 \begin{figure}[hbpt]
     \centering
     \begin{subfigure}{0.25\linewidth}
@@ -170,54 +217,62 @@ After data is collected, radar points are associated with image points based on 
     \caption{Radar camera calibration}
     \label{fig:radar_camera_calibration}
 \end{figure}
+\newpage
+\subsection{Calibration Result}\label{subsec:2-3-calibration-result}
+Calibration with the homography and approach produces a respectable result, 
+it is able to accurately translate the image coordinate into polar coordinate.
+Albeit, there is a limitation to only being able to translate the angle.
+%0.03420363041
 \begin{table}[h!]
     \begin{center}
       \label{tab:table4}
       \begin{tabular}{l|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
         \textbf{Method} & \textbf{RMSE} \\% %object detected
         \hline
-        Proposed                            & 0.0271 m \\%& 6m 
+        Proposed                            & 0.248 rad, 0.0271 m \\%& 6m 
         \citeauthor{8794186}\cite{8794186}  & 0.025 m \\%
       \end{tabular}
     \end{center}
     \caption{calibration method RMSE compared}
     \label{tab:callib_rmse}
   \end{table}
+This graph shows the comparison between ground truth and homography results.
 
 \begin{figure}[hpbt]
     \centering
-    \includegraphics[width=6cm]{Figures/matlab/Linear Fit of Camera u to Radar Azimuth Data.png}%\textwidth
-    \caption{Linear Fit of Camera u to Radar Azimuth Data}
-    \label{fig:Linear_Fit}
+    \includegraphics[width=10cm]{Figures/matlab/homography_result.png}%\textwidth
+    \caption{Homography result of Camera u to Radar Azimuth Data}
+    \label{fig:homography_result}
 \end{figure}
 \newpage
-\subsubsection{Generating 3D BBox}
+\subsection{Generating 3D BBox}\label{subsec:2-4-generating-bbox}
 The camera's bounding box detection result is initially expressed in pixels. 
 To transform these pixel coordinates into a meaningful real-world 3D bounding box, 
-it is essential to acquire the distance of the object, 
-a measurement obtained from the radar. 
-Once the distance to the object is known, the width of the object can be readily derived using Equation \ref{equ:2_cam_px}.
+it is essential to acquire the distance of the object, a measurement obtained from the radar. 
+Once the distance to the object is known, the width of the object can be readily derived using homography, 
+and converted into cartesian coordinates.
 \begin{figure}[hpbt]
     \centering
     \includegraphics[width=8cm]{Figures/cart_width.png}%\textwidth
     \caption{Object's width to polar coordinates relation}
     \label{fig:cart_width}
 \end{figure}
-Distance to the object is obtained from range ($\rho$) data from radar:
+
+Cartesian distance to the object is obtained from range ($\rho$) data from radar's polar coordinate:
 \begin{equation}\label{equ:2_py_rho}
-    P_y=
+    p_y=
     \frac
     {cos(\theta)}
     {\rho}
 \end{equation}
 
-Where $x_{min}$, $x_{max}$, $x_{min}$, and $x_{max}$ the size of the bbox in pixel obtained from Yolo detection. 
-$\theta_{x-max}$ and $\theta_{x-min}$ are obtained from equation \ref{equ:2_cam_px}.
+Where $x_{min}$,$x_{max}$,$y_{min}$, and $y_{max}$ the size of the bbox in pixel obtained from Yolo detection,
+is then cnverted  into $\theta_{x-max}$ and $\theta_{x-min}$ using homography equation.
 \begin{equation}\label{equ:2_cam_width}
     \begin{split}
     \text{width}&=P_{x-max}-P_{x-min}\\
-                &=P_y tan(\theta_{x-max}) - P_y tan(\theta_{x-min})\\
-                &=P_y (tan(\theta_{x-max}) - tan(\theta_{x-min}))
+                &=p_y tan(\theta_{x-max}) - p_y tan(\theta_{x-min})\\
+                &=p_y (tan(\theta_{x-max}) - tan(\theta_{x-min}))
     \end{split}
 \end{equation}
 
@@ -225,8 +280,8 @@ The same equation can also be applied to derive the height of the detected image
 \begin{equation}\label{equ:2_cam_height}
     \begin{split}
     \text{height}&=P_{y-max}-P_{y-min}\\
-                &=P_y tan(\theta_{y-max}) - P_y tan(\theta_{y-min})\\
-                &=P_y (tan(\theta_{y-max}) - tan(\theta_{y-min}))
+                &=p_y tan(\theta_{y-max}) - p_y tan(\theta_{y-min})\\
+                &=p_y (tan(\theta_{y-max}) - tan(\theta_{y-min}))
     \end{split}
 \end{equation}
 

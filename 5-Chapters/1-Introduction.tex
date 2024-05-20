@@ -39,9 +39,22 @@ and fuse them to create an ultimate sensor, applicable across a wide spectrum of
     \caption{Radar camera calibration}
     \label{fig:trade_off_and_plane}
 \end{figure}
+\newpage
+When the author attended the Hannover Messe 2024 exhibition, 
+he observed a real-world application very similar to his master's thesis. 
+The sensor testing platform built by Hochschule Stralsund consists of a mmWave radar, 
+an RGB camera, an infrared camera, a pair of LiDAR sensors, and a GPS. 
+The main purpose of this platform is to assist a captain in spotting and 
+tracking obstacles and determining whether an obstacle is in the ship's trajectory. 
+What makes this platform unique is the combination of sensors, 
+where each sensor compensates for the shortcomings of the others.
 
-
-
+\begin{figure}[hpbt]
+    \centering
+    \includegraphics[width=5cm]{Figures/host_maritime_sensors.png}%\textwidth
+    \caption{Maritime sensors by Hochschule Stralsund}
+    \label{fig:host_maritime_sensors}
+\end{figure}
 %\subsection{研究動機}
 %大跑前，照石戰呢：好過沒速朋。
 
@@ -61,6 +74,8 @@ which diverges from the primary focus of this thesis on tracking.
 Notably, two works cited in this context \cite{8844649}\cite{8932892} share similarities with the approach adopted in this thesis. 
 Both studies employ an Extended Kalman Filter (EKF) to linearize radar measurements. 
 Additionally, the work by \citeauthor{8844649} introduces the concept of "Error Bound" to correlate radar and camera planes.
+
+
 %\begin{enumerate}
 %    \item 花完造講，心城時……速政沒常，文他員這不星便說人，他的許管；家世上有案。整值八。
 %\end{enumerate}
