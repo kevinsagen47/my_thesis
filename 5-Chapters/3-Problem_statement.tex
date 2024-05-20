@@ -172,8 +172,8 @@ $h(\mathbf{x}_k)$ matrix represents conversion of polar coordinate to the cartes
     \begin{bmatrix}
     \sqrt{p_x^2+p_y^2}\\
     \tan^{-1}(\frac{p_x}{p_y})\\
-    p_y (tan(\theta_{x-max}) - tan(\theta_{x-min}))\\
-    p_y (tan(\theta_{y-max}) - tan(\theta_{y-min}))\\
+    p_y (\tan(\theta_{x-max}) - \tan(\theta_{x-min}))\\
+    p_y (\tan(\theta_{y-max}) - \tan(\theta_{y-min}))\\
     \end{bmatrix}
 \end{equation}
 
@@ -210,8 +210,8 @@ a first-order Jacobian matrix is employed on $\mathbf{H}$:
             \begin{bmatrix}
                 \frac{p_x}{\sqrt{p_x^2+p_y^2}} & \frac{p_y}{\sqrt{p_x^2+p_y^2}} & 0 & 0 & 0 & 0\\
                 -\frac{p_y}{p_x^2+p_y^2} & \frac{p_x}{p_x^2+p_y^2} & 0 & 0 & 0 & 0\\
-                0 & (tan(\theta_{x-max}) - tan(\theta_{x-min})) & 0 & 0 & 1 & 0\\
-                0 & (tan(\theta_{y-max}) - tan(\theta_{y-min})) & 0 & 0 & 0 & 1
+                0 & (\tan(\theta_{x-max}) - \tan(\theta_{x-min})) & 0 & 0 & 1 & 0\\
+                0 & (\tan(\theta_{y-max}) - \tan(\theta_{y-min})) & 0 & 0 & 0 & 1
             \end{bmatrix}
         \end{equation}
     \endgroup
