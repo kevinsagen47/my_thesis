@@ -1,6 +1,74 @@
 %----------------------------------------------------------------------
 % BIBLIOGRAPHY (參考書目)
 %----------------------------------------------------------------------
+%comprehensive review
+@ARTICLE{10225711,
+  author={Yao, Shanliang and Guan, Runwei and Huang, Xiaoyu and Li, Zhuoxiao and Sha, Xiangyu and Yue, Yong and Lim, Eng Gee and Seo, Hyungjoon and Man, Ka Lok and Zhu, Xiaohui and Yue, Yutao},
+  journal={IEEE Transactions on Intelligent Vehicles}, 
+  title={Radar-Camera Fusion for Object Detection and Semantic Segmentation in Autonomous Driving: A Comprehensive Review}, 
+  year={2024},
+  volume={9},
+  number={1},
+  pages={2094-2128},
+  keywords={Radar;Sensors;Radar cross-sections;Cameras;Radar antennas;Tensors;Radar imaging;Autonomous driving;radar-camera fusion;object detection;semantic segmentation},
+  doi={10.1109/TIV.2023.3307157}}
+
+%another review
+@Article{su14095114,
+AUTHOR = {Zhou, Yong and Dong, Yanyan and Hou, Fujin and Wu, Jianqing},
+TITLE = {Review on Millimeter-Wave Radar and Camera Fusion Technology},
+JOURNAL = {Sustainability},
+VOLUME = {14},
+YEAR = {2022},
+NUMBER = {9},
+ARTICLE-NUMBER = {5114},
+URL = {https://www.mdpi.com/2071-1050/14/9/5114},
+ISSN = {2071-1050},
+ABSTRACT = {Cameras allow for highly accurate identification of targets. However, it is difficult to obtain spatial position and velocity information about a target by relying solely on images. The millimeter-wave radar (MMW radar) sensor itself easily acquires spatial position and velocity information of the target but cannot identify the shape of the target. MMW radar and camera, as two sensors with complementary strengths, have been heavily researched in intelligent transportation. This article examines and reviews domestic and international research techniques for the definition, process, and data correlation of MMW radar and camera fusion. This article describes the structure and hierarchy of MMW radar and camera fusion, it also presents its fusion process, including spatio-temporal alignment, sensor calibration, and data information correlation methods. The data fusion algorithms from MMW radar and camera are described separately from traditional fusion algorithms and deep learning based algorithms, and their advantages and disadvantages are briefly evaluated.},
+DOI = {10.3390/su14095114}
+}
+
+%another review
+@misc{wei2022mmwave,
+      title={MmWave Radar and Vision Fusion for Object Detection in Autonomous Driving: A Review}, 
+      author={Zhiqing Wei and Fengkai Zhang and Shuo Chang and Yangyang Liu and Huici Wu and Zhiyong Feng},
+      year={2022},
+      eprint={2108.03004},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+
+%data fusion ex
+@misc{bansal2022radsegnet,
+      title={RadSegNet: A Reliable Approach to Radar Camera Fusion}, 
+      author={Kshitiz Bansal and Keshav Rungta and Dinesh Bharadia},
+      year={2022},
+      eprint={2208.03849},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+%feature ex
+@misc{chadwick2019distant,
+      title={Distant Vehicle Detection Using Radar and Vision}, 
+      author={Simon Chadwick and Will Maddern and Paul Newman},
+      year={2019},
+      eprint={1901.10951},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO}
+}
+
+%object fusion ex
+@INPROCEEDINGS{8711717,
+  author={Jha, Harimohan and Lodhi, Vaibhav and Chakravarty, Debashish},
+  booktitle={2019 6th International Conference on Signal Processing and Integrated Networks (SPIN)}, 
+  title={Object Detection and Identification Using Vision and Radar Data Fusion System for Ground-Based Navigation}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={590-593},
+  keywords={Cameras;Radar imaging;Radar detection;Navigation;Sensors;Radar tracking;Radar;Vision;Fusion;Navigation},
+  doi={10.1109/SPIN.2019.8711717}}
+
 
 %multimodal kf
 @inproceedings{7472511,
@@ -48,6 +116,22 @@
   keywords={Calibration;Radar imaging;Cameras;Sensors;Optimization;Autonomous vehicles},
   doi={10.1109/ICARCV.2018.8581329}
 }
+%calib PI
+@Article{s110908992,
+AUTHOR = {Wang, Tao and Zheng, Nanning and Xin, Jingmin and Ma, Zheng},
+TITLE = {Integrating Millimeter Wave Radar with a Monocular Vision Sensor for On-Road Obstacle Detection Applications},
+JOURNAL = {Sensors},
+VOLUME = {11},
+YEAR = {2011},
+NUMBER = {9},
+PAGES = {8992--9008},
+URL = {https://www.mdpi.com/1424-8220/11/9/8992},
+PubMedID = {22164117},
+ISSN = {1424-8220},
+ABSTRACT = {This paper presents a systematic scheme for fusing millimeter wave (MMW) radar and a monocular vision sensor for on-road obstacle detection. As a whole, a three-level fusion strategy based on visual attention mechanism and driver’s visual consciousness is provided for MMW radar and monocular vision fusion so as to obtain better comprehensive performance. Then an experimental method for radar-vision point alignment for easy operation with no reflection intensity of radar and special tool requirements is put forward. Furthermore, a region searching approach for potential target detection is derived in order to decrease the image processing time. An adaptive thresholding algorithm based on a new understanding of shadows in the image is adopted for obstacle detection, and edge detection is used to assist in determining the boundary of obstacles. The proposed fusion approach is verified through real experimental examples of on-road vehicle/pedestrian detection. In the end, the experimental results show that the proposed method is simple and feasible.},
+DOI = {10.3390/s110908992}
+}
+
 
 %homography
 @article{KIM2014641,
@@ -63,6 +147,18 @@ author = {Du Yong Kim and Moongu Jeon},
 keywords = {Kalman filter, Data fusion, Multi-object tracking},
 abstract = {Data fusion is an important issue for object tracking in autonomous systems such as robotics and surveillance. In this paper, we present a multiple-object tracking system whose design is based on multiple Kalman filters dealing with observations from two different kinds of physical sensors. Hardware integration which combines a cheap radar module and a CCD camera has been developed and data fusion method has been proposed to process measurements from those modules for multi-object tracking. Due to the limited resolution of bearing angle measurements of the cheap radar module, CCD measurements are used to compensate for the low angle resolution. Conversely, the radar module provides radial distance information which cannot be measured easily by the CCD camera. The proposed data fusion enables the tracker to efficiently utilize the radial measurements of objects from the cheap radar module and 2D location measurements of objects in image space of the CCD camera. To achieve the multi-object tracking we combine the proposed data fusion method with the integrated probability data association (IPDA) technique underlying the multiple-Kalman filter framework. The proposed complementary system based on the radar and CCD camera is experimentally evaluated through a multi-person tracking scenario. The experimental results demonstrate that the implemented system with fused observations considerably enhances tracking performance over a single sensor system.}
 }
+%another calib procedure
+@INPROCEEDINGS{4632220,
+  author={Zhengping Ji and Prokhorov, Danil},
+  booktitle={2008 11th International Conference on Information Fusion}, 
+  title={Radar-vision fusion for object classification}, 
+  year={2008},
+  volume={},
+  number={},
+  pages={1-7},
+  keywords={automotive;radar;camera;attention selection;sparse representation;MILN},
+  doi={}}
+
 
 %bayes fusion
 @InProceedings{10.1007/978-981-16-2248-9_32,

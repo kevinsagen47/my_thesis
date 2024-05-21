@@ -238,9 +238,8 @@ This graph shows the comparison between ground truth and homography results.
 \subsection{Calibration Approach}\label{subsec:2-1-data_collect}
 
 Data points from both radar and camera coordinates were collected with the corner reflector positioned at various locations.
-After data is collected, radar points are associated with image points based on equation \ref*{equ:homography_eq}
-The camera resolution was set to 1280x720. 
-The data was collected manually by reading the coordinates of the corner reflector from the camera's image, 
+After data is collected, radar points are associated with image points based on equation \ref*{equ:homography_eq}.
+Image data was collected manually by reading the coordinates of the corner reflector from the camera's image.
 The mmWave radar was set to operate at 77-81 GHz chirp, 
 with a configuration balanced between range and resolution, 
 collecting data at 20 frames per second. 
@@ -276,7 +275,7 @@ As shown, the corner reflector represents the radar's reading of the strongest r
 \subsection{Calibration Result}\label{subsec:2-3-calibration-result}
 Calibration with the homography and approach produces a respectable result, 
 it is able to accurately translate the image coordinate into polar coordinate.
-Albeit, there is a limitation to only being able to translate the angle.
+Albeit, there is a limitation to only being able to translate the angle, due to the camera's limitation perceiving depth.
 %0.03420363041
 \begin{table}[h!]
     \begin{center}

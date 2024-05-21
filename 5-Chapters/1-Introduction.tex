@@ -40,42 +40,64 @@ and fuse them to create an ultimate sensor, applicable across a wide spectrum of
     \label{fig:trade_off_and_plane}
 \end{figure}
 \newpage
-When the author attended the Hannover Messe 2024 exhibition, 
+
+%\subsection{研究動機}
+%大跑前，照石戰呢：好過沒速朋。
+
+\section{Related Work}\label{sec:1-related_work}
+\subsubsection{Which Sensor to Fuse}
+In recent years, the trend toward lidar-radar fusion has seen significant growth, as evidenced by numerous studies \cite{abs180711264}\cite{7579940}. 
+The fusion of radar and lidar presents a comparatively simpler scenario due to their ability to provide a Bird's Eye View (BEV), 
+aligning their measurements within the same plane. 
+Conversely, research efforts focusing on camera-lidar fusion \cite{chen2017multiview}\cite{li2016vehicle} have emerged, 
+yet both fusion approaches share a common drawback:
+the inherent cost inefficiency and susceptibility to adverse weather conditions, mainly rain, snow, and fog.
+Radar has the disadvantage of low resolution and noisy measurements, but is not affected by any weather or lighting conditions.
+
+\subsubsection{Radar-Camera Sensor Calibration}
+There are several methods of camera-radar calibration, 
+most methods can be divided into three categories, mainly Pseudo Inverse (PI) \cite{s110908992}, 
+Direct Linear Transformation (DLT) \cite{KIM2014641}, and Extrinsic Calibration (EC) \cite{4632220}.
+Based on the experiment performed by Oh \textit{et al.} \cite{8581329}, the method PI is not suitable for camera-radar calibration, 
+while DLT may provide a better result than EC.
+The calibration method DLT is employed in this thesis due to its accuracy and simplicity.
+
+\subsubsection{Radar-Camera Fusion}
+Radar-camera fusion can be divided into four levels: object level, data level, feature level, and hybrid level \cite{10225711}.
+\textbf{Data level fusion} \cite{bansal2022radsegnet} is where the raw data of radar and camera are fused before any pre-processing, also known as pixel-level fusion.
+The advantages of this method is that it provides redundancy, it also provides the least information loss. 
+The disadvantage is without pre-processing, it is more prone noise and interference \cite{wei2022mmwave}.
+
+\textbf{Feature level fusion} \cite{chadwick2019distant}, as the name implies, fuses features of both sensors, also known as middle-level fusion.
+This method transforms radar detection into an image form, 
+its features are then extracted by an algorithm to be combined with the features of image from the camera.
+The advantage of this method is that it only focuses on the area of interest and disregards other information, making it one of the highest performance.
+The main disadvantage of this method is that it doesn't provide a solution for when the camera data is unreliable \cite{10225711}.
+ 
+% better real-time performance, 
+In \textbf{Object level fusion} \cite{8711717}, (also known as late-level fusion or decision-level fusion) the data is only fused after each sensor has completed its processing individually.
+The advantage of this fusion is that it has the flexibility of adding more sensors,
+and has better reliability performance \cite{su14095114}.
+The disadvantage of this method is that it consumes more time for pre-processing, it also can get confused with multiple targets in the same areas (i.e. when one object is obstructed),
+which will be mitigated in this thesis.
+
+
+\subsubsection{Real-world Application}
+When the author attended the Hannover Messe 2024 exhibition in Germany, 
 he observed a real-world application very similar to his master's thesis. 
-The sensor testing platform built by Hochschule Stralsund consists of a mmWave radar, 
+The sensor testing platform built by Hochschule Stralsund (fig \ref{fig:host_maritime_sensors}) consists of a mmWave radar, 
 an RGB camera, an infrared camera, a pair of LiDAR sensors, and a GPS. 
-The main purpose of this platform is to assist a captain in spotting and 
-tracking obstacles and determining whether an obstacle is in the ship's trajectory. 
-What makes this platform unique is the combination of sensors, 
+The main purpose of this platform is to assist a ship captain in spotting and 
+tracking obstacles whilst determining whether the obstacle is in the ship's trajectory. 
+What makes this platform unique is the complete combination of sensors, 
 where each sensor compensates for the shortcomings of the others.
 
 \begin{figure}[hpbt]
     \centering
     \includegraphics[width=5cm]{Figures/host_maritime_sensors.png}%\textwidth
-    \caption{Maritime sensors by Hochschule Stralsund}
+    \caption{Maritime sensor platform by Hochschule Stralsund}
     \label{fig:host_maritime_sensors}
 \end{figure}
-%\subsection{研究動機}
-%大跑前，照石戰呢：好過沒速朋。
-
-\section{Related Work}\label{sec:1-related_work}
-In recent years, the trend toward lidar-radar fusion has seen significant growth, as evidenced by numerous studies \cite{abs180711264}\cite{7579940}. 
-The fusion of radar and lidar presents a comparatively simpler scenario due to their ability to provide a Bird's Eye View (BEV), 
-aligning their measurements within the same plane. Conversely, research efforts focusing on camera-lidar fusion \cite{chen2017multiview}\cite{li2016vehicle} have emerged, 
-yet both fusion approaches share a common drawback:
-the inherent cost inefficiency and susceptibility to interference associated with lidar technology.
-
-However, there is less heterogeneous sensor-focused fusion research, such as radar camera fusion.
-The fusion of radar and camera poses challenges due to the inherent dissimilarities between the sensors, necessitating certain assumptions during integration.
-In a recent comprehensive review article by \citeauthor{Yao_2023}\cite{Yao_2023}, 
-various methods employing neural networks to fuse radar and camera data were explored.
-These methods are resource-intensive and primarily focus on object detection, 
-which diverges from the primary focus of this thesis on tracking. 
-Notably, two works cited in this context \cite{8844649}\cite{8932892} share similarities with the approach adopted in this thesis. 
-Both studies employ an Extended Kalman Filter (EKF) to linearize radar measurements. 
-Additionally, the work by \citeauthor{8844649} introduces the concept of "Error Bound" to correlate radar and camera planes.
-
-
 %\begin{enumerate}
 %    \item 花完造講，心城時……速政沒常，文他員這不星便說人，他的許管；家世上有案。整值八。
 %\end{enumerate}
@@ -120,3 +142,22 @@ In summary, this thesis offers a significant contribution to the field of sensor
 that harnesses the advantages of camera and radar sensors while addressing their respective limitations.
 The proposed multimodal Kalman Filter model, correlation methods, and Bayesian fusion techniques collectively form 
 a powerful framework that enhances object tracking, reduces noise and achieves an accuracy of \textbf{0.1561m}.
+
+
+\iffalse
+In recent years, the trend toward lidar-radar fusion has seen significant growth, as evidenced by numerous studies \cite{abs180711264}\cite{7579940}. 
+The fusion of radar and lidar presents a comparatively simpler scenario due to their ability to provide a Bird's Eye View (BEV), 
+aligning their measurements within the same plane. Conversely, research efforts focusing on camera-lidar fusion \cite{chen2017multiview}\cite{li2016vehicle} have emerged, 
+yet both fusion approaches share a common drawback:
+the inherent cost inefficiency and susceptibility to interference associated with lidar technology.
+
+However, there is less heterogeneous sensor-focused fusion research, such as radar camera fusion.
+The fusion of radar and camera poses challenges due to the inherent dissimilarities between the sensors, necessitating certain assumptions during integration.
+In a recent comprehensive review article by \citeauthor{Yao_2023}\cite{Yao_2023}, 
+various methods employing neural networks to fuse radar and camera data were explored.
+These methods are resource-intensive and primarily focus on object detection, 
+which diverges from the primary focus of this thesis on tracking. 
+Notably, two works cited in this context \cite{8844649}\cite{8932892} share similarities with the approach adopted in this thesis. 
+Both studies employ an Extended Kalman Filter (EKF) to linearize radar measurements. 
+Additionally, the work by \citeauthor{8844649} introduces the concept of "Error Bound" to correlate radar and camera planes.
+\fi
