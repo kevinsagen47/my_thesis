@@ -4,6 +4,22 @@
 
 % 把英文摘要寫在裡面
 \begin{enAbstract}
+    This master's thesis introduces a solution for the fusion of camera and radar sensors, 
+    aimed at enhancing the robustness and accuracy of object tracking in diverse and challenging scenarios. 
+    The proposed solution employs a method for correlating data from these heterogeneous sensors 
+    and integrates them seamlessly using the Bayesian Fusion and Extended Kalman Filter framework. 
+    The resulting algorithm demonstrates the capability to precisely track and identify multiple objects, 
+    even in complex and dynamically changing environments, all while achieving real-time performance.
+    By utilizing width and height information in pixels from the camera,
+     the algorithm generates real-world 3D bounding boxes by fusing with radar information.
+    The proposed fusion method managed to achieve a range accuracy result of RMSE 0.1561 m and an angle accuracy of 0.0520 rad.
+
+    % 這個Command會自動幫你把Config裡面設定的東東填進來    
+    \enAbsKeywords
+\end{enAbstract}
+
+
+\iffalse
 
     This master's thesis introduces a novel solution for the fusion of camera and radar sensors, 
     aimed at enhancing the robustness and accuracy of object tracking in diverse and challenging scenarios. 
@@ -15,8 +31,4 @@
      the algorithm generates real-world 3D bounding boxes using radar data. 
     This research offers a valuable contribution to the field of sensor fusion, providing a reliable 
     and efficient means of addressing the demands of modern applications such as autonomous vehicles, surveillance systems, and robotics.
-    
-
-    % 這個Command會自動幫你把Config裡面設定的東東填進來    
-    \enAbsKeywords
-\end{enAbstract}
+    \fi

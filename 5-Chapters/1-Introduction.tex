@@ -108,40 +108,27 @@ where each sensor compensates for the shortcomings of the others.
 
 
 In this thesis, our primary objective is to harness the strengths of camera and radar sensors, 
-while simultaneously mitigating their inherent limitations. To achieve this, several notable contributions have been made:
+while simultaneously mitigating their inherent limitations. 
+Below are several notable contributions have been made:
 
-1. \textbf{Development of an Extended Kalman Filter Model: }
-We utilized a framework that leverages an Extended Kalman Filter model. 
-This model enables the fusion of data from both camera and radar sensors, 
-facilitating more accurate and robust object tracking and identification
- while addressing non-linearity in the equations.
-
-2. \textbf{Correlation of Radar and Image Detection Data: }
-A critical aspect of our work is the introduction of a method to correlate radar and image detection results. 
-This correlation process is essential for establishing a seamless connection between the two sensor modalities.
-By correlating the data effectively, we improve the accuracy of object tracking and further refine the quality of fused information.
-
-3. \textbf{Utilization of Bayesian Fusion for Noise Reduction: }
-We employ Bayesian fusion techniques to reduce noise in the fused data.
-This step not only enhances the overall data quality but also significantly improves the accuracy of the output. 
-
-4. \textbf{Versatility in Challenging Scenarios: }
-The contribution of this thesis is highlighted by the algorithm's comprehensive testing across various conditions, 
-with a specific focus on addressing the challenging "blind spot" scenarios. 
-The research demonstrates instances where sensor fusion complements the capabilities of individual sensors, 
-which will be further explored in this thesis.
-
-4. \textbf{Producing 3D BBox: }
+1. \textbf{Extracting information from both camera and radar to produce real-world 3D Bounding Boxes: }
 The conventional approach for producing a Cartesian 3D Bounding Box typically involves the use of high-resolution 3D sensors, 
 such as LiDAR. 
-However, this thesis explores an alternative by the utilization of width and height information in pixels from the camera. 
-The algorithm developed herein demonstrates its capability to generate real-world 3D bounding boxes with high accuracy, 
-leveraging sparse radar data as a key input.
+However, this thesis explores an alternative method 
+by utilizing width and height information in pixels from the camera and
+leveraging sparse radar's range data as a key input.
 
-In summary, this thesis offers a significant contribution to the field of sensor fusion by introducing a comprehensive solution 
-that harnesses the advantages of camera and radar sensors while addressing their respective limitations.
-The proposed multimodal Kalman Filter model, correlation methods, and Bayesian fusion techniques collectively form 
-a powerful framework that enhances object tracking, reduces noise and achieves an accuracy of \textbf{0.1561m}.
+2. \textbf{Keeping track of obstructed objects: }
+One of the limitations encountered by other radar-camera fusion systems is 
+that the camera becomes less reliable when several objects obstruct each other.
+The thesis addresses this problem by utilizing the limited information from radar
+combined with predictions from the Kalman Filter.
+
+3. \textbf{Improved Accuracy: }
+The experiments conducted in the later chapter demonstrate that the algorithm
+produces better results than using radar or camera alone in most cases.
+This thesis also compares its accuracy with other approaches
+and shows that it produces higher accuracy.
 
 
 \iffalse
